@@ -1,20 +1,19 @@
 import React, { Component } from "react"
 import CardList from "./Components/CardList/CardList"
 import "./App.css"
-import { Grommet } from "grommet"
 import Categories from "./Components/Categories/Categories"
+import { connect } from "react-redux"
+import { changeSearchField } from "./actions"
 
-const theme = {
-  global: {
-    colors: {
-      brand: "rgb(73, 73, 73)"
-    },
+const mapStateToProps = state => {
+  return {
+    search: state.search
+  }
+}
 
-    font: {
-      family: "Roboto",
-      size: "14px",
-      height: "20px"
-    }
+const mapDispatchToProps = dispatch => {
+  return {
+    onSearchChange: event => dispatch(changeSearchField(event.target.value))
   }
 }
 
@@ -63,16 +62,19 @@ class App extends Component {
 
   render() {
     const { filteredAnime } = this.state
-
+    const { onSearchChange } = this.props
     return (
-      <Grommet theme={theme} plain>
-        <input onChange={this.handleChangeSearch} type="text" name="name" />
+      <div>
+        <input onChange={onSearchChange} type="text" name="name" />
         <button onClick={this.handleClickSearch}>Click Me</button>
         <Categories />
         <CardList filteredAnime={filteredAnime} />
-      </Grommet>
+      </div>
     )
   }
 }
 
-export default App
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)
