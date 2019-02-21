@@ -1,19 +1,23 @@
 import React, { Component } from "react"
-import CardList from "./Components/CardList/CardList"
+import CardList from "./Components/CardList"
 import "./App.css"
-import Categories from "./Components/Categories/Categories"
+import Categories from "./Components/Categories"
 import { connect } from "react-redux"
-import { changeSearchField } from "./actions"
+import { changeSearchField, requestSearchedAnime } from "./actions"
 
 const mapStateToProps = state => {
   return {
-    search: state.search
+    search: state.changeSearchField.search,
+    filteredAnime: state.requestSearchedAnime.filteredAnime,
+    isPending: state.requestSearchedAnime.isPending,
+    error: state.requestSearchedAnime.error
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSearchChange: event => dispatch(changeSearchField(event.target.value))
+    onSearchChange: event => dispatch(changeSearchField(event.target.value)),
+    onRequestSearchedAnime: query => dispatch(requestSearchedAnime(query))
   }
 }
 
@@ -21,54 +25,25 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      filteredAnime: [],
-      search: "",
       animeCategories: []
     }
   }
-
-  // componentDidMount(){
-  //   fetch(`https://kitsu.io/api/edge/anime`)
-  //   .then(res=>res.json())
-  //   .then(json=>{
-  //     console.log(json)
-  //     this.setState({
-  //       isLoaded:true,
-  //       items: json.data[0].attributes.coverImage.large
-  //     })
-  //   })
-  // }
-
-  handleChangeSearch = e => {
-    let animeName = e.target.value
-    this.setState({
-      search: animeName
-    })
-  }
-  handleClickSearch = e => {
-    const api_search = "https://kitsu.io/api/edge/anime?filter[text]="
-    const { search } = this.state
-    const textSearchUrl = `${api_search}${search}`
-
-    fetch(`${textSearchUrl}`)
-      .then(res => res.json())
-      .then(json => {
-        const filteredAnime = json.data
-        this.setState({
-          filteredAnime: filteredAnime
-        })
-      })
-  }
+  componentWillMount() {}
 
   render() {
-    const { filteredAnime } = this.state
-    const { onSearchChange } = this.props
+    const {
+      filteredAnime,
+      onRequestSearchedAnime,
+      onSearchChange,
+      search
+    } = this.props
+
     return (
       <div>
-        <input onChange={onSearchChange} type="text" name="name" />
-        <button onClick={this.handleClickSearch}>Click Me</button>
-        <Categories />
+        <input onChange={onSearchChange} type="text" />
+        <button onClick={() => onRequestSearchedAnime(search)}>Click Me</button>
         <CardList filteredAnime={filteredAnime} />
+        <Categories />
       </div>
     )
   }

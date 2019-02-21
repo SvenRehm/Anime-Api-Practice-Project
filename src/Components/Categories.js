@@ -73,7 +73,6 @@ export default class Categories extends Component {
   // }
 
   render() {
-    console.log(this.state.animeCategorys)
     const { animeCategorys } = this.state
     return (
       <div>

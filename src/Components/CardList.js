@@ -1,5 +1,5 @@
 import React from "react"
-import CardC from "../Card/Card"
+import CardC from "./Card"
 import styled from "styled-components"
 
 const Grid = styled.div`
