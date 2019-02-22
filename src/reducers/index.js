@@ -1,8 +1,13 @@
 import { combineReducers } from "redux"
 import { requestSearchedAnime } from "./requestSearchedAnime"
 import { changeSearchField } from "./changeSearchField"
+import { requestCategoryLinks, requestCategorys } from "./requestCatergoryLinks"
 
-export default combineReducers({
+const rootReducer = combineReducers({
   changeSearchField,
-  requestSearchedAnime
+  requestSearchedAnime,
+  requestCategoryLinks,
+  requestCategorys
 })
+
+export default rootReducer

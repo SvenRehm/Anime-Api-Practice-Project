@@ -11,8 +11,7 @@ const initialSearchedAnime = {
 }
 export const requestSearchedAnime = (
   state = initialSearchedAnime,
-  action = {},
-  search = ""
+  action = {}
 ) => {
   switch (action.type) {
     case REQUEST_SEARCHED_ANIME_PENDING:

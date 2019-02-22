@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import CardList from "./Components/CardList"
 import "./App.css"
-import Categories from "./Components/Categories"
+import Categorys from "./Components/Categorys"
 import { connect } from "react-redux"
 import { changeSearchField, requestSearchedAnime } from "./actions"
 
@@ -43,7 +43,7 @@ class App extends Component {
         <input onChange={onSearchChange} type="text" />
         <button onClick={() => onRequestSearchedAnime(search)}>Click Me</button>
         <CardList filteredAnime={filteredAnime} />
-        <Categories />
+        <Categorys />
       </div>
     )
   }
