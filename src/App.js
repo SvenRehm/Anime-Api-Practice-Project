@@ -1,11 +1,11 @@
 import React, { Component } from "react"
-import CardList from "./Components/CardList"
-import Navigation from "./Components/Navigation"
-import "./App.css"
-import Categorys from "./Components/Categorys"
-import RedommendedAnime from "./Components/RecommendedAnime"
 import { connect } from "react-redux"
 import { changeSearchField, requestSearchedAnime } from "./actions"
+import CardList from "./Components/CardList"
+import Navigation from "./Components/Navigation"
+import Categorys from "./Components/Categorys"
+import RedommendedAnime from "./Components/RecommendedAnime"
+
 
 const mapStateToProps = state => {
   return {
@@ -24,13 +24,8 @@ const mapDispatchToProps = dispatch => {
 }
 
 class App extends Component {
-  constructor() {
-    super()
-    this.state = {
-      animeCategories: []
-    }
-  }
-  componentWillMount() {}
+ 
+
 
   render() {
     const {

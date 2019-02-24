@@ -21,7 +21,8 @@ export const requestRecommendedAnime = (subtype, sort) => dispatch => {
         cannontitle: id.attributes.canonicalTitle,
         ratingRank: id.attributes.ratingRank,
         averageRating: id.attributes.averageRating,
-        posterImage: id.attributes.posterImage.large
+        posterImage: id.attributes.posterImage.large,
+        episodeCount:id.attributes.episodeCount
       }))
       dispatch({
         type: REQUEST_RECOMMENDED_ANIME_SUCCESS,

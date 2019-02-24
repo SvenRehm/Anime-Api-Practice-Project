@@ -2,12 +2,23 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import { requestRecommendedAnime } from "../actions/requestRecommendedAnime"
 import { Grid } from "./CardList"
+import RecommendedAnimeCard from "./RecommendedAnimeCard"
+import styled from "styled-components"
+
 const mapStateToProps = state => {
+  const {
+    recommendedAnime,
+    subtype,
+    episodeCount,
+    isPending,
+    error
+  } = state.requestRecommendedAnime
   return {
-    recommendedAnime: state.requestRecommendedAnime.recommendedAnime,
-    subtype: state.requestRecommendedAnime.subtype,
-    isPending: state.requestRecommendedAnime.isPending,
-    error: state.requestRecommendedAnime.error
+    recommendedAnime: recommendedAnime,
+    subtype: subtype,
+    isPending: isPending,
+    episodeCount:episodeCount,
+    error: error,
   }
 }
 
@@ -30,13 +41,13 @@ class RecommendedAnime extends Component {
       <Grid>
         {recommendedAnime.map((category, i) => {
           return (
-            <div key={i}>
-              <img alt="animeimg" src={recommendedAnime[i].posterImage} />
-              <p>
-                {recommendedAnime[i].cannontitle}
-                {recommendedAnime[i].averageRating}
-              </p>
-            </div>
+            <RecommendedAnimeCard
+              key={i}
+              src={recommendedAnime[i].posterImage}
+              title={recommendedAnime[i].cannontitle}
+              averageRating={recommendedAnime[i].averageRating}
+              episodeCount={recommendedAnime[i].episodeCount}
+            />
           )
         })}
       </Grid>

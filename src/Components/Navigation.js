@@ -4,6 +4,7 @@ import styled from "styled-components"
 const StyledNav = styled.div`
   overflow: hidden;
   background-color: dark-grey;
+  border-bottom: solid 1px black;
 
   a {
     float: left;
@@ -13,14 +14,19 @@ const StyledNav = styled.div`
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
+   
+    transition: all 350ms ease-in-out;
+  }
+  a:first-child {
+    padding-right: 2em;
   }
   span > a {
     float: right;
   }
 
   a:hover {
-    background-color: #ddd;
-    color: black;
+    color: white;
+    background: black;
   }
 
   div {
@@ -33,6 +39,10 @@ const StyledNav = styled.div`
     margin-top: 8px;
     font-size: 17px;
     border: none;
+    border-left: 1px solid black;
+  }
+  input[type="text"]:focus {
+    outline: none;
   }
 
   button {
@@ -40,22 +50,27 @@ const StyledNav = styled.div`
     padding: 6px;
     margin-top: 8px;
     margin-right: 16px;
-    background: #ddd;
+    color: white;
+    background: black;
     font-size: 17px;
     border: none;
     cursor: pointer;
   }
-
+  button:focus {
+    outline: black;
+  }
   button:hover {
-    background: #ccc;
+    background: white;
+    border: solid 1px black;
+    color: black;
   }
 `
 
 const Navigation = ({ onSearchChange, onRequestSearchedAnime, search }) => {
   return (
     <StyledNav>
-      <a href="/">Home</a>
-      <a href="/">About</a>
+      <a href="/">Logo</a>
+      <a href="/">Something</a>
       <div>
         <input
           onChange={onSearchChange}
@@ -63,7 +78,7 @@ const Navigation = ({ onSearchChange, onRequestSearchedAnime, search }) => {
           placeholder="Search.."
           name="search"
         />
-        <button onClick={()=>onRequestSearchedAnime(search)}>Submit</button>
+        <button onClick={() => onRequestSearchedAnime(search)}>Search</button>
       </div>
       <span>
         <a href="/">Log In</a>

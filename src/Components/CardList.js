@@ -6,7 +6,7 @@ export const Grid = styled.div`
   display: grid;
   margin:1em;
   grid-gap: 1em;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
 `
 const CardList = ({ filteredAnime }) => {
   return (
