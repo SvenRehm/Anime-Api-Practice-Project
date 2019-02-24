@@ -2,10 +2,11 @@ import React from "react"
 import CardC from "./Card"
 import styled from "styled-components"
 
-const Grid = styled.div`
+export const Grid = styled.div`
   display: grid;
+  margin:1em;
   grid-gap: 1em;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
 `
 const CardList = ({ filteredAnime }) => {
   return (
