@@ -3,9 +3,8 @@ import { connect } from "react-redux"
 import { changeSearchField, requestSearchedAnime } from "./actions"
 import CardList from "./Components/CardList"
 import Navigation from "./Components/Navigation"
-import Categorys from "./Components/Categorys"
+// import Categorys from "./Components/Categorys"
 import RedommendedAnime from "./Components/RecommendedAnime"
-
 
 const mapStateToProps = state => {
   return {
@@ -22,11 +21,8 @@ const mapDispatchToProps = dispatch => {
     onRequestSearchedAnime: query => dispatch(requestSearchedAnime(query))
   }
 }
-
+//Am i in router??
 class App extends Component {
- 
-
-
   render() {
     const {
       filteredAnime,
@@ -39,7 +35,7 @@ class App extends Component {
       <div>
         <Navigation
           onSearchChange={onSearchChange}
-          onRequestSearchedAnime={()=>onRequestSearchedAnime(search)}
+          onRequestSearchedAnime={() => onRequestSearchedAnime(search)}
           search={search}
         />
         {/* <input onChange={onSearchChange} type="text" /> */}

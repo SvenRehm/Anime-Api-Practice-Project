@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { requestRecommendedAnime } from "../actions/requestRecommendedAnime"
 import { Grid } from "./CardList"
 import RecommendedAnimeCard from "./RecommendedAnimeCard"
-import styled from "styled-components"
+
 
 const mapStateToProps = state => {
   const {
