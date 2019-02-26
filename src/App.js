@@ -5,6 +5,7 @@ import CardList from "./Components/CardList"
 import Navigation from "./Components/Navigation"
 // import Categorys from "./Components/Categorys"
 import RedommendedAnime from "./Components/RecommendedAnime"
+import { BrowserRouter, Route } from "react-router-dom"
 
 const mapStateToProps = state => {
   return {
@@ -21,7 +22,7 @@ const mapDispatchToProps = dispatch => {
     onRequestSearchedAnime: query => dispatch(requestSearchedAnime(query))
   }
 }
-//Am i in router??
+
 class App extends Component {
   render() {
     const {
@@ -32,18 +33,28 @@ class App extends Component {
     } = this.props
 
     return (
-      <div>
-        <Navigation
-          onSearchChange={onSearchChange}
-          onRequestSearchedAnime={() => onRequestSearchedAnime(search)}
-          search={search}
-        />
-        {/* <input onChange={onSearchChange} type="text" /> */}
-        {/* <button onClick={() => onRequestSearchedAnime(search)}>Click Me</button> */}
-        <CardList filteredAnime={filteredAnime} />
-        {/* <Categorys /> */}
-        <RedommendedAnime />
-      </div>
+      <BrowserRouter>
+        <div>
+          <Navigation
+            onSearchChange={onSearchChange}
+            onRequestSearchedAnime={() => onRequestSearchedAnime(search)}
+            search={search}
+          />
+          {/* <input onChange={onSearchChange} type="text" /> */}
+          {/* <button onClick={() => onRequestSearchedAnime(search)}>Click Me</button> */}
+          {/* <CardList filteredAnime={filteredAnime} /> */}
+          {/* <Categorys /> */}
+          {/* <RedommendedAnime /> */}
+
+          <Route exact path="/" component={RedommendedAnime} />
+          <Route
+            path={`/search`}
+            render={props => (
+              <CardList {...props} filteredAnime={filteredAnime} />
+            )}
+          />
+        </div>
+      </BrowserRouter>
     )
   }
 }

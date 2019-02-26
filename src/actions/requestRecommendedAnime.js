@@ -11,7 +11,7 @@ export const requestRecommendedAnime = (subtype, sort) => dispatch => {
     sort
   })
   fetch(
-    `https://kitsu.io/api/edge/anime?filter[subtype]=${subtype}&sort=${sort}`
+    `https://kitsu.io/api/edge/anime?page%5Blimit%5D=20&page%5Boffset%5D=0?filter[subtype]=${subtype}&sort=${sort}`
   )
     .then(res => res.json())
     .then(data => {
@@ -22,7 +22,7 @@ export const requestRecommendedAnime = (subtype, sort) => dispatch => {
         ratingRank: id.attributes.ratingRank,
         averageRating: id.attributes.averageRating,
         posterImage: id.attributes.posterImage.large,
-        episodeCount:id.attributes.episodeCount
+        episodeCount: id.attributes.episodeCount
       }))
       dispatch({
         type: REQUEST_RECOMMENDED_ANIME_SUCCESS,

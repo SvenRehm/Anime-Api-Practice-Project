@@ -17,7 +17,10 @@ export const requestSearchedAnime = query => dispatch => {
     type: REQUEST_SEARCHED_ANIME_PENDING,
     query
   })
-  fetch(`https://kitsu.io/api/edge/anime?filter[text]=${query}}`)
+
+  fetch(
+    `https://kitsu.io/api/edge/anime?filter[text]=${query}&page%5Blimit%5D=20}`
+  )
     .then(res => res.json())
     .then(data =>
       dispatch({ type: REQUEST_SEARCHED_ANIME_SUCCESS, payload: data.data })

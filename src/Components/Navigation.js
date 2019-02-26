@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 
 const StyledNav = styled.div`
   overflow: hidden;
@@ -14,12 +15,10 @@ const StyledNav = styled.div`
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
-   
+
     transition: all 350ms ease-in-out;
   }
-  a:first-child {
-    padding-right: 2em;
-  }
+
   span > a {
     float: right;
   }
@@ -29,12 +28,8 @@ const StyledNav = styled.div`
     background: black;
   }
 
-  div {
-    float: left;
-    margin-left: 20px;
-  }
-
   input[type="text"] {
+    float: left;
     padding: 6px;
     margin-top: 8px;
     font-size: 17px;
@@ -69,8 +64,7 @@ const StyledNav = styled.div`
 const Navigation = ({ onSearchChange, onRequestSearchedAnime, search }) => {
   return (
     <StyledNav>
-      <a href="/">Logo</a>
-      <a href="/">Something</a>
+      <a href="/">Recommended</a>
       <div>
         <input
           onChange={onSearchChange}
@@ -78,7 +72,10 @@ const Navigation = ({ onSearchChange, onRequestSearchedAnime, search }) => {
           placeholder="Search.."
           name="search"
         />
-        <button onClick={() => onRequestSearchedAnime(search)}>Search</button>
+
+        <Link to={`/search`} onClick={() => onRequestSearchedAnime(search)}>
+          Search
+        </Link>
       </div>
       <span>
         <a href="/">Log In</a>

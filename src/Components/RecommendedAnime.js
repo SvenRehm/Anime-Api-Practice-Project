@@ -4,7 +4,6 @@ import { requestRecommendedAnime } from "../actions/requestRecommendedAnime"
 import { Grid } from "./CardList"
 import RecommendedAnimeCard from "./RecommendedAnimeCard"
 
-
 const mapStateToProps = state => {
   const {
     recommendedAnime,
@@ -17,8 +16,8 @@ const mapStateToProps = state => {
     recommendedAnime: recommendedAnime,
     subtype: subtype,
     isPending: isPending,
-    episodeCount:episodeCount,
-    error: error,
+    episodeCount: episodeCount,
+    error: error
   }
 }
 
