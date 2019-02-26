@@ -3,13 +3,15 @@ import { requestSearchedAnime } from "./requestSearchedAnime"
 import { changeSearchField } from "./changeSearchField"
 import { requestCategoryLinks, requestCategorys } from "./requestCatergoryLinks"
 import { requestRecommendedAnime } from "./requestRecommendedAnime"
+import { requestSingleMoreInfo } from "./requestSingleMoreInfo"
 
 const rootReducer = combineReducers({
   changeSearchField,
   requestSearchedAnime,
   requestCategoryLinks,
   requestCategorys,
-  requestRecommendedAnime
+  requestRecommendedAnime,
+  requestSingleMoreInfo
 })
 
 export default rootReducer

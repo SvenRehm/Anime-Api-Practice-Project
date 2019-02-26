@@ -6,13 +6,16 @@ import RecommendedAnimeCard from "./RecommendedAnimeCard"
 
 const mapStateToProps = state => {
   const {
+    id,
     recommendedAnime,
     subtype,
     episodeCount,
     isPending,
     error
   } = state.requestRecommendedAnime
+  
   return {
+    id: id,
     recommendedAnime: recommendedAnime,
     subtype: subtype,
     isPending: isPending,
@@ -31,26 +34,27 @@ const mapDispatchToProps = dispatch => {
 class RecommendedAnime extends Component {
   componentDidMount() {
     this.props.onRequestRecommendedAnime(this.props.subtype, "popularityRank")
+   
   }
 
   render() {
     const { recommendedAnime } = this.props
 
-    return (
-      <Grid>
-        {recommendedAnime.map((category, i) => {
-          return (
-            <RecommendedAnimeCard
-              key={i}
-              src={recommendedAnime[i].posterImage}
-              title={recommendedAnime[i].cannontitle}
-              averageRating={recommendedAnime[i].averageRating}
-              episodeCount={recommendedAnime[i].episodeCount}
-            />
-          )
-        })}
-      </Grid>
-    )
+    //mapping over received anime
+    const RecommendedAnime = recommendedAnime.map((category, i) => {
+      return (
+        <RecommendedAnimeCard
+          key={i}
+          id={recommendedAnime[i].id}
+          src={recommendedAnime[i].posterImage}
+          title={recommendedAnime[i].cannontitle}
+          averageRating={recommendedAnime[i].averageRating}
+          episodeCount={recommendedAnime[i].episodeCount}
+        />
+      )
+    })
+
+    return <Grid>{RecommendedAnime}</Grid>
   }
 }
 

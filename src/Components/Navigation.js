@@ -6,7 +6,6 @@ const StyledNav = styled.div`
   overflow: hidden;
   background-color: dark-grey;
   border-bottom: solid 1px black;
-
   a {
     float: left;
     display: block;
@@ -15,8 +14,9 @@ const StyledNav = styled.div`
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
-
+    border-left:1px solid black;
     transition: all 350ms ease-in-out;
+    margin:0 10px;
   }
 
   span > a {

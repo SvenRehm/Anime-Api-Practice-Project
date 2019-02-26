@@ -5,6 +5,7 @@ import CardList from "./Components/CardList"
 import Navigation from "./Components/Navigation"
 // import Categorys from "./Components/Categorys"
 import RedommendedAnime from "./Components/RecommendedAnime"
+import SingleMoreInfo from "./Components/SingleMoreInfoMoreInfo"
 import { BrowserRouter, Route } from "react-router-dom"
 
 const mapStateToProps = state => {
@@ -53,6 +54,7 @@ class App extends Component {
               <CardList {...props} filteredAnime={filteredAnime} />
             )}
           />
+          <Route path="/anime/info/:id" component={SingleMoreInfo} />
         </div>
       </BrowserRouter>
     )
