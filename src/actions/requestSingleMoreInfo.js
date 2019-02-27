@@ -13,17 +13,10 @@ export const requestSingleMoreInfo = animeid => dispatch => {
     .then(res => res.json())
     .then(data => {
       const info = data.data
-      const SingleInfo = {
-        type: info.type,
-        attributes: info.attributes,
-        posterImage: info.attributes.posterImage,
-        coverImage: info.attributes.coverImage,
-        titles: info.attributes.titles,
-        relationships: info.relationships
-      }
+     
       dispatch({
         type: REQUEST_SINGLE_MORE_INFO_SUCCESS,
-        payload: SingleInfo
+        payload: info
       })
     })
 

@@ -5,9 +5,20 @@ import {
 } from "../constants/action-types"
 
 const initialSingleMoreInfo = {
-  id: "",
   isPending: false,
-  singleMoreInfo: [],
+  singleMoreInfo: {
+    attributes: {
+      synopsis: "",
+      coverImage: {
+        large: "",
+        medium: ""
+      },
+      posterImage: {
+        large: "",
+        medium: ""
+      }
+    }
+  },
 
   error: ""
 }
@@ -17,7 +28,7 @@ export const requestSingleMoreInfo = (
 ) => {
   switch (action.type) {
     case REQUEST_SINGLE_MORE_INFO_PENDING:
-      return Object.assign({}, state, { isPending: true, id: action.animeid })
+      return Object.assign({}, state, { isPending: true })
 
     case REQUEST_SINGLE_MORE_INFO_SUCCESS:
       return Object.assign({}, state, {

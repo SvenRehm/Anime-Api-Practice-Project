@@ -6,33 +6,15 @@ import { withRouter } from "react-router-dom"
 
 const mapStateToProps = state => {
   const {
-    isPending,
-    error,
-    attributes,
-    posterImage,
     coverImage,
-    titles,
-    relationships
-  } = state.requestSingleMoreInfo.singleMoreInfo
-
+    posterImage,
+    synopsis
+  } = state.requestSingleMoreInfo.singleMoreInfo.attributes
   return {
-    id: state.requestSingleMoreInfo.id,
-    type: state.requestSingleMoreInfo.type,
-    isPending: isPending,
-    attributes: {
-      ...attributes
-    },
-    posterImage: {
-      ...posterImage
-    },
-    coverImage: { ...coverImage },
-    titles: {
-      ...titles
-    },
-    relationships: {
-      ...relationships
-    },
-    error: error
+    singleMoreInfo: state.requestSingleMoreInfo.singleMoreInfo,
+    coverImage: coverImage,
+    posterImage: posterImage,
+    synopsis: synopsis
   }
 }
 
@@ -44,7 +26,20 @@ const mapDispatchToProps = dispatch => {
 
 const LayoutGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 1em;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-rows: repeat(10, 100px);
+  overflow: hidden;
+
+  img {
+    max-width: 90%;
+    grid-column: 2 / span 3;
+    grid-row: 2 / span 4;
+  }
+  p {
+    grid-column: 6 / span 4;
+    grid-row: 2;
+  }
 `
 
 class SingleMoreInfo extends Component {
@@ -53,16 +48,15 @@ class SingleMoreInfo extends Component {
     this.props.onRequestSingleMoreInfo(id)
   }
   render() {
-    return (
-      <LayoutGrid>
-        <div>
-          <img alt="asdff" src={this.props.posterImage.large} />
+    console.log(this.props.coverImage)
 
-          <h3>{this.props.id}</h3>
-          <h3>{this.props.attributes.synopsis}</h3>
-        </div>
+    //  console.log(JSON.stringify(this.props.attributes.coverImage))
+    return this.props.singleMoreInfo ? (
+      <LayoutGrid>
+        <img alt="asdff" src={this.props.posterImage.medium} />
+        <p>{this.props.synopsis}</p>
       </LayoutGrid>
-    )
+    ) : null
   }
 }
 
