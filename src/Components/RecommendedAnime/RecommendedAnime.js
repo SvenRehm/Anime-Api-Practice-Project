@@ -1,8 +1,16 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { requestRecommendedAnime } from "../actions/requestRecommendedAnime"
-import { Grid } from "./CardList"
+import { requestRecommendedAnime } from "./actions/requestRecommendedAnime"
 import RecommendedAnimeCard from "./RecommendedAnimeCard"
+
+import styled from "styled-components"
+
+export const Grid = styled.div`
+  display: grid;
+  margin: 1em;
+  grid-gap: 1em;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+`
 
 const mapStateToProps = state => {
   const {
@@ -13,7 +21,7 @@ const mapStateToProps = state => {
     isPending,
     error
   } = state.requestRecommendedAnime
-  
+
   return {
     id: id,
     recommendedAnime: recommendedAnime,
@@ -34,7 +42,6 @@ const mapDispatchToProps = dispatch => {
 class RecommendedAnime extends Component {
   componentDidMount() {
     this.props.onRequestRecommendedAnime(this.props.subtype, "popularityRank")
-   
   }
 
   render() {

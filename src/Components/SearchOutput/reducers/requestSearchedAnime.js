@@ -2,7 +2,7 @@ import {
   REQUEST_SEARCHED_ANIME_PENDING,
   REQUEST_SEARCHED_ANIME_SUCCESS,
   REQUEST_SEARCHED_ANIME_FAILED
-} from "../constants/action-types"
+} from "../../../constants/action-types"
 
 const initialSearchedAnime = {
   isPending: false,

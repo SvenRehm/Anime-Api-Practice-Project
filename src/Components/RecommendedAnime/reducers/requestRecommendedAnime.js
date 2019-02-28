@@ -2,7 +2,7 @@ import {
   REQUEST_RECOMMENDED_ANIME_PENDING,
   REQUEST_RECOMMENDED_ANIME_SUCCESS,
   REQUEST_RECOMMENDED_ANIME_FAILED
-} from "../constants/action-types"
+} from "../../../constants/action-types"
 
 const initialState = {
   isPending: false,

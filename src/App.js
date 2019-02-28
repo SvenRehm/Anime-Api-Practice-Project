@@ -1,12 +1,16 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { changeSearchField, requestSearchedAnime } from "./actions"
-import CardList from "./Components/CardList"
-import Navigation from "./Components/Navigation"
+import {
+  changeSearchField,
+  requestSearchedAnime
+} from "./Components/SearchOutput/actions"
+import CardList from "./Components/SearchOutput/CardList"
+import Navigation from "./Components/Navigation/Navigation"
 // import Categorys from "./Components/Categorys"
-import RedommendedAnime from "./Components/RecommendedAnime"
-import SingleMoreInfo from "./Components/SingleMoreInfoMoreInfo"
+import RedommendedAnime from "./Components/RecommendedAnime/RecommendedAnime"
+import SingleMoreInfo from "./Components/SingleMoreInfo/SingleMoreInfoMoreInfo"
 import { BrowserRouter, Route } from "react-router-dom"
+import ScrollToTop from "./Components/ScrollToTop/ScrollToTop"
 
 const mapStateToProps = state => {
   return {
@@ -35,27 +39,29 @@ class App extends Component {
 
     return (
       <BrowserRouter>
-        <div>
-          <Navigation
-            onSearchChange={onSearchChange}
-            onRequestSearchedAnime={() => onRequestSearchedAnime(search)}
-            search={search}
-          />
-          {/* <input onChange={onSearchChange} type="text" /> */}
-          {/* <button onClick={() => onRequestSearchedAnime(search)}>Click Me</button> */}
-          {/* <CardList filteredAnime={filteredAnime} /> */}
-          {/* <Categorys /> */}
-          {/* <RedommendedAnime /> */}
+        <ScrollToTop>
+          <div>
+            <Navigation
+              onSearchChange={onSearchChange}
+              onRequestSearchedAnime={() => onRequestSearchedAnime(search)}
+              search={search}
+            />
+            {/* <input onChange={onSearchChange} type="text" /> */}
+            {/* <button onClick={() => onRequestSearchedAnime(search)}>Click Me</button> */}
+            {/* <CardList filteredAnime={filteredAnime} /> */}
+            {/* <Categorys /> */}
+            {/* <RedommendedAnime /> */}
 
-          <Route exact path="/" component={RedommendedAnime} />
-          <Route
-            path={`/search`}
-            render={props => (
-              <CardList {...props} filteredAnime={filteredAnime} />
-            )}
-          />
-          <Route path="/anime/info/:id" component={SingleMoreInfo} />
-        </div>
+            <Route exact path="/" component={RedommendedAnime} />
+            <Route
+              path={`/search`}
+              render={props => (
+                <CardList {...props} filteredAnime={filteredAnime} />
+              )}
+            />
+            <Route path="/anime/info/:id" component={SingleMoreInfo} />
+          </div>
+        </ScrollToTop>
       </BrowserRouter>
     )
   }

@@ -5,7 +5,7 @@ import {
   REQUEST_CATEGORYS_PENDING,
   REQUEST_CATEGORYS_SUCCESS,
   REQUEST_CATEGORYS_FAILED
-} from "../constants/action-types"
+} from "../../../constants/action-types"
 
 const initialState = {
   isPending: false,

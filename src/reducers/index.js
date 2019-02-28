@@ -1,9 +1,9 @@
 import { combineReducers } from "redux"
-import { requestSearchedAnime } from "./requestSearchedAnime"
-import { changeSearchField } from "./changeSearchField"
-import { requestCategoryLinks, requestCategorys } from "./requestCatergoryLinks"
-import { requestRecommendedAnime } from "./requestRecommendedAnime"
-import { requestSingleMoreInfo } from "./requestSingleMoreInfo"
+import { requestSearchedAnime } from "../Components/SearchOutput/reducers/requestSearchedAnime"
+import { changeSearchField } from "../Components/SearchOutput/reducers/changeSearchField"
+import { requestCategoryLinks, requestCategorys } from "../Components/Categorys/reducers/requestCatergoryLinks"
+import { requestRecommendedAnime } from "../Components/RecommendedAnime/reducers/requestRecommendedAnime"
+import { requestSingleMoreInfo } from "../Components/SingleMoreInfo/reducers/requestSingleMoreInfo"
 
 const rootReducer = combineReducers({
   changeSearchField,

@@ -1,4 +1,4 @@
-import { CHANGE_SEARCH_FIELD } from "../constants/action-types"
+import { CHANGE_SEARCH_FIELD } from "../../../constants/action-types"
 
 const initialState = {
   search: ""

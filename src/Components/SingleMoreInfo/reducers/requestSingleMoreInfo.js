@@ -2,7 +2,7 @@ import {
   REQUEST_SINGLE_MORE_INFO_PENDING,
   REQUEST_SINGLE_MORE_INFO_SUCCESS,
   REQUEST_SINGLE_MORE_INFO_FAILED
-} from "../constants/action-types"
+} from "../../../constants/action-types"
 
 const initialSingleMoreInfo = {
   isPending: false,
@@ -11,11 +11,19 @@ const initialSingleMoreInfo = {
       synopsis: "",
       coverImage: {
         large: "",
-        medium: ""
+        
       },
       posterImage: {
         large: "",
         medium: ""
+      },
+     
+    },
+    relationships: {
+      categories: {
+        links: {
+          related: ""
+        }
       }
     }
   },

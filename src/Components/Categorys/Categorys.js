@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import {
   requestCategoryLinks,
   requestCategorys
-} from "../actions/requestCategoryLinks"
+} from "../../actions/requestCategoryLinks"
 
 const mapStateToProps = state => {
   return {
