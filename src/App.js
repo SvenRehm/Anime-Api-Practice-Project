@@ -46,11 +46,8 @@ class App extends Component {
               onRequestSearchedAnime={() => onRequestSearchedAnime(search)}
               search={search}
             />
-            {/* <input onChange={onSearchChange} type="text" /> */}
-            {/* <button onClick={() => onRequestSearchedAnime(search)}>Click Me</button> */}
-            {/* <CardList filteredAnime={filteredAnime} /> */}
+
             {/* <Categorys /> */}
-            {/* <RedommendedAnime /> */}
 
             <Route exact path="/" component={RedommendedAnime} />
             <Route

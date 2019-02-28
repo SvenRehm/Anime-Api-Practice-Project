@@ -10,6 +10,7 @@ export const requestRecommendedAnime = (subtype, sort) => dispatch => {
     subtype,
     sort
   })
+  
   fetch(
     `https://kitsu.io/api/edge/anime?page%5Blimit%5D=20&page%5Boffset%5D=0?filter[subtype]=${subtype}&sort=${sort}`
   )
@@ -24,9 +25,11 @@ export const requestRecommendedAnime = (subtype, sort) => dispatch => {
         posterImage: id.attributes.posterImage.large,
         episodeCount: id.attributes.episodeCount
       }))
+      const pagination= data.links
       dispatch({
         type: REQUEST_RECOMMENDED_ANIME_SUCCESS,
-        payload: recommendedAnime
+        payload: recommendedAnime,
+        pagination:pagination
       })
     })
 

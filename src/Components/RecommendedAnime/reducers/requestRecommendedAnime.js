@@ -7,8 +7,14 @@ import {
 const initialState = {
   isPending: false,
   recommendedAnime: [],
+  pagination: {
+    first: "",
+    prev: "",
+    next: "",
+    last: ""
+  },
   subtype: "tv",
-  sort: "",
+  sort: "popularityRank",
   error: ""
 }
 export const requestRecommendedAnime = (state = initialState, action = {}) => {
@@ -21,10 +27,29 @@ export const requestRecommendedAnime = (state = initialState, action = {}) => {
       })
 
     case REQUEST_RECOMMENDED_ANIME_SUCCESS:
-      return Object.assign({}, state, {
+      return {
+        ...state,
         recommendedAnime: action.payload,
+        pagination: action.pagination,
         isPending: false
-      })
+      }
+
+    case "REQUEST_SECOND_PAGE_SUCCES":
+      //RETRUN INTITALSTATE/THAN RETRURN REDUX STATE/THAN INJECT NEW STATE
+      return {
+        ...state,
+        recommendedAnime: [...state.recommendedAnime, ...action.payload],
+        pagination: action.pagination
+      }
+
+    case "INCREMENT_PAGE":
+      return {
+        page: state.page + 1
+      }
+    case "DECREMENT_PAGE":
+      return {
+        page: state.page - 1
+      }
 
     case REQUEST_RECOMMENDED_ANIME_FAILED:
       return Object.assign({}, state, {

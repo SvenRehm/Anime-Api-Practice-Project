@@ -1,6 +1,11 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { requestRecommendedAnime } from "./actions/requestRecommendedAnime"
+import {
+  requestPageTwo,
+  incrementPage,
+  decrementPage
+} from "./actions/requestPageTwo"
 import RecommendedAnimeCard from "./RecommendedAnimeCard"
 
 import styled from "styled-components"
@@ -19,13 +24,17 @@ const mapStateToProps = state => {
     subtype,
     episodeCount,
     isPending,
+    sort,
+    pagination,
     error
   } = state.requestRecommendedAnime
 
   return {
     id: id,
+    url: pagination,
     recommendedAnime: recommendedAnime,
     subtype: subtype,
+    sort: sort,
     isPending: isPending,
     episodeCount: episodeCount,
     error: error
@@ -35,15 +44,26 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     onRequestRecommendedAnime: (subtype, sort) =>
-      dispatch(requestRecommendedAnime(subtype, sort))
+      dispatch(requestRecommendedAnime(subtype, sort)),
+    onRequestPageTwo: (url, subtype, sort) =>
+      dispatch(requestPageTwo(url, subtype, sort)),
+    onIncrementPage: () => dispatch(incrementPage()),
+    onDecrementPage: () => dispatch(decrementPage())
   }
 }
 
 class RecommendedAnime extends Component {
   componentDidMount() {
-    this.props.onRequestRecommendedAnime(this.props.subtype, "popularityRank")
+    this.props.onRequestRecommendedAnime(this.props.subtype, this.props.sort)
   }
 
+  handleClick = () => {
+    this.props.onRequestPageTwo(
+      this.props.subtype,
+      this.props.sort,
+      this.state.page
+    )
+  }
   render() {
     const { recommendedAnime } = this.props
 
@@ -61,7 +81,23 @@ class RecommendedAnime extends Component {
       )
     })
 
-    return <Grid>{RecommendedAnime}</Grid>
+    return (
+      <Grid>
+        <button
+          onClick={() => {
+            this.props.onRequestPageTwo(
+              this.props.url.next,
+              this.props.subtype,
+              this.props.sort
+            )
+          }}
+        >
+          next
+        </button>
+       
+        {RecommendedAnime}
+      </Grid>
+    )
   }
 }
 

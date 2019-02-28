@@ -2,7 +2,7 @@ import { combineReducers } from "redux"
 import { requestSearchedAnime } from "../Components/SearchOutput/reducers/requestSearchedAnime"
 import { changeSearchField } from "../Components/SearchOutput/reducers/changeSearchField"
 import { requestCategoryLinks, requestCategorys } from "../Components/Categorys/reducers/requestCatergoryLinks"
-import { requestRecommendedAnime } from "../Components/RecommendedAnime/reducers/requestRecommendedAnime"
+import { requestRecommendedAnime} from "../Components/RecommendedAnime/reducers/requestRecommendedAnime"
 import { requestSingleMoreInfo } from "../Components/SingleMoreInfo/reducers/requestSingleMoreInfo"
 
 const rootReducer = combineReducers({
@@ -11,7 +11,8 @@ const rootReducer = combineReducers({
   requestCategoryLinks,
   requestCategorys,
   requestRecommendedAnime,
-  requestSingleMoreInfo
+  requestSingleMoreInfo,
+ 
 })
 
 export default rootReducer
