@@ -33,12 +33,18 @@ const StyledRecommendedAnimeCard = styled.div`
     font-size: 0.7em;
   }
 `
-const RecommendedAnimeCard = ({ src, title, averageRating, episodeCount , id}) => {
+const RecommendedAnimeCard = ({
+  src,
+  title,
+  averageRating,
+  episodeCount,
+  id
+}) => {
   return (
     <StyledRecommendedAnimeCard>
-      <Link to={"/anime/info/"+id}>
-      <img alt="animeimg" src={src} />
-      <h4>{title}</h4>
+      <Link to={"/anime/info/" + id}>
+        <img alt="animeimg" src={src} />
+        <h4>{title}</h4>
       </Link>
       <h5>{episodeCount} - Episodes</h5>
       <p> Rating:{averageRating}</p>

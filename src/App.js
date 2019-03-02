@@ -48,8 +48,9 @@ class App extends Component {
             />
 
             {/* <Categorys /> */}
-
-            <Route exact path="/" component={RedommendedAnime} />
+            <ScrollToTop>
+              <Route exact path="/" component={RedommendedAnime} />
+            </ScrollToTop>
             <Route
               path={`/search`}
               render={props => (

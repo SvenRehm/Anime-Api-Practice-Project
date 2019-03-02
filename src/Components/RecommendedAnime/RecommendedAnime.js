@@ -7,7 +7,7 @@ import {
   decrementPage
 } from "./actions/requestPageTwo"
 import RecommendedAnimeCard from "./RecommendedAnimeCard"
-
+import InfiniteScroll from "react-infinite-scroller"
 import styled from "styled-components"
 
 export const Grid = styled.div`
@@ -26,6 +26,7 @@ const mapStateToProps = state => {
     isPending,
     sort,
     pagination,
+
     error
   } = state.requestRecommendedAnime
 
@@ -35,6 +36,7 @@ const mapStateToProps = state => {
     recommendedAnime: recommendedAnime,
     subtype: subtype,
     sort: sort,
+
     isPending: isPending,
     episodeCount: episodeCount,
     error: error
@@ -54,8 +56,13 @@ const mapDispatchToProps = dispatch => {
 
 class RecommendedAnime extends Component {
   componentDidMount() {
+    // window.addEventListener("scroll", this.onScroll, false)
+
     this.props.onRequestRecommendedAnime(this.props.subtype, this.props.sort)
   }
+  // componentWillUnmount() {
+  //   window.removeEventListener("scroll", this.onScroll, false)
+  // }
 
   handleClick = () => {
     this.props.onRequestPageTwo(
@@ -64,6 +71,28 @@ class RecommendedAnime extends Component {
       this.state.page
     )
   }
+  handleScroll = () => {
+    console.log(this.props.recommendedAnime.length)
+    // var heightBound = window.height * 0.8
+    // console.log(window)
+
+    // if (heightBound > window.scrollY) {
+    //   console.log("hello")
+  }
+  onScroll = () => {
+    if (
+      window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 &&
+      this.props.recommendedAnime.length &&
+      !this.props.isPedning
+    ) {
+      this.props.onRequestPageTwo(
+        this.props.url.next,
+        this.props.subtype,
+        this.props.sort
+      )
+    }
+  }
+
   render() {
     const { recommendedAnime } = this.props
 
@@ -82,21 +111,22 @@ class RecommendedAnime extends Component {
     })
 
     return (
-      <Grid>
-        <button
-          onClick={() => {
-            this.props.onRequestPageTwo(
-              this.props.url.next,
-              this.props.subtype,
-              this.props.sort
-            )
-          }}
-        >
-          next
-        </button>
-       
-        {RecommendedAnime}
-      </Grid>
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={() =>
+          this.props.onRequestPageTwo(
+            this.props.url.next,
+            this.props.subtype,
+            this.props.sort
+          )
+        }
+        initialLoad={false}
+        useWindow={true}
+        threshold={250}
+        hasMore={this.props.recommendedAnime.length <= 200}
+      >
+        <Grid>{RecommendedAnime}</Grid>
+      </InfiniteScroll>
     )
   }
 }

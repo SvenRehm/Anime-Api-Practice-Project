@@ -58,7 +58,7 @@ class SingleMoreInfo extends Component {
     this.props.onRequestSingleMoreInfo(id)
   }
   render() {
-    console.log(this.props.coverImage.medium)
+    
     return this.props.singleMoreInfo ? (
       <LayoutGrid>
         <div>
