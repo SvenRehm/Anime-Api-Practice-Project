@@ -22,8 +22,7 @@ export const requestRecommendedAnime = (state = initialState, action = {}) => {
     case REQUEST_RECOMMENDED_ANIME_PENDING:
       return Object.assign({}, state, {
         isPending: true,
-        subtype: action.subtype,
-        sort: action.sort
+       
       })
 
     case REQUEST_RECOMMENDED_ANIME_SUCCESS:
@@ -42,13 +41,16 @@ export const requestRecommendedAnime = (state = initialState, action = {}) => {
         pagination: action.pagination
       }
 
-    case "INCREMENT_PAGE":
+    case "CHANGE_SELELECT":
       return {
-        page: state.page + 1
+        ...state,
+        sort: action.payload
       }
-    case "DECREMENT_PAGE":
+
+    case "CHANGE_SELELECT_TYPE":
       return {
-        page: state.page - 1
+        ...state,
+        subtype: action.payload
       }
 
     case REQUEST_RECOMMENDED_ANIME_FAILED:

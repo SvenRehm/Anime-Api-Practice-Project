@@ -4,15 +4,17 @@ import {
   REQUEST_RECOMMENDED_ANIME_FAILED
 } from "../../../constants/action-types"
 
-export const requestRecommendedAnime = (subtype, sort) => dispatch => {
+export const requestRecommendedAnime = (subtype, sort, status) => dispatch => {
   dispatch({
     type: REQUEST_RECOMMENDED_ANIME_PENDING,
     subtype,
     sort
   })
 
-  fetch(
-    `https://kitsu.io/api/edge/anime?page%5Blimit%5D=20&page%5Boffset%5D=0?filter[subtype]=${subtype}&sort=${sort}`
+  fetch(`https://kitsu.io/api/edge/anime?filter%5Bstatus%5D=${status}&filter%5Bsubtype%5D=${subtype}&page%5Blimit%5D=20&page%5Boffset%5D=0&sort=${sort}`
+    
+    // `https://kitsu.io/api/edge/anime?filter%5Bsubtype%5D=${subtype}&page%5Blimit%5D=20&page%5Boffset%5D=0&sort=${sort}`
+    // `https://kitsu.io/api/edge/anime?filter[subtype]=${subtype}&sort=${sort}`
   )
     .then(res => res.json())
     .then(data => {

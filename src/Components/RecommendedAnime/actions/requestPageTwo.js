@@ -30,13 +30,18 @@ export const requestPageTwo = (url, subtype, sort) => dispatch => {
     )
 }
 
-export const incrementPage = () => {
+export const changeSelect = input => {
   return {
-    type: "INCREMENT_PAGE"
+    type: "CHANGE_SELELECT",
+    payload: input
   }
 }
-export const decrementPage = () => {
+
+export const changeSelectType = input => {
   return {
-    type: "DECREMENT_PAGE"
+    type: "CHANGE_SELELECT_TYPE",
+    payload: input
   }
 }
+
+

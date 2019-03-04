@@ -3,10 +3,12 @@ import { connect } from "react-redux"
 import { requestRecommendedAnime } from "./actions/requestRecommendedAnime"
 import {
   requestPageTwo,
-  incrementPage,
-  decrementPage
+  changeSelect,
+  changeSelectType
 } from "./actions/requestPageTwo"
 import RecommendedAnimeCard from "./RecommendedAnimeCard"
+import SortFilterBox from "./SortFilterBox"
+import SortTypeBox from "./SortTypeBox"
 import InfiniteScroll from "react-infinite-scroller"
 import styled from "styled-components"
 
@@ -45,53 +47,38 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onRequestRecommendedAnime: (subtype, sort) =>
-      dispatch(requestRecommendedAnime(subtype, sort)),
+    onRequestRecommendedAnime: (subtype, sort, status) =>
+      dispatch(requestRecommendedAnime(subtype, sort, status)),
     onRequestPageTwo: (url, subtype, sort) =>
       dispatch(requestPageTwo(url, subtype, sort)),
-    onIncrementPage: () => dispatch(incrementPage()),
-    onDecrementPage: () => dispatch(decrementPage())
+    onChangeSelect: e => {
+      dispatch(changeSelect(e.target.value))
+    },
+    onChangeSelectType: e => {
+      dispatch(changeSelectType(e.target.value))
+    }
   }
 }
 
 class RecommendedAnime extends Component {
   componentDidMount() {
-    // window.addEventListener("scroll", this.onScroll, false)
-
-    this.props.onRequestRecommendedAnime(this.props.subtype, this.props.sort)
+    this.props.onRequestRecommendedAnime(this.props.subtype, this.props.sort, "current")
   }
-  // componentWillUnmount() {
-  //   window.removeEventListener("scroll", this.onScroll, false)
-  // }
-
-  handleClick = () => {
-    this.props.onRequestPageTwo(
-      this.props.subtype,
-      this.props.sort,
-      this.state.page
-    )
-  }
-  handleScroll = () => {
-    console.log(this.props.recommendedAnime.length)
-    // var heightBound = window.height * 0.8
-    // console.log(window)
-
-    // if (heightBound > window.scrollY) {
-    //   console.log("hello")
-  }
-  onScroll = () => {
-    if (
-      window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 &&
-      this.props.recommendedAnime.length &&
-      !this.props.isPedning
-    ) {
-      this.props.onRequestPageTwo(
-        this.props.url.next,
-        this.props.subtype,
-        this.props.sort
-      )
+  componentWillReceiveProps(newProps) {
+    if (newProps.sort !== this.props.sort) {
+      this.props.onRequestRecommendedAnime(this.props.subtype, newProps.sort, "current")
+    }
+    if (newProps.subtype !== this.props.subtype) {
+      console.log(newProps.subtype)
+      this.props.onRequestRecommendedAnime(newProps.subtype, this.props.sort, "current")
     }
   }
+  // componentWillUpdate(newProps) {
+  //   if (newProps.subtype !== this.props.subtype) {
+  //     console.log(newProps.subtype)
+  //     this.props.onRequestRecommendedAnime(newProps.subtype, this.props.sort)
+  //   }
+  // }
 
   render() {
     const { recommendedAnime } = this.props
@@ -122,9 +109,11 @@ class RecommendedAnime extends Component {
         }
         initialLoad={false}
         useWindow={true}
-        threshold={250}
+        threshold={500}
         hasMore={this.props.recommendedAnime.length <= 200}
       >
+        <SortTypeBox onChangeSelectType={this.props.onChangeSelectType} />
+        <SortFilterBox onChangeSelect={this.props.onChangeSelect} />
         <Grid>{RecommendedAnime}</Grid>
       </InfiniteScroll>
     )
