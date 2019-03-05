@@ -13,24 +13,24 @@ const StyledRecommendedAnimeCard = styled.div`
   p {
     font-size: 0.7em;
     position: absolute;
-    right: 0;
+    top: 0;
+    left: 0;
     padding: 5px;
-    bottom: 45px;
+
     color: white;
     background: black;
   }
-  h4 {
+
+  h5 {
+    font-weight: 400;
+    font-size: 0.7em;
+  }
+  a {
     padding: 0;
     font-size: 0.8em;
     cursor: pointer;
     transition: all 200ms ease-in-out;
-  }
-  h4:hover {
-    color: red;
-  }
-  h5 {
-    font-weight: 400;
-    font-size: 0.7em;
+    color: ${props => props.theme.color};
   }
 `
 const RecommendedAnimeCard = ({

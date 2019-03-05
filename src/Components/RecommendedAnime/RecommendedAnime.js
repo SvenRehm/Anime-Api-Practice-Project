@@ -4,10 +4,12 @@ import { requestRecommendedAnime } from "./actions/requestRecommendedAnime"
 import {
   requestPageTwo,
   changeSelect,
-  changeSelectType
+  changeSelectType,
+  changeStatus
 } from "./actions/requestPageTwo"
 import RecommendedAnimeCard from "./RecommendedAnimeCard"
 import SortFilterBox from "./SortFilterBox"
+import SortStatus from "./SortStatus"
 import SortTypeBox from "./SortTypeBox"
 import InfiniteScroll from "react-infinite-scroller"
 import styled from "styled-components"
@@ -27,6 +29,7 @@ const mapStateToProps = state => {
     episodeCount,
     isPending,
     sort,
+    status,
     pagination,
 
     error
@@ -38,6 +41,7 @@ const mapStateToProps = state => {
     recommendedAnime: recommendedAnime,
     subtype: subtype,
     sort: sort,
+    status: status,
 
     isPending: isPending,
     episodeCount: episodeCount,
@@ -56,21 +60,49 @@ const mapDispatchToProps = dispatch => {
     },
     onChangeSelectType: e => {
       dispatch(changeSelectType(e.target.value))
+    },
+    onChangeStatus: e => {
+      dispatch(changeStatus(e.target.value))
     }
   }
 }
 
 class RecommendedAnime extends Component {
   componentDidMount() {
-    this.props.onRequestRecommendedAnime(this.props.subtype, this.props.sort, "current")
+    //loading recommended anime
+    this.props.onRequestRecommendedAnime(
+      this.props.subtype,
+      this.props.sort,
+      this.props.status
+    )
   }
   componentWillReceiveProps(newProps) {
+    //sort Update (rating...)
     if (newProps.sort !== this.props.sort) {
-      this.props.onRequestRecommendedAnime(this.props.subtype, newProps.sort, "current")
+      this.props.onRequestRecommendedAnime(
+        this.props.subtype,
+        newProps.sort,
+        this.props.status
+      )
     }
+    //subtype (tv/movie..)
     if (newProps.subtype !== this.props.subtype) {
       console.log(newProps.subtype)
-      this.props.onRequestRecommendedAnime(newProps.subtype, this.props.sort, "current")
+      this.props.onRequestRecommendedAnime(
+        newProps.subtype,
+        this.props.sort,
+        this.props.status
+      )
+    }
+
+    //sataus of the animes (finished/current..)
+    if (newProps.status !== this.props.status) {
+      console.log(newProps.subtype)
+      this.props.onRequestRecommendedAnime(
+        this.props.subtype,
+        this.props.sort,
+        newProps.status
+      )
     }
   }
   // componentWillUpdate(newProps) {
@@ -112,6 +144,7 @@ class RecommendedAnime extends Component {
         threshold={500}
         hasMore={this.props.recommendedAnime.length <= 200}
       >
+        <SortStatus onChangeStatus={this.props.onChangeStatus} />
         <SortTypeBox onChangeSelectType={this.props.onChangeSelectType} />
         <SortFilterBox onChangeSelect={this.props.onChangeSelect} />
         <Grid>{RecommendedAnime}</Grid>

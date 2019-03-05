@@ -13,6 +13,7 @@ const initialState = {
     next: "",
     last: ""
   },
+  status: "finished",
   subtype: "tv",
   sort: "popularityRank",
   error: ""
@@ -21,8 +22,7 @@ export const requestRecommendedAnime = (state = initialState, action = {}) => {
   switch (action.type) {
     case REQUEST_RECOMMENDED_ANIME_PENDING:
       return Object.assign({}, state, {
-        isPending: true,
-       
+        isPending: true
       })
 
     case REQUEST_RECOMMENDED_ANIME_SUCCESS:
@@ -52,7 +52,11 @@ export const requestRecommendedAnime = (state = initialState, action = {}) => {
         ...state,
         subtype: action.payload
       }
-
+    case "CHANGE_STATUS":
+      return {
+        ...state,
+        status: action.payload
+      }
     case REQUEST_RECOMMENDED_ANIME_FAILED:
       return Object.assign({}, state, {
         error: action.payload,

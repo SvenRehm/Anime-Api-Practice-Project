@@ -44,4 +44,10 @@ export const changeSelectType = input => {
   }
 }
 
+export const changeStatus = input => {
+  return {
+    type: "CHANGE_STATUS",
+    payload: input
+  }
+}
 
