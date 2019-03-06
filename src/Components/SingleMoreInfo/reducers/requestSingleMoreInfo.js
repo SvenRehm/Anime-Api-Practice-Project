@@ -10,14 +10,12 @@ const initialSingleMoreInfo = {
     attributes: {
       synopsis: "",
       coverImage: {
-        large: "",
-        
+        large: ""
       },
       posterImage: {
         large: "",
         medium: ""
-      },
-     
+      }
     },
     relationships: {
       categories: {
@@ -35,8 +33,29 @@ export const requestSingleMoreInfo = (
   action = {}
 ) => {
   switch (action.type) {
-    case REQUEST_SINGLE_MORE_INFO_PENDING:
-      return Object.assign({}, state, { isPending: true })
+    case REQUEST_SINGLE_MORE_INFO_PENDING: //temporär reset state
+      return Object.assign({}, state, {
+        isPending: true,
+        singleMoreInfo: {
+          attributes: {
+            synopsis: "",
+            coverImage: {
+              large: ""
+            },
+            posterImage: {
+              large: "",
+              medium: ""
+            }
+          },
+          relationships: {
+            categories: {
+              links: {
+                related: ""
+              }
+            }
+          }
+        }
+      })
 
     case REQUEST_SINGLE_MORE_INFO_SUCCESS:
       return Object.assign({}, state, {
@@ -49,6 +68,7 @@ export const requestSingleMoreInfo = (
         error: action.payload,
         isPending: false
       })
+
     default:
       return state
   }

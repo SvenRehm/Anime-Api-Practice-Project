@@ -4,19 +4,19 @@ import { Link } from "react-router-dom"
 
 const StyledNav = styled.div`
   overflow: hidden;
-  background-color: dark-grey;
-  border-bottom: solid 1px black;
+  background-color: ${props => props.theme.primary};
+  border-bottom: solid 1px ${props => props.theme.secondary};
+  margin-bottom:2em;
   a {
     float: left;
     display: block;
-    color: black;
+    color: ${props => props.theme.secondary};
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 17px;
-    border-left:1px solid black;
+    font-size: 1em;
     transition: all 350ms ease-in-out;
-    margin:0 10px;
+    margin: 0 5px;
   }
 
   span > a {
@@ -24,14 +24,13 @@ const StyledNav = styled.div`
   }
 
   a:hover {
-    color: white;
-    background: black;
+    color: ${props => props.theme.accent};
   }
 
   input[type="text"] {
     float: left;
     padding: 6px;
-    margin-top: 8px;
+    margin-top: 6px;
     font-size: 17px;
     border: none;
     border-left: 1px solid black;
@@ -39,26 +38,7 @@ const StyledNav = styled.div`
   input[type="text"]:focus {
     outline: none;
   }
-
-  button {
-    float: right;
-    padding: 6px;
-    margin-top: 8px;
-    margin-right: 16px;
-    color: white;
-    background: black;
-    font-size: 17px;
-    border: none;
-    cursor: pointer;
-  }
-  button:focus {
-    outline: black;
-  }
-  button:hover {
-    background: white;
-    border: solid 1px black;
-    color: black;
-  }
+ 
 `
 
 const Navigation = ({ onSearchChange, onRequestSearchedAnime, search }) => {

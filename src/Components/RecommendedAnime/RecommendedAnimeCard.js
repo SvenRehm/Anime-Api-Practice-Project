@@ -8,6 +8,7 @@ const StyledRecommendedAnimeCard = styled.div`
 
   img {
     width: 100%;
+    height: auto;
     cursor: pointer;
   }
   p {
@@ -20,17 +21,29 @@ const StyledRecommendedAnimeCard = styled.div`
     color: white;
     background: black;
   }
-
+  h4 {
+    font-size: .91em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 180px;
+  }
   h5 {
     font-weight: 400;
     font-size: 0.7em;
+    color: ${props => props.theme.secondary};
   }
   a {
+    text-decoration: none;
+    color: ${props => props.theme.secondary};
     padding: 0;
     font-size: 0.8em;
     cursor: pointer;
     transition: all 200ms ease-in-out;
     color: ${props => props.theme.color};
+    &:hover {
+      color: ${props => props.theme.accent};
+    }
   }
 `
 const RecommendedAnimeCard = ({
@@ -43,11 +56,12 @@ const RecommendedAnimeCard = ({
   return (
     <StyledRecommendedAnimeCard>
       <Link to={"/anime/info/" + id}>
-        <img alt="animeimg" src={src} />
+        <img alt="" src={src} />
+
         <h4>{title}</h4>
       </Link>
       <h5>{episodeCount} - Episodes</h5>
-      <p> Rating:{averageRating}</p>
+      <p> Rating: {averageRating}</p>
     </StyledRecommendedAnimeCard>
   )
 }

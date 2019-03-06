@@ -11,7 +11,7 @@ import RedommendedAnime from "./Components/RecommendedAnime/RecommendedAnime"
 import SingleMoreInfo from "./Components/SingleMoreInfo/SingleMoreInfo"
 import { BrowserRouter, Route } from "react-router-dom"
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop"
-import { ThemeProvider } from "styled-components"
+import { ThemeProvider, createGlobalStyle } from "styled-components"
 
 const mapStateToProps = state => {
   return {
@@ -29,10 +29,17 @@ const mapDispatchToProps = dispatch => {
   }
 }
 const themeblack = {
-  primary: "black",
-  secondary: "red"
+  primary: "#171717",
+  secondary: "#f9f9f9",
+  accent: "#e50914",
+  fontFamily: "Roboto"
 }
-
+const GlobalStyle = createGlobalStyle`
+  body {
+    font-family: ${props => props.theme.fontFamily};
+    background:${props => props.theme.primary};
+  }
+`
 class App extends Component {
   render() {
     const {
@@ -47,6 +54,7 @@ class App extends Component {
         <ThemeProvider theme={themeblack}>
           <ScrollToTop>
             <div>
+              <GlobalStyle />
               <Navigation
                 onSearchChange={onSearchChange}
                 onRequestSearchedAnime={() => onRequestSearchedAnime(search)}

@@ -14,11 +14,13 @@ import SortTypeBox from "./SortTypeBox"
 import InfiniteScroll from "react-infinite-scroller"
 import styled from "styled-components"
 
+
 export const Grid = styled.div`
   display: grid;
   margin: 1em;
   grid-gap: 1em;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  background: ${props => props.theme.primary};
 `
 
 const mapStateToProps = state => {

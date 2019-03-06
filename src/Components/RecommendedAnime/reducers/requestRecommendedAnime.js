@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   isPending: false,
-  recommendedAnime: [],
+  recommendedAnime: [{}],
   pagination: {
     first: "",
     prev: "",
@@ -57,11 +57,13 @@ export const requestRecommendedAnime = (state = initialState, action = {}) => {
         ...state,
         status: action.payload
       }
+
     case REQUEST_RECOMMENDED_ANIME_FAILED:
       return Object.assign({}, state, {
         error: action.payload,
         isPending: false
       })
+
     default:
       return state
   }
