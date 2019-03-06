@@ -9,7 +9,7 @@ export const Dropdown = styled.select`
   padding-left: 10px;
 
   color: ${props => props.theme.primary};
-  font-family: "Open Sans", sans-serif;
+
   font-size: 16px;
   box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.3);
   border-radius: 3px;
@@ -21,7 +21,7 @@ export const Dropdown = styled.select`
   }
 
   option {
-    color: #666;
+    color: ${props => props.theme.primary};
   }
 `
 

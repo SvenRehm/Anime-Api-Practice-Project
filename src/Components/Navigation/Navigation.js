@@ -6,7 +6,7 @@ const StyledNav = styled.div`
   overflow: hidden;
   background-color: ${props => props.theme.primary};
   border-bottom: solid 1px ${props => props.theme.secondary};
-  margin-bottom:2em;
+  margin-bottom: 2em;
   a {
     float: left;
     display: block;
@@ -38,7 +38,6 @@ const StyledNav = styled.div`
   input[type="text"]:focus {
     outline: none;
   }
- 
 `
 
 const Navigation = ({ onSearchChange, onRequestSearchedAnime, search }) => {

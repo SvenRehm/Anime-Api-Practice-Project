@@ -14,7 +14,6 @@ import SortTypeBox from "./SortTypeBox"
 import InfiniteScroll from "react-infinite-scroller"
 import styled from "styled-components"
 
-
 export const Grid = styled.div`
   display: grid;
   margin: 1em;

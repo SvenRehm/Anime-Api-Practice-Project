@@ -93,11 +93,14 @@ export const LayoutGrid = styled.div`
       overflow: hidden;
       /* white-space: nowrap; */
       text-overflow: ellipsis;
-      max-height: 100px;
+      max-height: 150px;
       /* add height */
     }
   }
-
+  h2 {
+    grid-column: 6 / span 5;
+    grid-row: 6;
+  }
   table {
     color: white;
     max-width: 80%;
@@ -117,7 +120,7 @@ class SingleMoreInfo extends Component {
     let id = this.props.match.params.id
     this.props.onRequestSingleMoreInfo(id)
   }
- 
+
   render() {
     const {
       canonicalTitle,
@@ -132,7 +135,7 @@ class SingleMoreInfo extends Component {
       endDate,
       averageRating
     } = this.props
-  
+
     return !this.props.isPending ? (
       <LayoutGrid>
         <div className="darkimg">
@@ -143,9 +146,8 @@ class SingleMoreInfo extends Component {
         <h1>{canonicalTitle}</h1>
         <div className="text">
           <p> {synopsis}</p>
-          <p>Hello</p>
+          <p>more</p>
         </div>
-
         <table className="table-styles">
           <tbody>
             <tr>
@@ -180,6 +182,7 @@ class SingleMoreInfo extends Component {
             </tr>
           </tbody>
         </table>
+        <h2>moasdadre</h2>
       </LayoutGrid>
     ) : (
       <h1>Loading DATA</h1>
