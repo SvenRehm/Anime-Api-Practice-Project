@@ -32,6 +32,7 @@ const themeblack = {
   primary: "#171717",
   secondary: "#f9f9f9",
   accent: "#e50914",
+  darkgrey: "#221f1f",
   fontFamily: "Roboto"
 }
 const GlobalStyle = createGlobalStyle`

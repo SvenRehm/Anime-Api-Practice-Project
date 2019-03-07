@@ -1,38 +1,84 @@
 import React from "react"
+import Select from "react-select"
 import styled from "styled-components"
 
-export const Dropdown = styled.select`
-  width: 200px;
-  appearance: none;
-  border: none;
-  height: 40px;
-  padding-left: 10px;
+const options = [
+  { value: "finished", label: "Finished" },
+  { value: "current", label: "Current" },
+  { value: "upcoming", label: "Upcoming" }
+]
+export const customStyles = {
+  option: (provided, state) => ({
+    ...provided,
+    width: "200px",
+    display: "inline-block",
+    color: state.isSelected ? "white" : "rgb(255, 255, 255, 0.5)",
+    background: state.isSelected ? "#221f1f" : "#171717",
+    border: "none",
+    "&:hover": {
+      color: "white",
+      background: "#221f1f"
+    }
+  }),
+  indicatorSeparator: (provided, state) => ({
+    ...provided,
+    background: "rgba(255, 255, 255, 0.5)"
+  }),
+  control: (provided, state) => ({
+    ...provided,
+    width: "200px",
+    background: "#171717",
+    border: "2px solid #221f1f",
+    borderRadius: "none",
+    margin: "0",
+    boxShadow: state.isFocused ? null : null,
 
-  color: ${props => props.theme.primary};
+    "&:hover": {
+      borderColor: null,
+      background: "#221f1f"
+    }
+  }),
 
-  font-size: 16px;
-  box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.3);
-  border-radius: 3px;
-  outline: none;
-  cursor: pointer;
-  margin-right: 1em;
-  &:focus::-ms-value {
-    background-color: transparent;
-  }
+  menu: (provided, state) => ({
+    ...provided,
+    borderRadius: 0,
+    hyphens: "auto",
+    width: "200px",
+    marginTop: 0,
 
-  option {
-    color: ${props => props.theme.primary};
-  }
+    textAlign: "left"
+  }),
+
+  menuList: (provided, state) => ({
+    ...provided,
+    padding: 0
+  }),
+  singleValue: (provided, state) => ({
+    ...provided,
+    color: "white"
+  })
+}
+const InLineBlock = styled.div`
+  display: inline-block;
+  margin: 2em 1em;
 `
-
 const SortStatus = ({ onChangeStatus }) => {
   return (
-    <Dropdown onChange={onChangeStatus} name="business">
-      <option value="finished">finished</option>
-      <option value="current">current</option>
+    <InLineBlock>
+      <Select
+        styles={customStyles}
+        defaultValue={options[0]}
+        onChange={onChangeStatus}
+        options={options}
+      />
+    </InLineBlock>
 
-      <option value="upcoming">upcoming</option>
-    </Dropdown>
+    // <Dropdown onChange={onChangeStatus} name="business">
+    //   <option value="finished">finished</option>
+    //   <option value="current">current</option>
+
+    //   <option value="upcoming">upcoming</option>
+    // </Dropdown>
   )
 }
 

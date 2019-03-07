@@ -136,6 +136,8 @@ class SingleMoreInfo extends Component {
       averageRating
     } = this.props
 
+    let loading=this.props.isPending
+    console.log(loading)
     return !this.props.isPending ? (
       <LayoutGrid>
         <div className="darkimg">

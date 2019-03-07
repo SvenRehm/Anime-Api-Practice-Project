@@ -57,13 +57,13 @@ const mapDispatchToProps = dispatch => {
     onRequestPageTwo: (url, subtype, sort) =>
       dispatch(requestPageTwo(url, subtype, sort)),
     onChangeSelect: e => {
-      dispatch(changeSelect(e.target.value))
+      dispatch(changeSelect(e.value))
     },
     onChangeSelectType: e => {
-      dispatch(changeSelectType(e.target.value))
+      dispatch(changeSelectType(e.value))
     },
     onChangeStatus: e => {
-      dispatch(changeStatus(e.target.value))
+      dispatch(changeStatus(e.value))
     }
   }
 }
