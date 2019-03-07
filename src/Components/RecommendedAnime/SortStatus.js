@@ -32,7 +32,8 @@ export const customStyles = {
     borderRadius: "none",
     margin: "0",
     boxShadow: state.isFocused ? null : null,
-
+    cursor:"pointer",
+    
     "&:hover": {
       borderColor: null,
       background: "#221f1f"

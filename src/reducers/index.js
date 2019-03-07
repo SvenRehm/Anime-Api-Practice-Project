@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
   requestCategorys,
   requestRecommendedAnime,
   requestSingleMoreInfo,
- 
+  
 })
 
 export default rootReducer

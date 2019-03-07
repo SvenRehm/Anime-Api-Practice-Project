@@ -1,6 +1,9 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { requestSingleMoreInfo } from "./actions/requestSingleMoreInfo"
+import {
+  requestSingleMoreInfo,
+  requestSingleCategories
+} from "./actions/requestSingleMoreInfo"
 import { withRouter } from "react-router-dom"
 // import { LayoutGrid } from "../Styled/index"
 import styled from "styled-components"
@@ -21,6 +24,7 @@ const mapStateToProps = state => {
     endDate
   } = state.requestSingleMoreInfo.singleMoreInfo.attributes
   return {
+    singleCatergories: state.requestSingleMoreInfo.singleCatergories,
     isPending: isPending,
     singleMoreInfo: state.requestSingleMoreInfo.singleMoreInfo,
     coverImage: coverImage,
@@ -42,7 +46,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onRequestSingleMoreInfo: animeid => dispatch(requestSingleMoreInfo(animeid))
+    onRequestSingleMoreInfo: animeid =>
+      dispatch(requestSingleMoreInfo(animeid)),
+    onRequestSingleCategories: animeid =>
+      dispatch(requestSingleCategories(animeid))
   }
 }
 
@@ -79,7 +86,6 @@ export const LayoutGrid = styled.div`
     /* align-self: center; */
     align-self: end;
     z-index: 2;
-    color: ${props => props.theme.third};
   }
   div.text {
     align-self: start;
@@ -119,6 +125,7 @@ class SingleMoreInfo extends Component {
   componentDidMount() {
     let id = this.props.match.params.id
     this.props.onRequestSingleMoreInfo(id)
+    this.props.onRequestSingleCategories(id)
   }
 
   render() {
@@ -136,19 +143,17 @@ class SingleMoreInfo extends Component {
       averageRating
     } = this.props
 
-    let loading=this.props.isPending
-    console.log(loading)
     return !this.props.isPending ? (
       <LayoutGrid>
         <div className="darkimg">
-          <img alt="" src={coverImage.large} />
+          <img alt="" src={coverImage === null ? null : coverImage.large} />
         </div>
         <img alt="" src={posterImage.medium} />
 
         <h1>{canonicalTitle}</h1>
         <div className="text">
           <p> {synopsis}</p>
-          <p>more</p>
+          <p>load more</p>
         </div>
         <table className="table-styles">
           <tbody>
@@ -184,7 +189,8 @@ class SingleMoreInfo extends Component {
             </tr>
           </tbody>
         </table>
-        <h2>moasdadre</h2>
+        {/* catergories */}
+        <h2>{this.props.singleCatergories[0].attributes.title}</h2>
       </LayoutGrid>
     ) : (
       <h1>Loading DATA</h1>

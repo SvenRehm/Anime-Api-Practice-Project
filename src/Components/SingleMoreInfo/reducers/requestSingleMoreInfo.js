@@ -25,6 +25,16 @@ const initialSingleMoreInfo = {
       }
     }
   },
+  singleCatergories: [
+    {
+      attributes: {
+        title: ""
+      }
+    }
+   
+     
+    
+  ],
 
   error: ""
 }
@@ -69,6 +79,11 @@ export const requestSingleMoreInfo = (
         isPending: false
       })
 
+    case "REQUEST_SINGLE_CATEGORIES_SUCCESS":
+      return {
+        ...state,
+        singleCatergories:  [...action.payload]
+      }
     default:
       return state
   }
