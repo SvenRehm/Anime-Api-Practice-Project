@@ -9,6 +9,7 @@ import Navigation from "./Components/Navigation/Navigation"
 // import Categorys from "./Components/Categorys"
 import RedommendedAnime from "./Components/RecommendedAnime/RecommendedAnime"
 import SingleMoreInfo from "./Components/SingleMoreInfo/SingleMoreInfo"
+import MyAnimeList from "./Components/MyAnimeList/MyAnimeList"
 import { BrowserRouter, Route } from "react-router-dom"
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop"
 import { ThemeProvider, createGlobalStyle } from "styled-components"
@@ -63,15 +64,17 @@ class App extends Component {
               />
 
               {/* <Categorys /> */}
-              <ScrollToTop>
-                <Route exact path="/" component={RedommendedAnime} />
-              </ScrollToTop>
+
+              <Route exact path="/" component={RedommendedAnime} />
+
               <Route
                 path={`/search`}
                 render={props => (
                   <CardList {...props} filteredAnime={filteredAnime} />
                 )}
               />
+              <Route path={`/MyAnimeList`} component={MyAnimeList} />
+
               <Route path="/anime/:id" component={SingleMoreInfo} />
             </div>
           </ScrollToTop>

@@ -47,6 +47,7 @@ const Navigation = ({ onSearchChange, onRequestSearchedAnime, search }) => {
   return (
     <StyledNav>
       <a href="/">Recommended</a>
+      <Link to={`/MyAnimeList`}> MyAnimeList</Link>
       <div>
         <input
           onChange={onSearchChange}
@@ -59,6 +60,7 @@ const Navigation = ({ onSearchChange, onRequestSearchedAnime, search }) => {
           Search
         </Link>
       </div>
+    
       <span>
         <a href="/">Log In</a>
       </span>

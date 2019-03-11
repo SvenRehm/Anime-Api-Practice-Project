@@ -134,11 +134,16 @@ export const LayoutGrid = styled.div`
     grid-column: 6 / span 4;
     grid-row: 3;
     margin-bottom: 1em;
-    /* align-self: center; */
+
     align-self: end;
     z-index: 2;
   }
-
+  button {
+    width: 80%;
+    grid-column: 3 / span 3;
+    height: 30px;
+    grid-row: 8;
+  }
   div.text {
     align-self: start;
 
@@ -148,6 +153,7 @@ export const LayoutGrid = styled.div`
     line-height: 1.5em;
     font-size: 0.9em;
     margin-bottom: 4em;
+
     h2 {
       line-height: 2em;
     }
@@ -174,6 +180,9 @@ export const LayoutGrid = styled.div`
     .right-align {
       text-align: right;
       font-weight: 700;
+    }
+    .green {
+      color: green;
     }
   }
   iframe {
@@ -207,8 +216,8 @@ const CategoriesList = styled.ul`
       display: block;
       &:hover {
         text-decoration: none;
-        color: #000000;
-        background-color: #33b5e5;
+        color: ${props => props.theme.accent};
+        /* background-color: ${props => props.theme.darkgrey}; */
       }
     }
   }
@@ -220,6 +229,9 @@ class SingleMoreInfo extends Component {
     this.props.onRequestSingleCategories(id)
   }
 
+  handleClick=(e)=> {
+    console.log(e)
+  }
   render() {
     const {
       canonicalTitle,
@@ -257,7 +269,9 @@ class SingleMoreInfo extends Component {
         <h1>{canonicalTitle}</h1>
         <Rankings>
           <h2>PopularityRank:#{popularityRank}</h2>
-          <h2>RatingRank:#{ratingRank}</h2>
+          <h2>
+            RatingRank:#{ratingRank} ({averageRating})
+          </h2>
         </Rankings>
         <div className="text">
           <h2>Synopsis</h2>
@@ -273,7 +287,7 @@ class SingleMoreInfo extends Component {
 
             <tr>
               <td>STATUS</td>
-              <td className="right-align">{status}</td>
+              <td className="right-align green">{status}</td>
             </tr>
             <tr>
               <td>averageRating</td>
@@ -298,13 +312,12 @@ class SingleMoreInfo extends Component {
             </tr>
           </tbody>
         </table>
-
+        <button onClick={this.handleClick}>Add To Playlist</button>
         <CategoriesList>{category}</CategoriesList>
         <iframe
           title="animeintro"
           src={`https://www.youtube.com/embed/${youtubeVideoId}`}
           frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
       </LayoutGrid>

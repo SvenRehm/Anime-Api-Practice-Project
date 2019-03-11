@@ -22,7 +22,7 @@ export const customStyles = {
   }),
   indicatorSeparator: (provided, state) => ({
     ...provided,
-    background: "rgba(255, 255, 255, 0.5)"
+    background: "#221f1f"
   }),
   control: (provided, state) => ({
     ...provided,
@@ -61,7 +61,7 @@ export const customStyles = {
 }
 const InLineBlock = styled.div`
   display: inline-block;
-  margin: 2em 1em;
+  margin: 5em 1em 2em 1em;
 `
 const SortStatus = ({ onChangeStatus }) => {
   return (

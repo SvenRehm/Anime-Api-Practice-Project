@@ -29,7 +29,7 @@ class Categorys extends Component {
 
   componentDidMount() {
     this.props.onRequestCategoryLinks()
-    console.log(this.props)
+   
   }
 
   render() {
