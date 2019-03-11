@@ -4,6 +4,9 @@ import { Link } from "react-router-dom"
 
 const StyledNav = styled.div`
   overflow: hidden;
+  position: fixed;
+  z-index: 3;
+  width: 100%;
   background-color: ${props => props.theme.primary};
   border-bottom: solid 1px ${props => props.theme.secondary};
 

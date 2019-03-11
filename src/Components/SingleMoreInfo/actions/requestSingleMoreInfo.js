@@ -13,7 +13,7 @@ export const requestSingleMoreInfo = animeid => dispatch => {
     .then(res => res.json())
     .then(data => {
       const info = data.data
-     
+
       dispatch({
         type: REQUEST_SINGLE_MORE_INFO_SUCCESS,
         payload: info
@@ -23,22 +23,20 @@ export const requestSingleMoreInfo = animeid => dispatch => {
     .catch(error =>
       dispatch({ type: REQUEST_SINGLE_MORE_INFO_FAILED, payload: error })
     )
-
 }
 
 export const requestSingleCategories = animeid => dispatch => {
- 
-  fetch(`https://kitsu.io/api/edge/anime/${animeid}/categories`)
+  
+  fetch(
+    `https://kitsu.io/api/edge/anime/${animeid}/categories?page%5Blimit%5D=16&page%5Boffset%5D=0`
+  )
     .then(res => res.json())
     .then(data => {
       const info = data.data
-     
+
       dispatch({
         type: "REQUEST_SINGLE_CATEGORIES_SUCCESS",
         payload: info
       })
     })
-
-   
-    
 }

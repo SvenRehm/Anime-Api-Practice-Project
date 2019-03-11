@@ -22,7 +22,7 @@ const StyledRecommendedAnimeCard = styled.div`
     background: black;
   }
   h4 {
-    font-size: .91em;
+    font-size: 0.91em;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -55,7 +55,7 @@ const RecommendedAnimeCard = ({
 }) => {
   return (
     <StyledRecommendedAnimeCard>
-      <Link to={"/anime/info/" + id}>
+      <Link to={"/anime/" + id}>
         <img alt="" src={src} />
 
         <h4>{title}</h4>

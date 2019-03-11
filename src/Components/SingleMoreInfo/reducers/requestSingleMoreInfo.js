@@ -31,9 +31,6 @@ const initialSingleMoreInfo = {
         title: ""
       }
     }
-   
-     
-    
   ],
 
   error: ""
@@ -82,7 +79,7 @@ export const requestSingleMoreInfo = (
     case "REQUEST_SINGLE_CATEGORIES_SUCCESS":
       return {
         ...state,
-        singleCatergories:  [...action.payload]
+        singleCatergories: [...action.payload]
       }
     default:
       return state

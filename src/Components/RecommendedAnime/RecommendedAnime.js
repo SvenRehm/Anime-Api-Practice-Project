@@ -106,12 +106,7 @@ class RecommendedAnime extends Component {
       )
     }
   }
-  // componentWillUpdate(newProps) {
-  //   if (newProps.subtype !== this.props.subtype) {
-  //     console.log(newProps.subtype)
-  //     this.props.onRequestRecommendedAnime(newProps.subtype, this.props.sort)
-  //   }
-  // }
+
 
   render() {
     const { recommendedAnime } = this.props
@@ -119,6 +114,7 @@ class RecommendedAnime extends Component {
     //mapping over received anime
     const RecommendedAnime = recommendedAnime.map((category, i) => {
       return (
+     
         <RecommendedAnimeCard
           key={i}
           id={recommendedAnime[i].id}

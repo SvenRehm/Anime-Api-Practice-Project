@@ -72,7 +72,7 @@ class App extends Component {
                   <CardList {...props} filteredAnime={filteredAnime} />
                 )}
               />
-              <Route path="/anime/info/:id" component={SingleMoreInfo} />
+              <Route path="/anime/:id" component={SingleMoreInfo} />
             </div>
           </ScrollToTop>
         </ThemeProvider>
