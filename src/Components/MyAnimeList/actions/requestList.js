@@ -17,10 +17,11 @@ export const requestList = animeCategoryLinks => dispatch => {
     .then(responses => Promise.all(responses.map(r => r.json())))
     .then(data => {
       //MAPPING OVER RESPONSE AN GIVING AN OBJECT BACK
-    //   const animelist = data.map(id => ({
-    //     animelist: data.data
-    //   }))
-       const animelist = data
+      const animelist = data.map(id => ({
+        id: id.data.id,
+        title: id.data.attributes.canonicalTitle
+      }))
+      //   const animelist = data
       dispatch({ type: "REQUEST_ANIME_LIST_SUCCES", payload: animelist })
     })
 

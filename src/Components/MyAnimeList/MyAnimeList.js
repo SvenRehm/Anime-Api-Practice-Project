@@ -6,7 +6,7 @@ import { requestList } from "./actions/requestList"
 const mapStateToProps = state => {
   return {
     animeId: state.addToPlaylist.animeId,
-    animeList: state.requestList
+    animeList: state.requestList.animeList
   }
 }
 const mapDispatchToProps = dispatch => {
@@ -24,17 +24,28 @@ const Styles = styled.div`
     grid-column: 1 / span 3;
     grid-row: 2;
   }
+  ul {
+    grid-column: 1 / span 4;
+    grid-row: 3;
+    color: white;
+  }
 `
+
 class MyAnimeList extends Component {
   componentDidMount() {
     this.props.onRequestList(this.props.animeId)
-   
   }
+
   render() {
-    console.log()
+    const { animeList } = this.props
+    const AnimeList = animeList.map((category, i) => {
+      return <li key={i}> {animeList[i].title}</li>
+    })
+    console.log(this.props.animeList)
     return (
       <Styles>
         <h1>My Anime List</h1>
+        <ul>{AnimeList}</ul>
       </Styles>
     )
   }

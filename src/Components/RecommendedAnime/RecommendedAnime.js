@@ -107,14 +107,12 @@ class RecommendedAnime extends Component {
     }
   }
 
-
   render() {
     const { recommendedAnime } = this.props
 
     //mapping over received anime
     const RecommendedAnime = recommendedAnime.map((category, i) => {
       return (
-     
         <RecommendedAnimeCard
           key={i}
           id={recommendedAnime[i].id}

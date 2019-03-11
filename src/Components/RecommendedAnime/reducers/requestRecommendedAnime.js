@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   isPending: false,
-  recommendedAnime: [{}],
+  recommendedAnime: [],
   pagination: {
     first: "",
     prev: "",
