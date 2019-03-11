@@ -4,6 +4,7 @@ import {
   requestSingleMoreInfo,
   requestSingleCategories
 } from "./actions/requestSingleMoreInfo"
+import { addToPlaylist } from "./actions/addToPlaylist"
 import { withRouter } from "react-router-dom"
 // import { LayoutGrid } from "../Styled/index"
 import styled from "styled-components"
@@ -28,6 +29,7 @@ const mapStateToProps = state => {
   } = state.requestSingleMoreInfo.singleMoreInfo.attributes
 
   return {
+    id: state.requestSingleMoreInfo.singleMoreInfo.id,
     youtubeVideoId: youtubeVideoId,
     popularityRank: popularityRank,
     ratingRank: ratingRank,
@@ -56,10 +58,12 @@ const mapDispatchToProps = dispatch => {
     onRequestSingleMoreInfo: animeid =>
       dispatch(requestSingleMoreInfo(animeid)),
     onRequestSingleCategories: animeid =>
-      dispatch(requestSingleCategories(animeid))
+      dispatch(requestSingleCategories(animeid)),
+
+    onAddToPlaylist: animeid => dispatch(addToPlaylist(animeid))
   }
 }
-//loading
+//loading styles
 const GreyBackground = styled.div`
   display: grid;
   grid-gap: 1em;
@@ -229,8 +233,10 @@ class SingleMoreInfo extends Component {
     this.props.onRequestSingleCategories(id)
   }
 
-  handleClick=(e)=> {
-    console.log(e)
+  handleClick = () => {
+    console.log("added to playlist", this.props.id)
+    this.props.onAddToPlaylist(this.props.id)
+    console.log()
   }
   render() {
     const {
@@ -314,12 +320,21 @@ class SingleMoreInfo extends Component {
         </table>
         <button onClick={this.handleClick}>Add To Playlist</button>
         <CategoriesList>{category}</CategoriesList>
-        <iframe
-          title="animeintro"
-          src={`https://www.youtube.com/embed/${youtubeVideoId}`}
-          frameBorder="0"
-          allowFullScreen
-        />
+        {youtubeVideoId === "" ? (
+          <iframe
+            title="animeintro"
+            src={`https://www.youtube.com/embed/fsxkO9P5hYQ`}
+            frameBorder="0"
+            allowFullScreen
+          />
+        ) : (
+          <iframe
+            title="animeintro"
+            src={`https://www.youtube.com/embed/${youtubeVideoId}`}
+            frameBorder="0"
+            allowFullScreen
+          />
+        )}
       </LayoutGrid>
     ) : (
       <GreyBackground>
