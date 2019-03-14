@@ -9,6 +9,9 @@ import { requestRecommendedAnime } from "../Components/RecommendedAnime/reducers
 import { requestSingleMoreInfo } from "../Components/SingleMoreInfo/reducers/requestSingleMoreInfo"
 import { addToPlaylist } from "../Components/SingleMoreInfo/reducers/addToPlaylist"
 import { requestList } from "../Components/MyAnimeList/reducers/requestList"
+import { Login } from "../Components/Login/reducers/Login"
+import { Register } from "../Components/Register/reducers/Register"
+
 const rootReducer = combineReducers({
   changeSearchField,
   requestSearchedAnime,
@@ -17,7 +20,9 @@ const rootReducer = combineReducers({
   requestRecommendedAnime,
   requestSingleMoreInfo,
   addToPlaylist,
-  requestList
+  requestList,
+  Login,
+  Register
 })
 
 export default rootReducer

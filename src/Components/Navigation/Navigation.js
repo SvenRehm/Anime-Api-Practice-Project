@@ -60,9 +60,10 @@ const Navigation = ({ onSearchChange, onRequestSearchedAnime, search }) => {
           Search
         </Link>
       </div>
-    
+
       <span>
-        <a href="/">Log In</a>
+        <Link to={`/Register`}> Register</Link>
+        <Link to={`/Login`}> Login</Link>
       </span>
     </StyledNav>
   )

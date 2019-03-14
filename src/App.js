@@ -10,6 +10,8 @@ import Navigation from "./Components/Navigation/Navigation"
 import RedommendedAnime from "./Components/RecommendedAnime/RecommendedAnime"
 import SingleMoreInfo from "./Components/SingleMoreInfo/SingleMoreInfo"
 import MyAnimeList from "./Components/MyAnimeList/MyAnimeList"
+import Login from "./Components/Login/Login"
+import Register from "./Components/Register/Register"
 import { BrowserRouter, Route } from "react-router-dom"
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop"
 import { ThemeProvider, createGlobalStyle } from "styled-components"
@@ -42,7 +44,9 @@ const GlobalStyle = createGlobalStyle`
     background:${props => props.theme.primary};
   }
 `
+
 class App extends Component {
+ 
   render() {
     const {
       filteredAnime,
@@ -73,6 +77,8 @@ class App extends Component {
                   <CardList {...props} filteredAnime={filteredAnime} />
                 )}
               />
+              <Route path={`/Register`} component={Register} />
+              <Route path={`/Login`} component={Login} />
               <Route path={`/MyAnimeList`} component={MyAnimeList} />
 
               <Route path="/anime/:id" component={SingleMoreInfo} />
