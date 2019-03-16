@@ -6,7 +6,9 @@ import { requestList } from "./actions/requestList"
 const mapStateToProps = state => {
   return {
     animeId: state.addToPlaylist.animeId,
-    animeList: state.requestList.animeList
+    animeList: state.requestList.animeList,
+    userId: state.Login.user.id,
+    animeListData: state.Login.user.animelist
   }
 }
 const mapDispatchToProps = dispatch => {
@@ -33,7 +35,8 @@ const Styles = styled.div`
 
 class MyAnimeList extends Component {
   componentDidMount() {
-    this.props.onRequestList(this.props.animeId)
+    // this.props.onRequestList(this.props.animeId)
+    this.props.onRequestList(this.props.animeListData)
   }
 
   render() {
@@ -41,10 +44,12 @@ class MyAnimeList extends Component {
     const AnimeList = animeList.map((category, i) => {
       return <li key={i}> {animeList[i].title}</li>
     })
+   
     console.log(this.props.animeList)
     return (
       <Styles>
         <h1>My Anime List</h1>
+
         <ul>{AnimeList}</ul>
       </Styles>
     )

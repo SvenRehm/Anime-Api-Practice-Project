@@ -42,11 +42,11 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: ${props => props.theme.fontFamily};
     background:${props => props.theme.primary};
+    
   }
 `
 
 class App extends Component {
- 
   render() {
     const {
       filteredAnime,

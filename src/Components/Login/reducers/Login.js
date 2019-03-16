@@ -1,6 +1,10 @@
 const initialState = {
   signInEmail: "",
-  signInPassword: ""
+  signInPassword: "",
+  LoggedIn: false,
+  user: {
+    animelist: []
+  }
 }
 
 export const Login = (state = initialState, action = {}) => {
@@ -10,8 +14,20 @@ export const Login = (state = initialState, action = {}) => {
     case "CHANGE_EMAIL_FIELD":
       return Object.assign({}, state, { signInEmail: action.payload })
     case "SUBMIT_LOGIN":
-
-      return Object.assign({}, state, { submit:true, data:action.payload })
+      return Object.assign({}, state, {
+        LoggedIn: true,
+        user: action.payload,
+        signInEmail: "",
+        signInPassword: ""
+      })
+    case "LOGIN_ADD_TO_PLAYLIST":
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          animelist: [...action.payload]
+        }
+      }
     default:
       return state
   }

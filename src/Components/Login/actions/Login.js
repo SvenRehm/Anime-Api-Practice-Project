@@ -11,18 +11,13 @@ export const changeEmailField = text => {
   }
 }
 
-export const submitLogin = (
-  registerEmail,
-  registerPassword,
-  registerName
-) => dispatch => {
-  fetch("http://localhost:3001/register", {
+export const submitLogin = (loginEmail, loginPassword) => dispatch => {
+  fetch("http://localhost:3001/signin", {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      name: registerName,
-      email: registerEmail,
-      password: registerPassword
+      email: loginEmail,
+      password: loginPassword
     })
   })
     .then(response => response.json())
@@ -30,6 +25,24 @@ export const submitLogin = (
       dispatch({
         type: "SUBMIT_LOGIN",
         payload: data
+      })
+    })
+}
+
+export const loginAddToPlaylist = (id, animeid) => dispatch => {
+  fetch("http://localhost:3001/addplaylist", {
+    method: "put",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      id: id,
+      animeid: animeid
+    })
+  })
+    .then(response => response.json())
+    .then(animeid => {
+      dispatch({
+        type: "LOGIN_ADD_TO_PLAYLIST",
+        payload: animeid
       })
     })
 }

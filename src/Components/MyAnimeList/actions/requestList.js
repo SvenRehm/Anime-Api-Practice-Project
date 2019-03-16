@@ -16,7 +16,7 @@ export const requestList = animeCategoryLinks => dispatch => {
 
     .then(responses => Promise.all(responses.map(r => r.json())))
     .then(data => {
-      //MAPPING OVER RESPONSE AN GIVING AN OBJECT BACK
+      //MAPPING OVER RESPONSE AND GIVING AN OBJECT BACK
       const animelist = data.map(id => ({
         id: id.data.id,
         title: id.data.attributes.canonicalTitle

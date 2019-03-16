@@ -4,6 +4,7 @@ import {
   requestSingleMoreInfo,
   requestSingleCategories
 } from "./actions/requestSingleMoreInfo"
+import { loginAddToPlaylist } from "../Login/actions/Login"
 import { addToPlaylist } from "./actions/addToPlaylist"
 import { withRouter } from "react-router-dom"
 // import { LayoutGrid } from "../Styled/index"
@@ -29,6 +30,7 @@ const mapStateToProps = state => {
   } = state.requestSingleMoreInfo.singleMoreInfo.attributes
 
   return {
+    userId: state.Login.user.id,
     id: state.requestSingleMoreInfo.singleMoreInfo.id,
     youtubeVideoId: youtubeVideoId,
     popularityRank: popularityRank,
@@ -59,8 +61,10 @@ const mapDispatchToProps = dispatch => {
       dispatch(requestSingleMoreInfo(animeid)),
     onRequestSingleCategories: animeid =>
       dispatch(requestSingleCategories(animeid)),
-
-    onAddToPlaylist: animeid => dispatch(addToPlaylist(animeid))
+    onLoginAddToPlaylist: (userId, animeid) =>
+      dispatch(loginAddToPlaylist(userId, animeid)),
+    onAddToPlaylist: (userId, animeid) =>
+      dispatch(addToPlaylist(userId, animeid))
   }
 }
 //loading styles
@@ -235,8 +239,10 @@ class SingleMoreInfo extends Component {
 
   handleClick = () => {
     console.log("added to playlist", this.props.id)
-    this.props.onAddToPlaylist(this.props.id)
-    console.log()
+
+    this.props.onLoginAddToPlaylist(this.props.userId, this.props.id)
+    // this.props.onAddToPlaylist(this.props.userId, this.props.id)
+    console.log(this.props.userId)
   }
   render() {
     const {
