@@ -4,10 +4,11 @@ import styled from "styled-components"
 
 export const Grid = styled.div`
   display: grid;
+
   margin: 1em;
+  margin-top: 0;
   grid-gap: 1em;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-
 `
 const CardList = ({ filteredAnime }) => {
   return (

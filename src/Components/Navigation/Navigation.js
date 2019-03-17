@@ -2,69 +2,88 @@ import React from "react"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 
-const StyledNav = styled.div`
-  overflow: hidden;
-  position: fixed;
+const StyledNav = styled.ul`
   z-index: 3;
+  position: fixed;
+  display: flex;
   width: 100%;
-  background-color: ${props => props.theme.primary};
-  border-bottom: solid 1px ${props => props.theme.secondary};
+  height: 57px;
+  padding: 0;
+  list-style: none;
+  align-items: center;
+  padding: 0 10px;
+  background-color: ${props => props.theme.lightgrey};
+  font-size: 17px;
 
-  a {
-    float: left;
-    display: block;
-    color: ${props => props.theme.secondary};
-    text-align: center;
-    padding: 14px 16px;
+  li > a {
     text-decoration: none;
-    font-size: 1em;
-    transition: all 350ms ease-in-out;
-    margin: 0 5px;
-  }
-
-  span > a {
-    float: right;
-  }
-
-  a:hover {
-    color: ${props => props.theme.accent};
-  }
-
-  input[type="text"] {
-    float: left;
-    padding: 6px;
-    margin-top: 6px;
+    color: ${props => props.theme.secondary};
+    padding: 1.1em;
     font-size: 17px;
-    border: none;
-    border-left: 1px solid black;
+    &:hover {
+      background: ${props => props.theme.darkgrey};
+    }
+    &:hover a {
+      color: ${props => props.theme.accent};
+    }
   }
-  input[type="text"]:focus {
-    outline: none;
+
+  li:not(:last-child):not(.search) {
+    margin-right: 10px;
+  }
+  input[type="text"] {
+    padding: 6px;
+    /* margin-left: 6px auto; */
+    /* margin-top: 6px; */
+    font-size: 17px;
+    width: 400px;
+    border: none;
+    color: ${props => props.theme.secondary};
+    background: ${props => props.theme.darkgrey};
+  }
+  .search {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+
+    &:hover {
+      background: ${props => props.theme.lightgrey};
+    }
+    &:hover a {
+      background-color: ${props => props.theme.lightgrey};
+      color: ${props => props.theme.secondary};
+    }
   }
 `
 
 const Navigation = ({ onSearchChange, onRequestSearchedAnime, search }) => {
   return (
     <StyledNav>
-      <Link to="/">Recommended</Link>
-      <Link to={`/MyAnimeList`}> MyAnimeList</Link>
-      <div>
+      <li>
+        <Link to="/">Recommended</Link>
+      </li>
+      <li>
+        <Link to={`/MyAnimeList`}> MyAnimeList</Link>
+      </li>
+
+      <li className="search">
         <input
           onChange={onSearchChange}
           type="text"
-          placeholder="Search.."
+          placeholder="Search"
           name="search"
         />
-
         <Link to={`/search`} onClick={() => onRequestSearchedAnime(search)}>
           Search
         </Link>
-      </div>
+      </li>
 
-      <span>
+      <li>
         <Link to={`/Register`}> Register</Link>
+      </li>
+      <li>
         <Link to={`/Login`}> Login</Link>
-      </span>
+      </li>
     </StyledNav>
   )
 }
