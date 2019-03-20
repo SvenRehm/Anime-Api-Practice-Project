@@ -2,6 +2,7 @@ const initialState = {
   signInEmail: "",
   signInPassword: "",
   LoggedIn: false,
+  token: null,
   user: {
     animelist: []
   }
@@ -18,15 +19,17 @@ export const Login = (state = initialState, action = {}) => {
         LoggedIn: true,
         user: action.payload,
         signInEmail: "",
-        signInPassword: ""
+        signInPassword: "",
+        token: action.token
       })
     case "LOGIN_ADD_TO_PLAYLIST":
       return {
-        ...state,
-        user: {
-          ...state.user,
-          animelist: [...action.payload]
-        }
+        ...state
+
+        // user: {
+        //   ...state.user,
+        //   animelist: [...action.payload]
+        // }
       }
     default:
       return state

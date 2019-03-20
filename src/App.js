@@ -13,9 +13,12 @@ import MyAnimeList from "./Components/MyAnimeList/MyAnimeList"
 import Login from "./Components/Login/Login"
 import Register from "./Components/Register/Register"
 import { BrowserRouter, Route } from "react-router-dom"
+import { Router } from "react-router-dom"
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop"
 import { ThemeProvider, createGlobalStyle } from "styled-components"
+import createBrowserHistory from "history/createBrowserHistory"
 
+export const history = createBrowserHistory()
 const mapStateToProps = state => {
   return {
     search: state.changeSearchField.search,
@@ -57,7 +60,7 @@ class App extends Component {
     } = this.props
 
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <ThemeProvider theme={themeblack}>
           <ScrollToTop>
             <div>
@@ -67,11 +70,8 @@ class App extends Component {
                 onRequestSearchedAnime={() => onRequestSearchedAnime(search)}
                 search={search}
               />
-
               {/* <Categorys /> */}
-
               <Route exact path="/" component={RedommendedAnime} />
-
               <Route
                 path={`/search`}
                 render={props => (
@@ -86,7 +86,7 @@ class App extends Component {
             </div>
           </ScrollToTop>
         </ThemeProvider>
-      </BrowserRouter>
+      </Router>
     )
   }
 }
