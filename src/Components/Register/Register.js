@@ -74,16 +74,14 @@ const LoginDiv = styled.div`
 `
 class Register extends Component {
   render() {
-    console.log(this.props.registerPassword)
-    console.log(this.props.registerEmail)
-    console.log(this.props.registerName)
+    
     return (
       <LoginDiv>
         <h1>Login</h1>
         <h2>signInPassword</h2>
         <input
           onChange={this.props.onChangeRegisterPasswordField}
-          type="text"
+          type="password"
         />
         <h2 className="mail">signInEmail</h2>
         <input

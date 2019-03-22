@@ -12,13 +12,17 @@ import SingleMoreInfo from "./Components/SingleMoreInfo/SingleMoreInfo"
 import MyAnimeList from "./Components/MyAnimeList/MyAnimeList"
 import Login from "./Components/Login/Login"
 import Register from "./Components/Register/Register"
-import { BrowserRouter, Route } from "react-router-dom"
-import { Router } from "react-router-dom"
+
+import { Router, Route } from "react-router-dom"
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop"
 import { ThemeProvider, createGlobalStyle } from "styled-components"
-import createBrowserHistory from "history/createBrowserHistory"
+
+// import AuthenticatedComponent from "./Components/AuthenticatedComponent/AuthenticatedComponent"
+import Auth from "./Components/AuthenticatedComponent/Auth"
+import { createBrowserHistory } from "history"
 
 export const history = createBrowserHistory()
+
 const mapStateToProps = state => {
   return {
     search: state.changeSearchField.search,
@@ -78,9 +82,11 @@ class App extends Component {
                   <CardList {...props} filteredAnime={filteredAnime} />
                 )}
               />
+
               <Route path={`/Register`} component={Register} />
+
               <Route path={`/Login`} component={Login} />
-              <Route path={`/MyAnimeList`} component={MyAnimeList} />
+              <Route path={`/MyAnimeList`} component={Auth(MyAnimeList)} />
 
               <Route path="/anime/:id" component={SingleMoreInfo} />
             </div>

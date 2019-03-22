@@ -61,18 +61,16 @@ const LoginDiv = styled.div`
 `
 class Login extends Component {
   render() {
-    console.log(this.props.signInPassword)
-    console.log(this.props.signInEmail)
     return (
       <LoginDiv>
         <h1>Login</h1>
         <h2>signInPassword</h2>
-        <input onChange={this.props.onChangePasswordField} type="text" />
+        <input onChange={this.props.onChangePasswordField} type="password" />
         <h2 className="mail">signInEmail</h2>
         <input
           className="right"
           onChange={this.props.onChangeEmailField}
-          type="text"
+          type="email"
         />
         <button
           onClick={() =>

@@ -1,6 +1,7 @@
 import { history } from "../../../App"
 import axios from "axios"
 
+
 export const changePasswordField = text => {
   return {
     type: "CHANGE_PASSWORD_FIELD",
@@ -25,23 +26,6 @@ export const changeEmailField = text => {
 //   });
 // }
 export const submitLogin = (loginEmail, loginPassword) => dispatch => {
-  // fetch("http://localhost:5000/getToken", {
-  //   method: "post",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify({
-  //     email: loginEmail,
-  //     password: loginPassword
-  //   })
-  // })
-  //   // .then(response => response.json())
-  //   .then(data => {
-  //     dispatch({
-  //       type: "SUBMIT_LOGIN",
-
-  //       token: data.data
-  //     })
-  //     // history.push("/")
-  //   })
   axios
     .post("http://localhost:5000/getToken", {
       email: loginEmail,
@@ -52,13 +36,13 @@ export const submitLogin = (loginEmail, loginPassword) => dispatch => {
         type: "SUBMIT_LOGIN",
         token: res.data
       })
-      // localStorage.setItem("cool-jwt", res.data)
+      localStorage.setItem("cool-jwt", res.data)
       history.push("/")
     })
 }
 
 export const loginAddToPlaylist = (id, animeid) => dispatch => {
-  fetch("http://localhost:3001/addplaylist", {
+  fetch("http://localhost:5000/addplaylist", {
     method: "put",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -72,5 +56,22 @@ export const loginAddToPlaylist = (id, animeid) => dispatch => {
         type: "LOGIN_ADD_TO_PLAYLIST",
         payload: animeid
       })
+    })
+}
+
+export const Authenticate = (jwt) => dispatch => {
+  axios
+    .get("http://localhost:5000/getUser", {
+      headers: { Authorization: `Bearer ${jwt}` }
+    })
+    .then(res => {
+      dispatch({
+        type: "AUTHENTICATE",
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      localStorage.removeItem("cool-jwt")
+      history.push("/Login")
     })
 }
