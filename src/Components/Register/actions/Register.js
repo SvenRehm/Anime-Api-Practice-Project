@@ -22,11 +22,11 @@ export const submitRegister = (
   registerPassword,
   registerName
 ) => dispatch => {
-  fetch("http://localhost:3001/register", {
+  fetch("http://localhost:5000/register", {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      name: registerName,
+      username: registerName,
       email: registerEmail,
       password: registerPassword
     })

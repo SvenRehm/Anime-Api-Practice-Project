@@ -1,14 +1,14 @@
 //ACTION THAT USES THE LINKS
-export const requestList = animeCategoryLinks => dispatch => {
+export const requestList = animelistids => dispatch => {
   dispatch({
     type: "REQUEST_ANIME_LIST_PENDING"
   })
 
   //FETCHIN EVERY LINK
-  let requests = animeCategoryLinks.map(id =>
+ 
+  let requests = animelistids.map(id =>
     fetch(`https://kitsu.io/api/edge/anime/${id}`)
   )
-
   Promise.all(requests)
     .then(responses => {
       return responses

@@ -1,7 +1,6 @@
 import { history } from "../../../App"
 import axios from "axios"
 
-
 export const changePasswordField = text => {
   return {
     type: "CHANGE_PASSWORD_FIELD",
@@ -34,32 +33,14 @@ export const submitLogin = (loginEmail, loginPassword) => dispatch => {
     .then(res => {
       dispatch({
         type: "SUBMIT_LOGIN",
-        token: res.data
+        payload: res.data
       })
+      dispatch(Authenticate(res.data))
       localStorage.setItem("cool-jwt", res.data)
       history.push("/")
     })
 }
-
-export const loginAddToPlaylist = (id, animeid) => dispatch => {
-  fetch("http://localhost:5000/addplaylist", {
-    method: "put",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      id: id,
-      animeid: animeid
-    })
-  })
-    .then(response => response.json())
-    .then(animeid => {
-      dispatch({
-        type: "LOGIN_ADD_TO_PLAYLIST",
-        payload: animeid
-      })
-    })
-}
-
-export const Authenticate = (jwt) => dispatch => {
+export const Authenticate = jwt => dispatch => {
   axios
     .get("http://localhost:5000/getUser", {
       headers: { Authorization: `Bearer ${jwt}` }
@@ -74,4 +55,44 @@ export const Authenticate = (jwt) => dispatch => {
       localStorage.removeItem("cool-jwt")
       history.push("/Login")
     })
+}
+// export const loginAddToPlaylist = (id, animeid) => dispatch => {
+//   fetch("http://localhost:5000/addplaylist", {
+//     method: "put",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({
+//       id: id,
+//       animeid: animeid
+//     })
+//   })
+//     .then(response => response.json())
+//     .then(animeid => {
+//       dispatch({
+//         type: "LOGIN_ADD_TO_PLAYLIST",
+//         payload: animeid
+//       })
+//     })
+// }
+
+export const loginAddToPlaylist = (id, animeid) => dispatch => {
+  axios
+    .put("http://localhost:5000/addplaylist", {
+      id: id,
+      animeid: animeid
+    })
+    .then(res => {
+      dispatch({
+        type: "LOGIN_ADD_TO_PLAYLIST",
+        payload: animeid
+      })
+    })
+}
+
+
+export const Logout = () => dispatch => {
+  dispatch({
+    type: "LOGOUT"
+  })
+  localStorage.removeItem("cool-jwt")
+  history.push("/")
 }

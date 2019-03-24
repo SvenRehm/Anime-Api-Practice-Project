@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Component } from "react"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
 
@@ -55,37 +55,66 @@ const StyledNav = styled.ul`
     }
   }
 `
+class Navigation extends Component {
+  onSubmit=(e) =>{
+    e.preventDefault()
+    console.log("The link was clicked.")
+    this.props.onLogout()
+  }
 
-const Navigation = ({ onSearchChange, onRequestSearchedAnime, search }) => {
-  return (
-    <StyledNav>
-      <li>
-        <Link to="/">Recommended</Link>
-      </li>
-      <li>
-        <Link to={`/MyAnimeList`}> MyAnimeList</Link>
-      </li>
+  render() {
+    const {
+      onSearchChange,
+      onRequestSearchedAnime,
+      search,
+      loggedIn
+    } = this.props
 
-      <li className="search">
-        <input
-          onChange={onSearchChange}
-          type="text"
-          placeholder="Search"
-          name="search"
-        />
-        <Link to={`/search`} onClick={() => onRequestSearchedAnime(search)}>
-          Search
-        </Link>
-      </li>
+    return (
+      <StyledNav>
+        <li>
+          <Link to="/">Recommended</Link>
+        </li>
+        <li>
+          <Link to={`/MyAnimeList`}> MyAnimeList</Link>
+        </li>
 
-      <li>
-        <Link to={`/Register`}> Register</Link>
-      </li>
-      <li>
-        <Link to={`/Login`}> Login</Link>
-      </li>
-    </StyledNav>
-  )
+        <li className="search">
+          <input
+            onChange={onSearchChange}
+            type="text"
+            placeholder="Search"
+            name="search"
+          />
+          <Link to={`/search`} onClick={() => onRequestSearchedAnime(search)}>
+            Search
+          </Link>
+        </li>
+
+        <li>
+          <Link to={`/Register`}> Register</Link>
+        </li>
+
+        <li>
+          {loggedIn ? (
+            <a href="/" onClick={this.onSubmit}>
+              Logout
+            </a>
+          ) : (
+            <Link to={`/Login`}> Login</Link>
+          )}
+        </li>
+      </StyledNav>
+    )
+  }
 }
+
+// const Navigation = ({
+//   onSearchChange,
+//   onRequestSearchedAnime,
+//   search,
+//   loggedIn,
+//   onLogout
+// }) => {
 
 export default Navigation

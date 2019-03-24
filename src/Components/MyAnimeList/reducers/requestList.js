@@ -7,8 +7,13 @@ export const requestList = (state = initialState, action = {}) => {
       //RETRUN INTITALSTATE/THAN RETRURN REDUX STATE/THAN INJECT NEW STATE
       return {
         ...state,
-        animeList: [...state.animeList, ...action.payload]
+        animeList: [...action.payload]
         // animeList: action.payload
+      }
+    case "LOGOUT":
+      return {
+        ...state,
+        animeList: []
       }
 
     default:
