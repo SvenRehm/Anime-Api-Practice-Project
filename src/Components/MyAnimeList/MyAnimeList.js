@@ -8,6 +8,7 @@ const mapStateToProps = state => {
     animeId: state.addToPlaylist.animeId,
     animeList: state.requestList.animeList,
     userId: state.Login.user.id,
+    //load animeids from database
     animeListData: state.Login.user.animelist
   }
 }
@@ -35,8 +36,9 @@ const Styles = styled.div`
 
 class MyAnimeList extends Component {
   componentDidMount() {
-    // this.props.onRequestList(this.props.animeId)
-    this.props.onRequestList(this.props.animeListData)
+    if (this.props.animeListData) {
+      this.props.onRequestList(this.props.animeListData)
+    } 
   }
 
   render() {
@@ -44,8 +46,8 @@ class MyAnimeList extends Component {
     const AnimeList = animeList.map((category, i) => {
       return <li key={i}> {animeList[i].title}</li>
     })
-   
-    console.log(this.props.animeList)
+
+    console.log(this.props.animeListData)
     return (
       <Styles>
         <h1>My Anime List</h1>

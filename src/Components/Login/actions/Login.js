@@ -1,6 +1,6 @@
 import { history } from "../../../App"
 import axios from "axios"
-
+import { getJwt } from "../../helpers/jwt"
 export const changePasswordField = text => {
   return {
     type: "CHANGE_PASSWORD_FIELD",
@@ -56,23 +56,6 @@ export const Authenticate = jwt => dispatch => {
       history.push("/Login")
     })
 }
-// export const loginAddToPlaylist = (id, animeid) => dispatch => {
-//   fetch("http://localhost:5000/addplaylist", {
-//     method: "put",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify({
-//       id: id,
-//       animeid: animeid
-//     })
-//   })
-//     .then(response => response.json())
-//     .then(animeid => {
-//       dispatch({
-//         type: "LOGIN_ADD_TO_PLAYLIST",
-//         payload: animeid
-//       })
-//     })
-// }
 
 export const loginAddToPlaylist = (id, animeid) => dispatch => {
   axios
@@ -88,6 +71,33 @@ export const loginAddToPlaylist = (id, animeid) => dispatch => {
     })
 }
 
+export const loginRemoveFromePlaylist = (id, animeid) => dispatch => {
+  const jwt = getJwt()
+  axios
+    .delete("http://localhost:5000/removefromplaylist", {
+      data: { id: id, animeid: animeid }
+    })
+    .then(res => {
+      dispatch({
+        type: "DELETE_FROM_PLAYLIST",
+        payload: animeid
+      })
+      dispatch(Authenticate(jwt))
+    })
+}
+// export const loginRemoveFromePlaylist = (id, animeid) => dispatch => {
+//   axios
+//     .delete("http://localhost:5000/removefromplaylist", {
+//       id: id,
+//       animeid: animeid
+//     })
+//     .then(res => {
+//       dispatch({
+//         type: "DELETE_FROM_PLAYLIST",
+//         payload: res
+//       })
+//     })
+// }
 
 export const Logout = () => dispatch => {
   dispatch({

@@ -35,6 +35,11 @@ export const Login = (state = initialState, action = {}) => {
           animelist: [...state.user.animelist, action.payload]
         }
       }
+    case "DELETE_FROM_PLAYLIST":
+      return {
+        ...state
+      }
+
     case "LOGOUT":
       return {
         ...state,

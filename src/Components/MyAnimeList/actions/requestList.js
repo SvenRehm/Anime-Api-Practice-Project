@@ -5,7 +5,7 @@ export const requestList = animelistids => dispatch => {
   })
 
   //FETCHIN EVERY LINK
- 
+
   let requests = animelistids.map(id =>
     fetch(`https://kitsu.io/api/edge/anime/${id}`)
   )

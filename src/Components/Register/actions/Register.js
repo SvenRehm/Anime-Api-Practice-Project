@@ -1,3 +1,4 @@
+import { history } from "../../../App"
 export const changeRegisterPasswordField = text => {
   return {
     type: "CHANGE_REGISTER_PASSWORD_FIELD",
@@ -38,4 +39,5 @@ export const submitRegister = (
         payload: data
       })
     })
+  history.push("/")
 }

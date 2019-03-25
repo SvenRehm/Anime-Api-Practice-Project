@@ -5,6 +5,7 @@ import {
   requestSingleCategories
 } from "./actions/requestSingleMoreInfo"
 import { loginAddToPlaylist } from "../Login/actions/Login"
+import { loginRemoveFromePlaylist } from "../Login/actions/Login"
 import { addToPlaylist } from "./actions/addToPlaylist"
 import { withRouter } from "react-router-dom"
 // import { LayoutGrid } from "../Styled/index"
@@ -30,6 +31,7 @@ const mapStateToProps = state => {
   } = state.requestSingleMoreInfo.singleMoreInfo.attributes
 
   return {
+    animeListData: state.Login.user.animelist,
     userId: state.Login.user.id,
     id: state.requestSingleMoreInfo.singleMoreInfo.id,
     youtubeVideoId: youtubeVideoId,
@@ -64,7 +66,9 @@ const mapDispatchToProps = dispatch => {
     onLoginAddToPlaylist: (userId, animeid) =>
       dispatch(loginAddToPlaylist(userId, animeid)),
     onAddToPlaylist: (userId, animeid) =>
-      dispatch(addToPlaylist(userId, animeid))
+      dispatch(addToPlaylist(userId, animeid)),
+    onLoginRemoveFromePlaylist: (userId, animeid) =>
+      dispatch(loginRemoveFromePlaylist(userId, animeid))
   }
 }
 //loading styles
@@ -104,7 +108,7 @@ const Rankings = styled.div`
     grid-column: 4 / span 3;
     font-weight: 300;
     justify-content: end;
-    text-align: center;
+    text-align: right;
   }
 `
 //SingleMoreInfo
@@ -114,7 +118,6 @@ export const LayoutGrid = styled.div`
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-template-rows: repeat(10, 100px);
   overflow: hidden;
-
   background: ${props => props.theme.primary};
   color: ${props => props.theme.secondary};
 
@@ -123,6 +126,7 @@ export const LayoutGrid = styled.div`
     grid-row: 1 / span 3;
     align-self: end;
     z-index: 2;
+
     filter: brightness(50%);
     img {
       align-self: end;
@@ -189,9 +193,6 @@ export const LayoutGrid = styled.div`
       text-align: right;
       font-weight: 700;
     }
-    .green {
-      color: green;
-    }
   }
   iframe {
     width: 100%;
@@ -201,31 +202,27 @@ export const LayoutGrid = styled.div`
     z-index: 2;
   }
 `
-//categories styles
+
 const CategoriesList = styled.ul`
-  float: left;
+  display: grid;
+  grid-gap: 0.3em;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   list-style: none;
   li {
-    float: left;
+    position: relative;
     list-style: none;
     text-align: center;
-    background-color: #000000;
-
-    width: 150px;
-
+    background-color: ${props => props.theme.darkgrey};
     text-decoration: none;
-    margin-bottom: 5px;
-    margin-right: 5px;
-    width: 150px;
     line-height: 50px;
+    height: 50px;
     a {
       text-decoration: none;
-      color: #ffffff;
+      color: ${props => props.theme.secondary};
       display: block;
       &:hover {
         text-decoration: none;
         color: ${props => props.theme.accent};
-        /* background-color: ${props => props.theme.darkgrey}; */
       }
     }
   }
@@ -237,12 +234,15 @@ class SingleMoreInfo extends Component {
     this.props.onRequestSingleCategories(id)
   }
 
-  handleClick = () => {
-    console.log("added to playlist", this.props.id)
-
+  addToPlaylist = () => {
     this.props.onLoginAddToPlaylist(this.props.userId, this.props.id)
-    // this.props.onAddToPlaylist(this.props.userId, this.props.id)
-    console.log(this.props.userId)
+  }
+  removeFromPlaylist = () => {
+    this.props.onLoginRemoveFromePlaylist(
+      this.props.userId,
+      Number(this.props.id)
+    )
+    console.log(this.props.userId, Number(this.props.id))
   }
   render() {
     const {
@@ -270,6 +270,11 @@ class SingleMoreInfo extends Component {
         </li>
       )
     })
+
+    const animeListData = this.props.animeListData
+    const isAnimeOnList = animeListData.find(
+      i => i === this.props.match.params.id
+    )
 
     return !this.props.isPending ? (
       <LayoutGrid>
@@ -324,7 +329,15 @@ class SingleMoreInfo extends Component {
             </tr>
           </tbody>
         </table>
-        <button onClick={this.handleClick}>Add To Playlist</button>
+
+        {!isAnimeOnList ? (
+          <button onClick={this.addToPlaylist}>Add To Playlist</button>
+        ) : (
+          <button onClick={this.removeFromPlaylist}>
+            Remove from Playlist
+          </button>
+        )}
+
         <CategoriesList>{category}</CategoriesList>
         {youtubeVideoId === "" ? (
           <iframe

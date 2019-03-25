@@ -34,7 +34,7 @@ const mapDispatchToProps = dispatch => {
 const RegisterStyles = styled.div`
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-rows: repeat(8, 90px);
+  grid-template-rows: repeat(9, 90px);
   label {
     grid-row: 3;
     grid-column: 5 / span 4;
@@ -84,13 +84,24 @@ const RegisterStyles = styled.div`
     grid-column: 5 / span 4;
   }
   h1 {
-    text-align: center;
+    justify-self: center;
+
+    align-self: center;
+
     grid-column: 5 / span 4;
     grid-row: 2;
     color: ${props => props.theme.secondary};
   }
   button {
     grid-row: 7;
+    grid-column: 5 / span 4;
+    width: 160px;
+    height: 50px;
+    color: ${props => props.theme.secondary};
+    text-transform: uppercase;
+    background-color: ${props => props.theme.primary};
+    border: 1px solid ${props => props.theme.secondary};
+    justify-self: center;
   }
 `
 class Register extends Component {
@@ -133,7 +144,7 @@ class Register extends Component {
             )
           }
         >
-          submit
+          Register
         </button>
       </RegisterStyles>
     )

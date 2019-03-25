@@ -13,6 +13,7 @@ const StyledNav = styled.ul`
   align-items: center;
   padding: 0 10px;
   background-color: ${props => props.theme.lightgrey};
+  /* background-color: transparent; */
   font-size: 17px;
 
   li > a {
@@ -29,7 +30,7 @@ const StyledNav = styled.ul`
   }
 
   li:not(:last-child):not(.search) {
-    margin-right: 10px;
+    margin-right: 0;
   }
   input[type="text"] {
     padding: 6px;
@@ -56,7 +57,7 @@ const StyledNav = styled.ul`
   }
 `
 class Navigation extends Component {
-  onSubmit=(e) =>{
+  onSubmit = e => {
     e.preventDefault()
     console.log("The link was clicked.")
     this.props.onLogout()

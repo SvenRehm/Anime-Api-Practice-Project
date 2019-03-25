@@ -12,11 +12,10 @@ import SingleMoreInfo from "./Components/SingleMoreInfo/SingleMoreInfo"
 import MyAnimeList from "./Components/MyAnimeList/MyAnimeList"
 import Login from "./Components/Login/Login"
 import Register from "./Components/Register/Register"
-import {Logout} from "./Components/Login/actions/Login"
+import { Logout } from "./Components/Login/actions/Login"
 import { Router, Route } from "react-router-dom"
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop"
 import { ThemeProvider, createGlobalStyle } from "styled-components"
-
 
 // import AuthenticatedComponent from "./Components/AuthenticatedComponent/AuthenticatedComponent"
 import Auth from "./Components/AuthenticatedComponent/Auth"
@@ -49,6 +48,7 @@ const themeblack = {
   lightgrey: "#272727",
   fontFamily: "Roboto"
 }
+
 const GlobalStyle = createGlobalStyle`
   body {
     font-family: ${props => props.theme.fontFamily};
@@ -77,7 +77,7 @@ class App extends Component {
               <Navigation
                 onSearchChange={onSearchChange}
                 loggedIn={loggedIn}
-                onLogout={()=>onLogout()}
+                onLogout={() => onLogout()}
                 onRequestSearchedAnime={() => onRequestSearchedAnime(search)}
                 search={search}
               />
@@ -89,12 +89,9 @@ class App extends Component {
                   <CardList {...props} filteredAnime={filteredAnime} />
                 )}
               />
-
               <Route path={`/Register`} component={Register} />
-
               <Route path={`/Login`} component={Login} />
               <Route path={`/MyAnimeList`} component={Auth(MyAnimeList)} />
-
               <Route path="/anime/:id" component={SingleMoreInfo} />
             </div>
           </ScrollToTop>

@@ -5,8 +5,7 @@ import styled from "styled-components"
 import {
   changePasswordField,
   changeEmailField,
-  submitLogin,
- 
+  submitLogin
 } from "./actions/Login"
 
 const mapStateToProps = state => {
@@ -28,36 +27,62 @@ const mapDispatchToProps = dispatch => {
 
 const LoginDiv = styled.div`
   display: grid;
-
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-rows: repeat(12, 100px);
-  h2 {
-    color: white;
-    grid-row: 4;
-  }
-  h2.mail {
-    color: white;
-    grid-row: 4;
-    grid-column: 3 / span 1;
-  }
-  button {
-    grid-row: 5;
-    grid-column: 4;
-    height: 20px;
+  grid-template-rows: repeat(9, 90px);
+  label {
+    grid-row: 3;
+    grid-column: 5 / span 4;
+    width: 70%;
+
+    height: 2em;
+    justify-self: center;
+    align-self: end;
+
+    color: ${props => props.theme.secondary};
+    width: 80%;
+    & #email {
+      grid-row: 3;
+    }
+    &#password {
+      grid-row: 4;
+    }
   }
   input {
-    width: 200px;
-    height: 20px;
-    margin-right: 1em;
-    grid-column: 1;
-    grid-row: 5;
+    padding: 6px;
+    justify-self: center;
+    height: 2em;
+    font-size: 17px;
+    width: 80%;
+    border: none;
+    color: ${props => props.theme.secondary};
+    background: ${props => props.theme.darkgrey};
   }
-  input.right {
-    width: 200px;
-    height: 20px;
-    margin-right: 1em;
-    grid-column: 3;
+  input[name="email"] {
+    grid-row: 4;
+    grid-column: 5 / span 4;
+  }
+  input[name="password"] {
     grid-row: 5;
+    grid-column: 5 / span 4;
+  }
+
+  h1 {
+    justify-self: center;
+    align-self: center;
+    grid-column: 5 / span 4;
+    grid-row: 2;
+    color: ${props => props.theme.secondary};
+  }
+  button {
+    grid-row: 6;
+    grid-column: 5 / span 4;
+    width: 160px;
+    height: 50px;
+    color: ${props => props.theme.secondary};
+    text-transform: uppercase;
+    background-color: ${props => props.theme.primary};
+    border: 1px solid ${props => props.theme.secondary};
+    justify-self: center;
   }
 `
 class Login extends Component {
@@ -65,14 +90,23 @@ class Login extends Component {
     return (
       <LoginDiv>
         <h1>Login</h1>
-        <h2>signInPassword</h2>
-        <input onChange={this.props.onChangePasswordField} type="password" />
-        <h2 className="mail">signInEmail</h2>
+        <label id="email">Email</label>
         <input
-          className="right"
+          placeholder="Email exm. abc@gmail.com"
+          name="email"
+          value={this.props.signInEmail}
           onChange={this.props.onChangeEmailField}
           type="email"
         />
+        <label id="password">Password</label>
+        <input
+          placeholder="Password"
+          onChange={this.props.onChangePasswordField}
+          type="password"
+          name="password"
+          value={this.props.signInPassword}
+        />
+
         <button
           onClick={() =>
             this.props.onSubmitLogin(
@@ -81,7 +115,7 @@ class Login extends Component {
             )
           }
         >
-          submit
+          Login
         </button>
       </LoginDiv>
     )
