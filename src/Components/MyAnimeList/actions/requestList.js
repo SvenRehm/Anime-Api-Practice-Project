@@ -19,7 +19,12 @@ export const requestList = animelistids => dispatch => {
       //MAPPING OVER RESPONSE AND GIVING AN OBJECT BACK
       const animelist = data.map(id => ({
         id: id.data.id,
-        title: id.data.attributes.canonicalTitle
+        title: id.data.attributes.canonicalTitle,
+        subtype: id.data.attributes.subtype,
+        posterimage: id.data.attributes.posterImage.tiny,
+        episodeCount: id.data.attributes.episodeCount,
+        totalLength: id.data.attributes.totalLength,
+        startDate: id.data.attributes.startDate
       }))
       //   const animelist = data
       dispatch({ type: "REQUEST_ANIME_LIST_SUCCES", payload: animelist })

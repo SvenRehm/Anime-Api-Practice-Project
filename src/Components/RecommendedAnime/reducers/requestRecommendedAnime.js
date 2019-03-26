@@ -5,7 +5,7 @@ import {
 } from "../../../constants/action-types"
 
 const initialState = {
-  isPending: false,
+  isLoading: false,
   recommendedAnime: [],
   pagination: {
     first: "",
@@ -22,7 +22,7 @@ export const requestRecommendedAnime = (state = initialState, action = {}) => {
   switch (action.type) {
     case REQUEST_RECOMMENDED_ANIME_PENDING:
       return Object.assign({}, state, {
-        isPending: true
+        isLoading: true
       })
 
     case REQUEST_RECOMMENDED_ANIME_SUCCESS:
@@ -30,7 +30,8 @@ export const requestRecommendedAnime = (state = initialState, action = {}) => {
         ...state,
         recommendedAnime: action.payload,
         pagination: action.pagination,
-        isPending: false
+
+        isLoading: false
       }
 
     case "REQUEST_SECOND_PAGE_SUCCES":

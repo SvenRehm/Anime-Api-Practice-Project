@@ -34,8 +34,7 @@ const StyledNav = styled.ul`
   }
   input[type="text"] {
     padding: 6px;
-    /* margin-left: 6px auto; */
-    /* margin-top: 6px; */
+
     font-size: 17px;
     width: 400px;
     border: none;
@@ -59,7 +58,7 @@ const StyledNav = styled.ul`
 class Navigation extends Component {
   onSubmit = e => {
     e.preventDefault()
-    console.log("The link was clicked.")
+
     this.props.onLogout()
   }
 

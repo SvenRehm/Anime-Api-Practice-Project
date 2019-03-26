@@ -5,11 +5,21 @@ import { Link } from "react-router-dom"
 const StyledRecommendedAnimeCard = styled.div`
   position: relative;
   /* border-bottom: 1px solid grey; */
-
+  div.load {
+    width: 100%;
+    min-height: 270px;
+    max-height: 300px;
+    cursor: pointer;
+    background-color: ${props => props.theme.lightgrey};
+    margin-bottom: 5px;
+  }
   img {
+    max-width: 180px;
     width: 100%;
     height: auto;
     cursor: pointer;
+
+    transition: all 350ms ease-in-out;
   }
   p {
     font-size: 0.7em;
@@ -37,6 +47,7 @@ const StyledRecommendedAnimeCard = styled.div`
     text-decoration: none;
     color: ${props => props.theme.secondary};
     padding: 0;
+    margin: 0;
     font-size: 0.8em;
     cursor: pointer;
     transition: all 200ms ease-in-out;
@@ -51,12 +62,13 @@ const RecommendedAnimeCard = ({
   title,
   averageRating,
   episodeCount,
-  id
+  id,
+  isLoading
 }) => {
   return (
     <StyledRecommendedAnimeCard>
       <Link to={"/anime/" + id}>
-        <img alt="" src={src} />
+        {isLoading ? <div className="load" /> : <img alt="" src={src} />}
 
         <h4>{title}</h4>
       </Link>

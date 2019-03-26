@@ -26,9 +26,8 @@ export const requestSingleMoreInfo = animeid => dispatch => {
 }
 
 export const requestSingleCategories = animeid => dispatch => {
-  
   fetch(
-    `https://kitsu.io/api/edge/anime/${animeid}/categories?page%5Blimit%5D=16&page%5Boffset%5D=0`
+    `https://kitsu.io/api/edge/anime/${animeid}/categories?page%5Blimit%5D=12&page%5Boffset%5D=0`
   )
     .then(res => res.json())
     .then(data => {

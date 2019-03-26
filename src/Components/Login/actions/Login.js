@@ -24,9 +24,11 @@ export const changeEmailField = text => {
 //     this.props.history.push('/Protected');
 //   });
 // }
+const api = "http://localhost:5000"
+
 export const submitLogin = (loginEmail, loginPassword) => dispatch => {
   axios
-    .post("http://localhost:5000/getToken", {
+    .post(`${api}/getToken`, {
       email: loginEmail,
       password: loginPassword
     })
@@ -42,7 +44,7 @@ export const submitLogin = (loginEmail, loginPassword) => dispatch => {
 }
 export const Authenticate = jwt => dispatch => {
   axios
-    .get("http://localhost:5000/getUser", {
+    .get(`${api}/getUser`, {
       headers: { Authorization: `Bearer ${jwt}` }
     })
     .then(res => {
@@ -59,7 +61,7 @@ export const Authenticate = jwt => dispatch => {
 
 export const loginAddToPlaylist = (id, animeid) => dispatch => {
   axios
-    .put("http://localhost:5000/addplaylist", {
+    .put(`${api}/addplaylist`, {
       id: id,
       animeid: animeid
     })
@@ -74,7 +76,7 @@ export const loginAddToPlaylist = (id, animeid) => dispatch => {
 export const loginRemoveFromePlaylist = (id, animeid) => dispatch => {
   const jwt = getJwt()
   axios
-    .delete("http://localhost:5000/removefromplaylist", {
+    .delete(`${api}/removefromplaylist`, {
       data: { id: id, animeid: animeid }
     })
     .then(res => {
