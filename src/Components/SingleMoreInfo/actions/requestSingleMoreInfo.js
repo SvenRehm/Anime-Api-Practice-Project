@@ -32,7 +32,6 @@ export const requestSingleCategories = animeid => dispatch => {
     .then(res => res.json())
     .then(data => {
       const info = data.data
-
       dispatch({
         type: "REQUEST_SINGLE_CATEGORIES_SUCCESS",
         payload: info

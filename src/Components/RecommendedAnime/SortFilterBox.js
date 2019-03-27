@@ -10,7 +10,7 @@ const options = [
 
 const InLineBlock = styled.div`
   display: inline-block;
-  margin: 0 1em;
+
 `
 const SortFilterBox = ({ onChangeSelect }) => {
   return (

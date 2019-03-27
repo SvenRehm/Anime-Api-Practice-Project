@@ -1,5 +1,15 @@
 import styled from "styled-components"
 
+//grid in recommended anime/and searchoutput
+export const Grid = styled.div`
+  display: grid;
+
+  grid-gap: 1em;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  margin: 100px 1em;
+  background: ${props => props.theme.primary};
+`
+
 //LayoutGrid SingleInfo
 export const LayoutGrid = styled.div`
   display: grid;
@@ -8,8 +18,25 @@ export const LayoutGrid = styled.div`
   grid-template-rows: repeat(10, 100px);
   overflow: hidden;
   background: ${props => props.theme.primary};
-  color: ${props => props.theme.secondary};
 
+  a.logintoadd {
+    text-transform: uppercase;
+    margin-top: 1em;
+    width: 80%;
+    grid-column: 3 / span 3;
+
+    grid-row: 8;
+    color: ${props => props.theme.secondary};
+    background: ${props => props.theme.lightgrey};
+    text-decoration: none;
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+    font-weight: 400;
+    &:hover {
+      color: ${props => props.theme.accent};
+    }
+  }
   div.darkimg {
     grid-column: 1/-1;
     grid-row: 1 / span 3;
@@ -32,18 +59,31 @@ export const LayoutGrid = styled.div`
   }
 
   h1 {
-    grid-column: 6 / span 4;
+    grid-column: 6 / span 5;
     grid-row: 3;
     margin-bottom: 1em;
-
+    color: ${props => props.theme.secondary};
     align-self: end;
     z-index: 2;
   }
   button {
+    font-weight: 400;
+    margin-top: 1em;
     width: 80%;
     grid-column: 3 / span 3;
-    height: 30px;
+    border: none;
     grid-row: 8;
+    color: ${props => props.theme.secondary};
+    background: ${props => props.theme.lightgrey};
+    text-decoration: none;
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+    display: inline-block;
+    text-transform: uppercase;
+    &:hover {
+      color: ${props => props.theme.accent};
+    }
   }
   div.text {
     align-self: start;
@@ -59,7 +99,7 @@ export const LayoutGrid = styled.div`
       line-height: 2em;
     }
     p {
-      color: white;
+      color: ${props => props.theme.secondary};
       overflow: hidden;
       /* white-space: nowrap; */
       text-overflow: ellipsis;
@@ -130,11 +170,70 @@ export const Rankings = styled.div`
     margin-bottom: 1em;
     grid-column: 1 / span 3;
     font-weight: 300;
+    color: ${props => props.theme.secondary};
   }
   h2:last-child {
+    color: ${props => props.theme.secondary};
     grid-column: 4 / span 3;
     font-weight: 300;
     justify-content: end;
     text-align: right;
+  }
+`
+
+//animecard
+export const AnimeCard = styled.div`
+  position: relative;
+  /* border-bottom: 1px solid grey; */
+  div.load {
+    width: 100%;
+    min-height: 270px;
+    max-height: 300px;
+    cursor: pointer;
+    background-color: ${props => props.theme.lightgrey};
+    margin-bottom: 5px;
+  }
+  img {
+    max-width: 180px;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+
+    transition: all 350ms ease-in-out;
+  }
+  p {
+    font-size: 0.7em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px;
+
+    color: white;
+    background: black;
+  }
+  h4 {
+    font-size: 0.91em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 180px;
+  }
+  h5 {
+    font-weight: 400;
+    font-size: 0.7em;
+    color: ${props => props.theme.secondary};
+  }
+  a {
+    text-decoration: none;
+    color: ${props => props.theme.secondary};
+    padding: 0;
+    margin: 0;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+    color: ${props => props.theme.color};
+    &:hover {
+      color: ${props => props.theme.accent};
+    }
   }
 `

@@ -82,13 +82,14 @@ class App extends Component {
                 search={search}
               />
               {/* <Categorys /> */}
-              <Route exact path="/" component={RedommendedAnime} />
               <Route
                 path={`/search`}
                 render={props => (
                   <CardList {...props} filteredAnime={filteredAnime} />
                 )}
               />
+              <Route exact path="/" component={RedommendedAnime} />
+
               <Route path={`/Register`} component={Register} />
               <Route path={`/Login`} component={Login} />
               <Route path={`/MyAnimeList`} component={Auth(MyAnimeList)} />

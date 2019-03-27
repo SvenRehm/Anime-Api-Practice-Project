@@ -12,15 +12,8 @@ import SortFilterBox from "./SortFilterBox"
 import SortStatus from "./SortStatus"
 import SortTypeBox from "./SortTypeBox"
 import InfiniteScroll from "react-infinite-scroller"
-import styled from "styled-components"
 
-export const Grid = styled.div`
-  display: grid;
-  margin: 1em;
-  grid-gap: 1em;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  background: ${props => props.theme.primary};
-`
+import { Grid } from "../../Styled"
 
 const mapStateToProps = state => {
   const {
@@ -70,7 +63,6 @@ const mapDispatchToProps = dispatch => {
 
 class RecommendedAnime extends Component {
   componentDidMount() {
-    
     //loading recommended anime
     this.props.onRequestRecommendedAnime(
       this.props.subtype,
@@ -89,7 +81,6 @@ class RecommendedAnime extends Component {
     }
     //subtype (tv/movie..)
     if (newProps.subtype !== this.props.subtype) {
-     
       this.props.onRequestRecommendedAnime(
         newProps.subtype,
         this.props.sort,
@@ -99,7 +90,6 @@ class RecommendedAnime extends Component {
 
     //sataus of the animes (finished/current..)
     if (newProps.status !== this.props.status) {
-      
       this.props.onRequestRecommendedAnime(
         this.props.subtype,
         this.props.sort,
@@ -110,7 +100,7 @@ class RecommendedAnime extends Component {
 
   render() {
     const { recommendedAnime, isLoading } = this.props
-  
+
     //mapping over received anime
     const RecommendedAnime = recommendedAnime.map((category, i) => {
       return (

@@ -61,7 +61,7 @@ export const customStyles = {
 }
 const InLineBlock = styled.div`
   display: inline-block;
-  margin: 5em 1em 2em 1em;
+  margin: 5em 1em 0em 1em;
 `
 const SortStatus = ({ onChangeStatus }) => {
   return (

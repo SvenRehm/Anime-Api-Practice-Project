@@ -1,11 +1,12 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import styled from "styled-components"
-import { addToPlaylist } from "../SingleMoreInfo/actions/addToPlaylist"
+
+import { loginRemoveFromePlaylist } from "../Login/actions/Login"
 import { requestList } from "./actions/requestList"
 const mapStateToProps = state => {
   return {
-    animeId: state.addToPlaylist.animeId,
+    animeId: state.Login.user.animeList,
     animeList: state.requestList.animeList,
     userId: state.Login.user.id,
     // subtype: id.data.attributes.subtype,
@@ -19,14 +20,16 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    onAddToPlaylist: animeid => dispatch(addToPlaylist(animeid)),
-    onRequestList: animeid => dispatch(requestList(animeid))
+    onRequestList: animeid => dispatch(requestList(animeid)),
+    onLoginRemoveFromePlaylist: (userId, animeid) =>
+      dispatch(loginRemoveFromePlaylist(userId, animeid))
   }
 }
 const MyAnimeListStyles = styled.div`
   display: grid;
   grid-template-rows: repeat(10, 100px);
   grid-template-columns: repeat(12, minmax(0, 1fr));
+
   h2 {
     grid-column: 2 / span 8;
     grid-row: 2;
@@ -41,18 +44,31 @@ const MyAnimeListStyles = styled.div`
   }
   ul {
     grid-column: 2 / span 8;
-    grid-row: 3/-1;
+    grid-row: 4/-1;
     color: white;
     list-style: none;
     display: grid;
-    grid-auto-rows: repeat(auto-fill, minmax(130px, 1fr));
+    grid-auto-rows: repeat(auto-fill, minmax(130px, 130px));
     grid-gap: 0.7em;
+
     li {
-      height: 110px;
+      min-height: 110px;
+      max-height: 250px;
       display: grid;
       width: 95%;
       grid-template-columns: repeat(6, minmax(0, 1fr));
       background-color: ${props => props.theme.lightgrey};
+      &:last-child {
+        margin-bottom: 2em;
+      }
+      button {
+        grid-column: 6;
+        grid-row: 1;
+        width: 120px;
+        height: 50px;
+        justify-self: center;
+        align-self: center;
+      }
       img {
         height: 100%;
         width: auto;
@@ -61,11 +77,11 @@ const MyAnimeListStyles = styled.div`
         grid-column: 1 / span 1;
       }
       h1 {
-        grid-column: 2 / span 2;
+        grid-column: 2 / span 5;
         grid-row: 1;
         margin-top: 10px;
         margin-left: 15px;
-        font-size: 20px;
+        font-size: 1.3em;
       }
       p {
         grid-column: 1 / span 1;
@@ -74,11 +90,13 @@ const MyAnimeListStyles = styled.div`
         margin-left: 2em;
       }
       h3 {
+        font-size: 1em;
         margin-left: 15px;
         align-self: center;
         color: ${props => props.theme.secondary};
         grid-column: 2 / span 2;
         grid-row: 1;
+        filter: brightness(50%);
       }
     }
   }
@@ -86,22 +104,37 @@ const MyAnimeListStyles = styled.div`
 
 class MyAnimeList extends Component {
   componentDidMount() {
+    
     if (this.props.animeListData) {
       this.props.onRequestList(this.props.animeListData)
     }
   }
-
+  componentWillReceiveProps(newProps) {
+    //sort Update (rating...)
+    if (newProps.animeListData !== this.props.animeListData) {
+      this.props.onRequestList(newProps.animeListData)
+    }
+  }
+  removeFromPlaylist = (userid, animeid) => {
+    this.props.onLoginRemoveFromePlaylist(userid, animeid)
+  }
   render() {
     const { animeList } = this.props
     const AnimeList = animeList.map((category, i) => {
+      const { userId } = this.props
       return (
         <li key={i}>
-          <p>{i}</p>
+          <p>{i + 1}</p>
           <img src={animeList[i].posterimage} alt="animesmallimage" />
           <h1>{animeList[i].title}</h1>
           <h3>
             {animeList[i].subtype}, {parseInt(animeList[i].startDate)}
           </h3>
+          <button
+            onClick={() => this.removeFromPlaylist(userId, animeList[i].id)}
+          >
+            remove
+          </button>
         </li>
       )
     })
@@ -109,7 +142,7 @@ class MyAnimeList extends Component {
     return (
       <MyAnimeListStyles>
         <h2>My Anime List</h2>
-        {this.props.isLoading ? <h1>LOADING</h1> : <ul>{AnimeList}</ul>}
+        {this.props.animeListData<2 ? <h1>LOADING</h1> : <ul>{AnimeList}</ul>}
       </MyAnimeListStyles>
     )
   }

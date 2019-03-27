@@ -14,6 +14,7 @@ const StyledNav = styled.ul`
   padding: 0 10px;
   background-color: ${props => props.theme.lightgrey};
   /* background-color: transparent; */
+  top: 0;
   font-size: 17px;
 
   li > a {
@@ -96,12 +97,12 @@ class Navigation extends Component {
         </li>
 
         <li>
-          {loggedIn ? (
+          {!loggedIn ? (
+            <Link to={`/Login`}> Login</Link>
+          ) : (
             <a href="/" onClick={this.onSubmit}>
               Logout
             </a>
-          ) : (
-            <Link to={`/Login`}> Login</Link>
           )}
         </li>
       </StyledNav>

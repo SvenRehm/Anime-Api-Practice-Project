@@ -6,12 +6,10 @@ import {
 } from "./actions/requestSingleMoreInfo"
 import { loginAddToPlaylist } from "../Login/actions/Login"
 import { loginRemoveFromePlaylist } from "../Login/actions/Login"
-import { addToPlaylist } from "./actions/addToPlaylist"
 import { withRouter } from "react-router-dom"
-// import { LayoutGrid } from "../Styled/index"
 import styled from "styled-components"
 import { LayoutGrid, CategoriesList, Rankings } from "../../Styled"
-
+import { Link } from "react-router-dom"
 const mapStateToProps = state => {
   const {
     youtubeVideoId,
@@ -31,6 +29,7 @@ const mapStateToProps = state => {
   } = state.requestSingleMoreInfo.singleMoreInfo.attributes
 
   return {
+    LoggedIn: state.Login.LoggedIn,
     isPending: state.requestSingleMoreInfo.isPending,
     animeListData: state.Login.user.animelist,
     userId: state.Login.user.id,
@@ -65,8 +64,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(requestSingleCategories(animeid)),
     onLoginAddToPlaylist: (userId, animeid) =>
       dispatch(loginAddToPlaylist(userId, animeid)),
-    onAddToPlaylist: (userId, animeid) =>
-      dispatch(addToPlaylist(userId, animeid)),
+
     onLoginRemoveFromePlaylist: (userId, animeid) =>
       dispatch(loginRemoveFromePlaylist(userId, animeid))
   }
@@ -109,7 +107,6 @@ class SingleMoreInfo extends Component {
       this.props.userId,
       Number(this.props.id)
     )
-    console.log(this.props.userId, Number(this.props.id))
   }
   render() {
     const {
@@ -144,7 +141,7 @@ class SingleMoreInfo extends Component {
       // eslint-disable-next-line
       i => i == this.props.match.params.id
     )
-    console.log(this.props.isPending)
+
     return !this.props.isPending ? (
       <LayoutGrid>
         <div className="darkimg">
@@ -198,8 +195,11 @@ class SingleMoreInfo extends Component {
             </tr>
           </tbody>
         </table>
-
-        {!isAnimeOnList ? (
+        {!this.props.LoggedIn ? (
+          <Link className="logintoadd" to="/Login">
+            Log In
+          </Link>
+        ) : !isAnimeOnList ? (
           <button onClick={this.addToPlaylist}>Add To Playlist</button>
         ) : (
           <button onClick={this.removeFromPlaylist}>
