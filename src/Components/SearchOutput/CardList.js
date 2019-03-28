@@ -14,7 +14,7 @@ const CardList = ({ filteredAnime }) => {
                 id={filteredAnime[i].id}
                 synopsis={filteredAnime[i].synopsis}
                 title={filteredAnime[i].attributes.canonicalTitle}
-                src={filteredAnime[i].attributes.posterImage.large}
+                src={filteredAnime[i].attributes.posterImage.medium}
                 url={filteredAnime[i].url}
                 averageRating={filteredAnime[i].attributes.averageRating}
                 episodeCount={filteredAnime[i].attributes.episodeCount}

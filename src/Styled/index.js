@@ -33,6 +33,7 @@ export const LayoutGrid = styled.div`
     height: 50px;
     text-align: center;
     font-weight: 400;
+    cursor: pointer;
     &:hover {
       color: ${props => props.theme.accent};
     }
@@ -157,7 +158,7 @@ export const CategoriesList = styled.ul`
   }
 `
 
-//singlemoreinfo at the top
+//singlemoreinfo  ranks
 export const Rankings = styled.div`
   grid-column: 6 / span 5;
   grid-row: 4;
@@ -194,7 +195,7 @@ export const AnimeCard = styled.div`
     margin-bottom: 5px;
   }
   img {
-    max-width: 180px;
+    /* max-width: 180px; */
     width: 100%;
     height: auto;
     cursor: pointer;

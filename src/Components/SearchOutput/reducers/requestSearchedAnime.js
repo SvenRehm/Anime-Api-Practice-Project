@@ -7,7 +7,8 @@ import {
 const initialSearchedAnime = {
   isPending: false,
   filteredAnime: [],
-  error: ""
+  error: "",
+  message: ""
 }
 export const requestSearchedAnime = (
   state = initialSearchedAnime,
@@ -20,7 +21,8 @@ export const requestSearchedAnime = (
     case REQUEST_SEARCHED_ANIME_SUCCESS:
       return Object.assign({}, state, {
         filteredAnime: action.payload,
-        isPending: false
+        isPending: false,
+        message: action.message
       })
 
     case REQUEST_SEARCHED_ANIME_FAILED:

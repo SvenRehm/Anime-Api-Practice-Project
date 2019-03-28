@@ -14,16 +14,6 @@ export const changeEmailField = text => {
   }
 }
 
-// submit(e) {
-//   e.preventDefault();
-//   axios.post('/getToken', {
-//     email: this.state.email,
-//     password: this.state.password
-//   }).then(res => {
-//     localStorage.setItem('cool-jwt', res.data);
-//     this.props.history.push('/Protected');
-//   });
-// }
 const api = "http://localhost:5000"
 
 export const submitLogin = (loginEmail, loginPassword) => dispatch => {
@@ -35,12 +25,14 @@ export const submitLogin = (loginEmail, loginPassword) => dispatch => {
     .then(res => {
       dispatch({
         type: "SUBMIT_LOGIN",
-        payload: res.data
+        payload: res.data,
+        message: res.data.message
       })
       dispatch(Authenticate(res.data))
       localStorage.setItem("cool-jwt", res.data)
       history.push("/")
     })
+    .catch(error => dispatch({ type: "SUBMIT_LOGIN_FAILED", payload: error }))
 }
 export const Authenticate = jwt => dispatch => {
   axios
@@ -56,6 +48,22 @@ export const Authenticate = jwt => dispatch => {
     .catch(err => {
       localStorage.removeItem("cool-jwt")
       history.push("/Login")
+    })
+}
+
+export const reloadUser = jwt => dispatch => {
+  axios
+    .get(`${api}/getUser`, {
+      headers: { Authorization: `Bearer ${jwt}` }
+    })
+    .then(res => {
+      dispatch({
+        type: "REALOAD_USER",
+        payload: res.data
+      })
+    })
+    .catch(err => {
+      localStorage.removeItem("cool-jwt")
     })
 }
 
@@ -87,19 +95,6 @@ export const loginRemoveFromePlaylist = (id, animeid) => dispatch => {
       dispatch(Authenticate(jwt))
     })
 }
-// export const loginRemoveFromePlaylist = (id, animeid) => dispatch => {
-//   axios
-//     .delete("http://localhost:5000/removefromplaylist", {
-//       id: id,
-//       animeid: animeid
-//     })
-//     .then(res => {
-//       dispatch({
-//         type: "DELETE_FROM_PLAYLIST",
-//         payload: res
-//       })
-//     })
-// }
 
 export const Logout = () => dispatch => {
   dispatch({

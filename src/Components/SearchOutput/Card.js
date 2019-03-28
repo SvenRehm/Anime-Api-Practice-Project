@@ -5,6 +5,9 @@ import { Link } from "react-router-dom"
 
 const CardC = ({ title, src, id, episodeCount, averageRating }) => {
   const isLoading = false
+
+  console.log(src.large == null ? "hello" : src.large)
+
   return (
     <AnimeCard>
       <Link to={"/anime/" + id}>

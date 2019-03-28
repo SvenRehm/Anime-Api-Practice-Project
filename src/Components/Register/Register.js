@@ -13,7 +13,8 @@ const mapStateToProps = state => {
   return {
     registerPassword: state.Register.registerPassword,
     registerEmail: state.Register.registerEmail,
-    registerName: state.Register.registerName
+    registerName: state.Register.registerName,
+    message: state.Register.message
   }
 }
 
@@ -35,6 +36,15 @@ const RegisterStyles = styled.div`
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-template-rows: repeat(9, 90px);
+  p {
+    grid-row: 3;
+
+    grid-column: 5 / span 4;
+
+    justify-self: center;
+    align-self: start;
+    color: ${props => props.theme.secondary};
+  }
   label {
     grid-row: 3;
     grid-column: 5 / span 4;
@@ -106,9 +116,10 @@ const RegisterStyles = styled.div`
 `
 class Register extends Component {
   render() {
-    const { regiterPassword, registerEmail, registerName } = this.props
+    const { registerPassword, registerEmail, registerName, message } = this.props
     return (
       <RegisterStyles>
+        <p>{message}</p>
         <h1>Register</h1>
         <label id="username">Username</label>
         <input
@@ -133,7 +144,7 @@ class Register extends Component {
           onChange={this.props.onChangeRegisterPasswordField}
           type="password"
           name="RegisterPassword"
-          value={regiterPassword}
+          value={registerPassword}
         />
         <button
           onClick={() =>

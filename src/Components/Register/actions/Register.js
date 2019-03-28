@@ -1,4 +1,7 @@
 import { history } from "../../../App"
+import axios from "axios"
+
+const api = "http://localhost:5000"
 export const changeRegisterPasswordField = text => {
   return {
     type: "CHANGE_REGISTER_PASSWORD_FIELD",
@@ -23,21 +26,20 @@ export const submitRegister = (
   registerPassword,
   registerName
 ) => dispatch => {
-  fetch("http://localhost:5000/register", {
-    method: "post",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
+  axios
+    .post(`${api}/register`, {
       username: registerName,
       email: registerEmail,
       password: registerPassword
     })
-  })
-    .then(response => response.json())
+
     .then(data => {
       dispatch({
         type: "SUBMIT_REGISTER",
-        payload: data
+        payload: data.data
       })
     })
-  history.push("/")
+    .catch(error =>
+      dispatch({ type: "SUBMIT_REGISTER_FAILED", payload: error })
+    )
 }

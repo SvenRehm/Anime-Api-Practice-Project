@@ -86,6 +86,12 @@ class Navigation extends Component {
             type="text"
             placeholder="Search"
             name="search"
+            onKeyPress={event => {
+              var code = event.keyCode || event.which
+              if (code === 13) {
+                onRequestSearchedAnime(search)
+              }
+            }}
           />
           <Link to={`/search`} onClick={() => onRequestSearchedAnime(search)}>
             Search

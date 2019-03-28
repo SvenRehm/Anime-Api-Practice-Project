@@ -2,7 +2,7 @@ const initialState = {
   signInEmail: "",
   signInPassword: "",
   LoggedIn: false,
-
+  message: "",
   user: {
     id: "0",
     animelist: []
@@ -21,7 +21,19 @@ export const Login = (state = initialState, action = {}) => {
         signInEmail: "",
         signInPassword: ""
       })
+    case "SUBMIT_LOGIN_FAILED":
+      return Object.assign({}, state, {
+        signInEmail: "",
+        signInPassword: "",
+        message: action.payload.response.data.message
+      })
     case "AUTHENTICATE":
+      return {
+        ...state,
+        LoggedIn: true,
+        user: action.payload
+      }
+    case "REALOAD_USER":
       return {
         ...state,
         LoggedIn: true,
