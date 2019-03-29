@@ -68,6 +68,19 @@ const MyAnimeListStyles = styled.div`
         height: 50px;
         justify-self: center;
         align-self: center;
+        text-transform: uppercase;
+        color: ${props => props.theme.secondary};
+        background: ${props => props.theme.lightgrey};
+        border: none;
+        text-align: center;
+        font-weight: 400;
+        cursor: pointer;
+        &:hover {
+          color: ${props => props.theme.accent};
+        }
+        &:focus {
+          outline: none;
+        }
       }
       img {
         height: 100%;
@@ -104,7 +117,6 @@ const MyAnimeListStyles = styled.div`
 
 class MyAnimeList extends Component {
   componentDidMount() {
-    
     if (this.props.animeListData) {
       this.props.onRequestList(this.props.animeListData)
     }
@@ -142,7 +154,7 @@ class MyAnimeList extends Component {
     return (
       <MyAnimeListStyles>
         <h2>My Anime List</h2>
-        {this.props.animeListData<2 ? <h1>LOADING</h1> : <ul>{AnimeList}</ul>}
+        {this.props.animeListData < 2 ? <h1>LOADING</h1> : <ul>{AnimeList}</ul>}
       </MyAnimeListStyles>
     )
   }

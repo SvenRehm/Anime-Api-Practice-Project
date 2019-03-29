@@ -34,6 +34,9 @@ export const LayoutGrid = styled.div`
     text-align: center;
     font-weight: 400;
     cursor: pointer;
+    &:focus {
+      outline: none;
+    }
     &:hover {
       color: ${props => props.theme.accent};
     }
@@ -84,6 +87,9 @@ export const LayoutGrid = styled.div`
     text-transform: uppercase;
     &:hover {
       color: ${props => props.theme.accent};
+    }
+    &:focus {
+      outline: none;
     }
   }
   div.text {

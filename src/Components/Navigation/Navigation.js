@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import styled from "styled-components"
 import { Link } from "react-router-dom"
+import { getJwt } from "../helpers/jwt"
 
 const StyledNav = styled.ul`
   z-index: 3;
@@ -64,12 +65,8 @@ class Navigation extends Component {
   }
 
   render() {
-    const {
-      onSearchChange,
-      onRequestSearchedAnime,
-      search,
-      loggedIn
-    } = this.props
+    const jwt = getJwt()
+    const { onSearchChange, onRequestSearchedAnime, search } = this.props
 
     return (
       <StyledNav>
@@ -103,7 +100,7 @@ class Navigation extends Component {
         </li>
 
         <li>
-          {!loggedIn ? (
+          {!jwt ? (
             <Link to={`/Login`}> Login</Link>
           ) : (
             <a href="/" onClick={this.onSubmit}>

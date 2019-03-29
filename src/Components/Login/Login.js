@@ -87,6 +87,8 @@ const LoginDiv = styled.div`
 `
 class Login extends Component {
   render() {
+    console.log(this.props.location
+       )
     return (
       <LoginDiv>
         <h1>Login</h1>

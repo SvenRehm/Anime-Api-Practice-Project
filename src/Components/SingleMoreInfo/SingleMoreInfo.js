@@ -10,6 +10,7 @@ import { withRouter } from "react-router-dom"
 import styled from "styled-components"
 import { LayoutGrid, CategoriesList, Rankings } from "../../Styled"
 import { Link } from "react-router-dom"
+import { getJwt } from "../helpers/jwt"
 const mapStateToProps = state => {
   const {
     youtubeVideoId,
@@ -109,6 +110,7 @@ class SingleMoreInfo extends Component {
     )
   }
   render() {
+    const jwt = getJwt()
     const {
       canonicalTitle,
       synopsis,
@@ -195,7 +197,7 @@ class SingleMoreInfo extends Component {
             </tr>
           </tbody>
         </table>
-        {!this.props.LoggedIn ? (
+        {!jwt ? (
           <Link className="logintoadd" to="/Login">
             Log In
           </Link>
