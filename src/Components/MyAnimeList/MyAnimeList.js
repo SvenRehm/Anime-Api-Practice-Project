@@ -38,14 +38,14 @@ const MyAnimeListStyles = styled.div`
     color: ${props => props.theme.secondary};
   }
   h1 {
-    color: white;
+    color: ${props => props.theme.secondary};
     grid-column: 1 / span 3;
     grid-row: 2;
   }
   ul {
     grid-column: 2 / span 8;
     grid-row: 4/-1;
-    color: white;
+    color: ${props => props.theme.secondary};
     list-style: none;
     display: grid;
     grid-auto-rows: repeat(auto-fill, minmax(130px, 130px));
@@ -57,7 +57,7 @@ const MyAnimeListStyles = styled.div`
       display: grid;
       width: 95%;
       grid-template-columns: repeat(6, minmax(0, 1fr));
-      background-color: ${props => props.theme.lightgrey};
+      background-color: ${props => props.theme.primary};
       &:last-child {
         margin-bottom: 2em;
       }
@@ -70,7 +70,7 @@ const MyAnimeListStyles = styled.div`
         align-self: center;
         text-transform: uppercase;
         color: ${props => props.theme.secondary};
-        background: ${props => props.theme.lightgrey};
+        background: ${props => props.theme.primary};
         border: none;
         text-align: center;
         font-weight: 400;

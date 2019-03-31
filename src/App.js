@@ -16,7 +16,7 @@ import { Logout } from "./Components/Login/actions/Login"
 import { Router, Route } from "react-router-dom"
 import ScrollToTop from "./Components/ScrollToTop/ScrollToTop"
 import { ThemeProvider, createGlobalStyle } from "styled-components"
-import Auth from "./Components/AuthenticatedComponent/Auth"
+import Auth from "./Components/Auth/Auth"
 import { createBrowserHistory } from "history"
 
 export const history = createBrowserHistory()
@@ -38,24 +38,56 @@ const mapDispatchToProps = dispatch => {
     onLogout: () => dispatch(Logout())
   }
 }
+// const themeblack = {
+//   primary: "#171717",
+//   secondary: "#f9f9f9",
+//   accent: "#e50914",
+//   darkgrey: "#221f1f",
+//   lightgrey: "#272727",
+//   fontFamily: "Roboto"
+// }
+
 const themeblack = {
-  primary: "#171717",
-  secondary: "#f9f9f9",
-  accent: "#e50914",
-  darkgrey: "#221f1f",
-  lightgrey: "#272727",
+  primary: "#272727", //darkest
+  secondary: "#B3C2B8", //white
+  accent: "#FF0000", //red
+  background: "#121212",
+  border: "#272727",
   fontFamily: "Roboto"
 }
 
+// const themewhite = {
+//   primary: "#F5F5F5", //darkest
+//   secondary: "#221f1f",
+//   accent: "#FF0000", //red
+//   background: "#FAFAFA",
+//   border: "#BABABA",
+//   fontFamily: "Roboto"
+// }
+const themewhite = {
+  primary: "#FBFAF5", //hell weis
+  secondary: "#2A2D2E", //dunkel black
+  accent: "#8ED7EB", // blau hell
+  background: "#F7F7F7", //grau
+  border: "#BABABA", //B5B5B5 dunkel grau
+
+  fontFamily: "Roboto"
+}
 const GlobalStyle = createGlobalStyle`
   body {
     font-family: ${props => props.theme.fontFamily};
-    background:${props => props.theme.primary};
+    background:${props => props.theme.background};
     
   }
 `
 
 class App extends Component {
+  constructor() {
+    super()
+    this.state = {
+      theme: themewhite
+    }
+  }
   render() {
     const {
       filteredAnime,
@@ -68,7 +100,7 @@ class App extends Component {
 
     return (
       <Router history={history}>
-        <ThemeProvider theme={themeblack}>
+        <ThemeProvider theme={this.state.theme}>
           <ScrollToTop>
             <div>
               <GlobalStyle />

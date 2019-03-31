@@ -7,7 +7,7 @@ export const Grid = styled.div`
   grid-gap: 1em;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   margin: 100px 1em;
-  background: ${props => props.theme.primary};
+  background: ${props => props.theme.background};
 `
 
 //LayoutGrid SingleInfo
@@ -17,17 +17,17 @@ export const LayoutGrid = styled.div`
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-template-rows: repeat(10, 100px);
   overflow: hidden;
-  background: ${props => props.theme.primary};
+  background: ${props => props.theme.background};
 
   a.logintoadd {
     text-transform: uppercase;
-    margin-top: 1em;
+    border: 1px solid ${props => props.theme.border};
     width: 80%;
     grid-column: 3 / span 3;
-
-    grid-row: 8;
+    font-weight: 400;
+    grid-row: 9;
     color: ${props => props.theme.secondary};
-    background: ${props => props.theme.lightgrey};
+    background: ${props => props.theme.primary};
     text-decoration: none;
     line-height: 50px;
     height: 50px;
@@ -42,11 +42,11 @@ export const LayoutGrid = styled.div`
     }
   }
   div.darkimg {
+    margin-top: 57px;
     grid-column: 1/-1;
-    grid-row: 1 / span 3;
-    align-self: end;
+    grid-row: 1 / span 4;
+    align-self: start;
     z-index: 2;
-
     filter: brightness(50%);
     img {
       align-self: end;
@@ -57,28 +57,28 @@ export const LayoutGrid = styled.div`
   img {
     max-width: 80%;
     grid-column: 3 / span 3;
-    grid-row: 3 / span 4;
-    align-self: end;
+    grid-row: 4 / span 4;
+    align-self: start;
     z-index: 2;
   }
 
   h1 {
     grid-column: 6 / span 5;
-    grid-row: 3;
+    grid-row: 4;
     margin-bottom: 1em;
-    color: ${props => props.theme.secondary};
-    align-self: end;
+    color: #f9f9f9;
+    align-self: start;
     z-index: 2;
   }
   button {
     font-weight: 400;
-    margin-top: 1em;
+    border: 1px solid ${props => props.theme.border};
     width: 80%;
     grid-column: 3 / span 3;
-    border: none;
-    grid-row: 8;
+
+    grid-row: 9;
     color: ${props => props.theme.secondary};
-    background: ${props => props.theme.lightgrey};
+    background: ${props => props.theme.primary};
     text-decoration: none;
     line-height: 50px;
     height: 50px;
@@ -96,7 +96,7 @@ export const LayoutGrid = styled.div`
     align-self: start;
 
     grid-column: 6 / span 5;
-    grid-row: 11 / span 4;
+    grid-row: 12 / span 4;
 
     line-height: 1.5em;
     font-size: 0.9em;
@@ -104,6 +104,7 @@ export const LayoutGrid = styled.div`
 
     h2 {
       line-height: 2em;
+      color: ${props => props.theme.secondary};
     }
     p {
       color: ${props => props.theme.secondary};
@@ -116,13 +117,16 @@ export const LayoutGrid = styled.div`
   }
   ul {
     grid-column: 6 / span 5;
-    grid-row: 5;
+    grid-row: 6;
   }
   table {
-    color: white;
+    color: ${props => props.theme.secondary};
     max-width: 80%;
+
     grid-column: 3 / span 3;
-    grid-row: 7 / span 5;
+    grid-row: 7 / span 2;
+    margin-top: 6em;
+    align-self: start;
     text-transform: uppercase;
     font-size: 0.7em;
     .right-align {
@@ -134,7 +138,7 @@ export const LayoutGrid = styled.div`
     width: 100%;
     height: 100%;
     grid-column: 6 / span 5;
-    grid-row: 7 / span 4;
+    grid-row: 8 / span 4;
     z-index: 2;
   }
 `
@@ -144,20 +148,25 @@ export const CategoriesList = styled.ul`
   grid-gap: 0.3em;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   list-style: none;
+
   li {
     position: relative;
     list-style: none;
     text-align: center;
-    background-color: ${props => props.theme.darkgrey};
+    border: 1px solid ${props => props.theme.border};
     text-decoration: none;
-    line-height: 50px;
-    height: 50px;
+    line-height: 40px;
+    height: 40px;
+    background: ${props => props.theme.primary};
     a {
+      width: 100%;
+      height: 100%;
+      display: blocK;
       text-decoration: none;
       color: ${props => props.theme.secondary};
-      display: block;
+      background: ${props => props.theme.primary};
+
       &:hover {
-        text-decoration: none;
         color: ${props => props.theme.accent};
       }
     }
@@ -167,9 +176,10 @@ export const CategoriesList = styled.ul`
 //singlemoreinfo  ranks
 export const Rankings = styled.div`
   grid-column: 6 / span 5;
-  grid-row: 4;
+  grid-row: 5;
   align-self: start;
   margin-top: 1em;
+  z-index: 2;
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   border-bottom: solid 2px ${props => props.theme.accent};

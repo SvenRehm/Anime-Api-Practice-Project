@@ -12,28 +12,25 @@ const StyledNav = styled.ul`
   padding: 0;
   list-style: none;
   align-items: center;
-  padding: 0 10px;
-  background-color: ${props => props.theme.lightgrey};
+  padding: 0;
+  background-color: ${props => props.theme.primary};
   /* background-color: transparent; */
   top: 0;
   font-size: 17px;
-
+  overflow: hidden;
+  box-shadow: 0px 13px 50px -25px rgba(0, 0, 0, 1);
   li > a {
     text-decoration: none;
     color: ${props => props.theme.secondary};
+    background: ${props => props.theme.primary};
     padding: 1.1em;
     font-size: 17px;
     &:hover {
-      background: ${props => props.theme.darkgrey};
-    }
-    &:hover a {
-      color: ${props => props.theme.accent};
+       background: ${props => props.theme.background}; 
+      /* filter: brightness(150%); */
     }
   }
 
-  li:not(:last-child):not(.search) {
-    margin-right: 0;
-  }
   input[type="text"] {
     padding: 6px;
 
@@ -41,19 +38,20 @@ const StyledNav = styled.ul`
     width: 400px;
     border: none;
     color: ${props => props.theme.secondary};
-    background: ${props => props.theme.darkgrey};
+    background: ${props => props.theme.primary};
+    border: 1px solid ${props => props.theme.border};
   }
   .search {
     margin-left: auto;
     margin-right: auto;
     padding: 0;
-
-    &:hover {
-      background: ${props => props.theme.lightgrey};
+   
+    a {
+      padding: 1px;
+   
+      &:hover  {
+        background: ${props => props.theme.background};
     }
-    &:hover a {
-      background-color: ${props => props.theme.lightgrey};
-      color: ${props => props.theme.secondary};
     }
   }
 `
