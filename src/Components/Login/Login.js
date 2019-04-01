@@ -29,6 +29,16 @@ const LoginDiv = styled.div`
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-template-rows: repeat(9, 90px);
+  &::before {
+    content: "";
+    height: 90%;
+    align-self: start;
+    background: ${props => props.theme.primary};
+
+    grid-row: 2 / span 7;
+    grid-column: 5 / span 4;
+    border: 1px solid ${props => props.theme.border};
+  }
   label {
     grid-row: 3;
     grid-column: 5 / span 4;
@@ -87,8 +97,7 @@ const LoginDiv = styled.div`
 `
 class Login extends Component {
   render() {
-    console.log(this.props.location
-       )
+  
     return (
       <LoginDiv>
         <h1>Login</h1>

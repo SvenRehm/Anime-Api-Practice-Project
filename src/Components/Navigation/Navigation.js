@@ -23,10 +23,11 @@ const StyledNav = styled.ul`
     text-decoration: none;
     color: ${props => props.theme.secondary};
     background: ${props => props.theme.primary};
-    padding: 1.1em;
+    padding: 1em;
     font-size: 17px;
     &:hover {
-       background: ${props => props.theme.background}; 
+      /* background: ${props => props.theme.background}; */
+      border-bottom: 2px solid ${props => props.theme.border};
       /* filter: brightness(150%); */
     }
   }
@@ -45,13 +46,13 @@ const StyledNav = styled.ul`
     margin-left: auto;
     margin-right: auto;
     padding: 0;
-   
+
     a {
       padding: 1px;
-   
-      &:hover  {
+
+      &:hover {
         background: ${props => props.theme.background};
-    }
+      }
     }
   }
 `

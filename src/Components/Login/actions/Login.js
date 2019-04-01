@@ -34,7 +34,7 @@ export const submitLogin = (loginEmail, loginPassword) => dispatch => {
     })
     .catch(error => dispatch({ type: "SUBMIT_LOGIN_FAILED", payload: error }))
 }
-export const Authenticate = jwt => dispatch => {
+export const Authenticate = (jwt, location) => dispatch => {
   axios
     .get(`${api}/getUser`, {
       headers: { Authorization: `Bearer ${jwt}` }
@@ -44,6 +44,7 @@ export const Authenticate = jwt => dispatch => {
         type: "AUTHENTICATE",
         payload: res.data
       })
+      history.push("/MyAnimeList")
     })
     .catch(err => {
       localStorage.removeItem("cool-jwt")

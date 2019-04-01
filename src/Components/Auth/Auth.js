@@ -14,7 +14,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuthenticate: jwt => dispatch(Authenticate(jwt))
+    onAuthenticate: (jwt, location) => dispatch(Authenticate(jwt, location))
   }
 }
 
@@ -22,13 +22,15 @@ export default function(ComposedComponent) {
   class Auth extends Component {
     componentWillMount() {
       const jwt = getJwt()
-
       if (!jwt) {
         this.props.history.push("/Login")
+       
       } else {
+   
         this.props.onAuthenticate(jwt)
       }
     }
+  
     componentWillUpdate(nextProps) {
       const jwt = getJwt()
       if (!jwt) {

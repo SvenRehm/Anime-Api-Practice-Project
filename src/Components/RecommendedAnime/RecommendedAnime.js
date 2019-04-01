@@ -111,6 +111,7 @@ class RecommendedAnime extends Component {
           title={recommendedAnime[i].cannontitle}
           averageRating={recommendedAnime[i].averageRating}
           episodeCount={recommendedAnime[i].episodeCount}
+          ratingRank={recommendedAnime[i].ratingRank}
           isLoading={isLoading}
         />
       )

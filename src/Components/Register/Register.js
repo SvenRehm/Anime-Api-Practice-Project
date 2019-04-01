@@ -36,6 +36,16 @@ const RegisterStyles = styled.div`
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-template-rows: repeat(9, 90px);
+  &::before {
+    content: "";
+    height: 90%;
+    align-self: start;
+    background: ${props => props.theme.primary};
+  
+    grid-row: 2 / span 7;
+    grid-column: 5 / span 4;
+    border: 1px solid ${props => props.theme.border};
+  }
   p {
     grid-row: 3;
 
@@ -110,13 +120,18 @@ const RegisterStyles = styled.div`
     color: ${props => props.theme.secondary};
     text-transform: uppercase;
     background-color: ${props => props.theme.primary};
-    border: 1px solid ${props => props.theme.secondary};
+    border: 1px solid ${props => props.theme.border};
     justify-self: center;
   }
 `
 class Register extends Component {
   render() {
-    const { registerPassword, registerEmail, registerName, message } = this.props
+    const {
+      registerPassword,
+      registerEmail,
+      registerName,
+      message
+    } = this.props
     return (
       <RegisterStyles>
         <p>{message}</p>

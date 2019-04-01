@@ -18,8 +18,32 @@ import ScrollToTop from "./Components/ScrollToTop/ScrollToTop"
 import { ThemeProvider, createGlobalStyle } from "styled-components"
 import Auth from "./Components/Auth/Auth"
 import { createBrowserHistory } from "history"
+import { library } from "@fortawesome/fontawesome-svg-core"
+import {
+  faHeart,
+  faStar,
+  faPlusSquare,
+  faPlusCircle,
+  faMinusCircle,
+  faSpinner
+} from "@fortawesome/free-solid-svg-icons"
+import {
+  faPlusSquare as farPlusSquare,
+  faMinusSquare as farMinusSquare
+} from "@fortawesome/free-regular-svg-icons"
 
 export const history = createBrowserHistory()
+
+//fontawesome
+library.add(
+  faHeart,
+  faStar,
+  faPlusSquare,
+  faPlusCircle,
+  faMinusCircle,
+  faSpinner
+)
+library.add(farPlusSquare, farMinusSquare)
 
 const mapStateToProps = state => {
   return {
@@ -46,16 +70,6 @@ const mapDispatchToProps = dispatch => {
 //   lightgrey: "#272727",
 //   fontFamily: "Roboto"
 // }
-
-const themeblack = {
-  primary: "#272727", //darkest
-  secondary: "#B3C2B8", //white
-  accent: "#FF0000", //red
-  background: "#121212",
-  border: "#272727",
-  fontFamily: "Roboto"
-}
-
 // const themewhite = {
 //   primary: "#F5F5F5", //darkest
 //   secondary: "#221f1f",
@@ -64,12 +78,23 @@ const themeblack = {
 //   border: "#BABABA",
 //   fontFamily: "Roboto"
 // }
-const themewhite = {
+
+const blacktheme = {
+  primary: "#272727", //darkest
+  secondary: "#B3C2B8", //white
+  accent: "#FF0000", //red
+  background: "#121212",
+  border: "#272727",
+  fontFamily: "Roboto"
+}
+
+
+const whitetheme = {
   primary: "#FBFAF5", //hell weis
   secondary: "#2A2D2E", //dunkel black
   accent: "#8ED7EB", // blau hell
   background: "#F7F7F7", //grau
-  border: "#BABABA", //B5B5B5 dunkel grau
+  border: "#BABABA", // dunkel grau
 
   fontFamily: "Roboto"
 }
@@ -85,7 +110,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      theme: themewhite
+      theme: blacktheme
     }
   }
   render() {

@@ -69,22 +69,31 @@ export const LayoutGrid = styled.div`
     color: #f9f9f9;
     align-self: start;
     z-index: 2;
+
+    font-family: "Merriweather Sans", sans-serif;
   }
   button {
-    font-weight: 400;
+    cursor: pointer;
     border: 1px solid ${props => props.theme.border};
     width: 80%;
     grid-column: 3 / span 3;
-
     grid-row: 9;
     color: ${props => props.theme.secondary};
     background: ${props => props.theme.primary};
-    text-decoration: none;
-    line-height: 50px;
     height: 50px;
     text-align: center;
-    display: inline-block;
-    text-transform: uppercase;
+    .minusicon {
+      line-height: 50px;
+      width: 22px;
+      height: 22px;
+      color: red;
+    }
+    .plusicon {
+      line-height: 50px;
+      width: 22px;
+      height: 22px;
+      color: green;
+    }
     &:hover {
       color: ${props => props.theme.accent};
     }
@@ -182,11 +191,19 @@ export const Rankings = styled.div`
   z-index: 2;
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  border-bottom: solid 2px ${props => props.theme.accent};
+  border-bottom: solid 1px ${props => props.theme.accent};
+  .heart {
+    color: red;
+  }
+  .star {
+    color: gold;
+  }
+
   h2 {
     margin-bottom: 1em;
     grid-column: 1 / span 3;
     font-weight: 300;
+    text-align: center;
     color: ${props => props.theme.secondary};
   }
   h2:last-child {
@@ -194,7 +211,7 @@ export const Rankings = styled.div`
     grid-column: 4 / span 3;
     font-weight: 300;
     justify-content: end;
-    text-align: right;
+    text-align: center;
   }
 `
 
@@ -227,6 +244,9 @@ export const AnimeCard = styled.div`
 
     color: white;
     background: black;
+    .star {
+      color: gold;
+    }
   }
   h4 {
     font-size: 0.91em;

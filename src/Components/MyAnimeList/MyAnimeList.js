@@ -4,6 +4,7 @@ import styled from "styled-components"
 
 import { loginRemoveFromePlaylist } from "../Login/actions/Login"
 import { requestList } from "./actions/requestList"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 const mapStateToProps = state => {
   return {
     animeId: state.Login.user.animeList,
@@ -58,13 +59,14 @@ const MyAnimeListStyles = styled.div`
       width: 95%;
       grid-template-columns: repeat(6, minmax(0, 1fr));
       background-color: ${props => props.theme.primary};
+      border: 1px solid ${props => props.theme.border};
       &:last-child {
         margin-bottom: 2em;
       }
       button {
         grid-column: 6;
         grid-row: 1;
-        width: 120px;
+        width: 50px;
         height: 50px;
         justify-self: center;
         align-self: center;
@@ -75,6 +77,12 @@ const MyAnimeListStyles = styled.div`
         text-align: center;
         font-weight: 400;
         cursor: pointer;
+        .minusicon {
+          line-height: 50px;
+          width: 22px;
+          height: 22px;
+          color: red;
+        }
         &:hover {
           color: ${props => props.theme.accent};
         }
@@ -134,6 +142,7 @@ class MyAnimeList extends Component {
     const { animeList } = this.props
     const AnimeList = animeList.map((category, i) => {
       const { userId } = this.props
+      
       return (
         <li key={i}>
           <p>{i + 1}</p>
@@ -145,7 +154,10 @@ class MyAnimeList extends Component {
           <button
             onClick={() => this.removeFromPlaylist(userId, animeList[i].id)}
           >
-            remove
+            <FontAwesomeIcon
+              className="minusicon"
+              icon={["fas", "minus-circle"]}
+            />
           </button>
         </li>
       )

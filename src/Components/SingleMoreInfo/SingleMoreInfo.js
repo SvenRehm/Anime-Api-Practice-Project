@@ -11,6 +11,7 @@ import styled from "styled-components"
 import { LayoutGrid, CategoriesList, Rankings } from "../../Styled"
 import { Link } from "react-router-dom"
 import { getJwt } from "../helpers/jwt"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 const mapStateToProps = state => {
   const {
     youtubeVideoId,
@@ -80,6 +81,15 @@ const GreyBackground = styled.div`
 
   background: ${props => props.theme.background};
   color: ${props => props.theme.secondary};
+  .spinner {
+    grid-column: 1/-1;
+    grid-row: 1 / span 4;
+    z-index: 2;
+    align-self: center;
+    justify-self: center;
+    width: 40%;
+    height: 70px;
+  }
   div.coverImage {
     margin-top: 57px;
     grid-column: 1/-1;
@@ -163,9 +173,12 @@ class SingleMoreInfo extends Component {
 
         <h1>{canonicalTitle}</h1>
         <Rankings>
-          <h2>PopularityRank:#{popularityRank}</h2>
           <h2>
-            RatingRank:#{ratingRank} ({averageRating})
+            <FontAwesomeIcon className="heart" icon="heart" /> {popularityRank}
+          </h2>
+          <h2>
+            <FontAwesomeIcon className="star" icon="star" /> {ratingRank} (
+            {averageRating})
           </h2>
         </Rankings>
         <div className="text">
@@ -212,10 +225,18 @@ class SingleMoreInfo extends Component {
             Log In
           </Link>
         ) : !isAnimeOnList ? (
-          <button onClick={this.addToPlaylist}>Add To Playlist</button>
+          <button onClick={this.addToPlaylist}>
+            <FontAwesomeIcon
+              className="plusicon"
+              icon={["fas", "plus-circle"]}
+            />
+          </button>
         ) : (
           <button onClick={this.removeFromPlaylist}>
-            Remove from Playlist
+            <FontAwesomeIcon
+              className="minusicon"
+              icon={["fas", "minus-circle"]}
+            />
           </button>
         )}
 
@@ -240,6 +261,7 @@ class SingleMoreInfo extends Component {
       <GreyBackground>
         <div className="coverImage" />
         <div className="image" />
+        <FontAwesomeIcon spin className="spinner" icon={["fas", "spinner"]} />
       </GreyBackground>
     )
   }

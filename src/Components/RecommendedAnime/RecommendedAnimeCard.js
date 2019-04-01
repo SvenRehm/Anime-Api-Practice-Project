@@ -2,13 +2,14 @@ import React from "react"
 
 import { Link } from "react-router-dom"
 import { AnimeCard } from "../../Styled"
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 const RecommendedAnimeCard = ({
   src,
   title,
   averageRating,
   episodeCount,
   id,
+  ratingRank,
   isLoading
 }) => {
   return (
@@ -19,7 +20,9 @@ const RecommendedAnimeCard = ({
         <h4>{title}</h4>
       </Link>
       <h5>{episodeCount} - Episodes</h5>
-      <p> Rating: {averageRating}</p>
+      <p>
+        <FontAwesomeIcon className="star" icon="star" />{averageRating}
+      </p>
     </AnimeCard>
   )
 }
