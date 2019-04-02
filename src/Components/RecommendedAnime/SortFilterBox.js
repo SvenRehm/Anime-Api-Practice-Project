@@ -1,5 +1,5 @@
 import React from "react"
-import { customStyles } from "../RecommendedAnime/SortStatus"
+
 import Select from "react-select"
 import styled from "styled-components"
 const options = [
@@ -8,18 +8,78 @@ const options = [
   { value: "-averageRating", label: "AverageRating" }
 ]
 
+const MultiSelect = styled(Select)`
+  .react-select__single-value{
+    color: ${props => props.theme.secondary};
+  }
+  .react-select__indicator-separator {
+    background: ${props => props.theme.primary};
+  }
+
+  .react-select__option {
+    background: ${props => props.theme.primary};
+    cursor: pointer;
+    color: ${props => props.theme.secondary};
+    &:hover {
+      border-color: none;
+  
+      background: ${props => props.theme.border};
+    }
+  }
+  .react-select__control {
+    width: 200px;
+    color: ${props => props.theme.secondary};
+
+    /* border: 2px solid ${props => props.theme.border}; */
+    border-radius: 0;
+  
+    margin: 0;
+    cursor: pointer;
+    box-shadow: none;
+    &:hover{
+      border-color:${props => props.theme.border};
+    }
+  }
+  .react-select__menu {
+    border-radius: 0;
+    hyphens: auto;
+    width: 200px;
+    margin-top: 0;
+   
+    text-align: left;
+    color: ${props => props.theme.secondary};
+    background: ${props => props.theme.primary};
+  }
+  .react-select__option--is-selected{
+    color: ${props => props.theme.secondary};
+    background: ${props => props.theme.border};
+  }
+.react-select__control--is-focused{
+  box-shadow:none;
+  border-color:${props => props.theme.border};
+}
+
+
+  .react-select__menu-list {
+    padding:0;
+ 
+  }
+  .react-select__singleValue {
+    color: ${props => props.theme.secondary};
+  }
+`
 const InLineBlock = styled.div`
   display: inline-block;
-
 `
 const SortFilterBox = ({ onChangeSelect }) => {
   return (
     <InLineBlock>
-      <Select
-        styles={customStyles}
+      <MultiSelect
+        classNamePrefix="react-select"
         defaultValue={options[0]}
         onChange={onChangeSelect}
         options={options}
+        isSearchable={false}
       />
     </InLineBlock>
   )

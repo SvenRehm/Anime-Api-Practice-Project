@@ -31,7 +31,7 @@ const LoginDiv = styled.div`
   grid-template-rows: repeat(9, 90px);
   &::before {
     content: "";
-    height: 90%;
+    height: 80%;
     align-self: start;
     background: ${props => props.theme.primary};
 
