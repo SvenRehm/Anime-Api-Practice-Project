@@ -130,7 +130,7 @@ class RecommendedAnime extends Component {
         initialLoad={false}
         useWindow={true}
         threshold={500}
-        hasMore={this.props.recommendedAnime.length <= 200}
+        hasMore={this.props.recommendedAnime.length <= 600}
       >
         <SortStatus onChangeStatus={this.props.onChangeStatus} />
         <SortTypeBox onChangeSelectType={this.props.onChangeSelectType} />

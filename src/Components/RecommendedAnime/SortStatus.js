@@ -43,10 +43,10 @@ const InLineBlock = styled.div`
   margin: 5em 1em 0em 1em;
 `
 
-
 const MultiSelect = styled(Select)`
+  
   .react-select__single-value{
-    color: ${props => props.theme.secondary};
+    color:${props => props.theme.hovertext};
   }
   .react-select__indicator-separator {
     background: ${props => props.theme.primary};
@@ -58,14 +58,15 @@ const MultiSelect = styled(Select)`
     color: ${props => props.theme.secondary};
     &:hover {
       border-color: none;
-  
-      background: ${props => props.theme.border};
+  color:${props => props.theme.hovertext};
+      background: ${props => props.theme.hover};
     }
   }
   .react-select__control {
+    background: ${props => props.theme.primary};
     width: 200px;
     color: ${props => props.theme.secondary};
-
+    border-color:${props => props.theme.border};
     /* border: 2px solid ${props => props.theme.border}; */
     border-radius: 0;
   
@@ -74,6 +75,7 @@ const MultiSelect = styled(Select)`
     box-shadow: none;
     &:hover{
       border-color:${props => props.theme.border};
+      color:${props => props.theme.hovertext};
     }
   }
   .react-select__menu {
@@ -84,15 +86,17 @@ const MultiSelect = styled(Select)`
    
     text-align: left;
     color: ${props => props.theme.secondary};
+
     background: ${props => props.theme.primary};
   }
   .react-select__option--is-selected{
-    color: ${props => props.theme.secondary};
-    background: ${props => props.theme.border};
+    color:${props => props.theme.hovertext};
+    background: ${props => props.theme.selected};
   }
 .react-select__control--is-focused{
   box-shadow:none;
   border-color:${props => props.theme.border};
+  color:${props => props.theme.hovertext};
 }
 
 

@@ -7,15 +7,14 @@ const StyledNav = styled.ul`
   z-index: 3;
   position: fixed;
   display: flex;
+  align-items: center;
   width: 100%;
   height: 57px;
   padding: 0;
   list-style: none;
-  align-items: center;
-  padding: 0;
-  background-color: ${props => props.theme.primary};
-  /* background-color: transparent; */
+  background: ${props => props.theme.primary};
   top: 0;
+  font-weight: 500;
   font-size: 17px;
   overflow: hidden;
   box-shadow: 0px 13px 50px -25px rgba(0, 0, 0, 1);
@@ -23,12 +22,11 @@ const StyledNav = styled.ul`
     text-decoration: none;
     color: ${props => props.theme.secondary};
     background: ${props => props.theme.primary};
-    padding: 1em;
+    padding: 1.1em;
     font-size: 17px;
     &:hover {
-      /* background: ${props => props.theme.background}; */
-      border-bottom: 2px solid ${props => props.theme.border};
-      /* filter: brightness(150%); */
+      background: ${props => props.theme.hover};
+      color: ${props => props.theme.hovertext};
     }
   }
 
@@ -37,21 +35,30 @@ const StyledNav = styled.ul`
 
     font-size: 17px;
     width: 400px;
-    border: none;
+    margin: 0;
     color: ${props => props.theme.secondary};
-    background: ${props => props.theme.primary};
+    background: ${props => props.theme.background};
     border: 1px solid ${props => props.theme.border};
   }
   .search {
+    display: flex;
     margin-left: auto;
     margin-right: auto;
     padding: 0;
 
     a {
-      padding: 1px;
+     
+
+      display: inline-block;
+      border: 1px solid ${props => props.theme.border};
+      font-size: 15px;
+      padding: 6px;
+
+      background: ${props => props.theme.hover};
 
       &:hover {
-        background: ${props => props.theme.background};
+        color: ${props => props.theme.hovertext};
+        background: ${props => props.theme.hover};
       }
     }
   }

@@ -25,7 +25,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const LoginDiv = styled.div`
+const LoginForm = styled.form`
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-template-rows: repeat(9, 90px);
@@ -42,18 +42,26 @@ const LoginDiv = styled.div`
   label {
     grid-row: 3;
     grid-column: 5 / span 4;
-    width: 70%;
 
     height: 2em;
+    line-height: 1.2;
+    letter-spacing: 0.2px;
+    text-align: left;
     justify-self: center;
     align-self: end;
 
     color: ${props => props.theme.secondary};
     width: 80%;
     & #email {
+      line-height: 1.2;
+      letter-spacing: 0.2px;
+      text-align: left;
       grid-row: 3;
     }
     &#password {
+      line-height: 1.2;
+      letter-spacing: 0.2px;
+      text-align: left;
       grid-row: 4;
     }
   }
@@ -65,8 +73,9 @@ const LoginDiv = styled.div`
     width: 80%;
     border: none;
     color: ${props => props.theme.secondary};
-    background: ${props => props.theme.darkgrey};
+    background: ${props => props.theme.background};
   }
+
   input[name="email"] {
     grid-row: 4;
     grid-column: 5 / span 4;
@@ -82,6 +91,10 @@ const LoginDiv = styled.div`
     grid-column: 5 / span 4;
     grid-row: 2;
     color: ${props => props.theme.secondary};
+    line-height: 1.2;
+    letter-spacing: 0.2px;
+    text-align: left;
+    font-size: 2.5em;
   }
   button {
     grid-row: 6;
@@ -95,11 +108,16 @@ const LoginDiv = styled.div`
     justify-self: center;
   }
 `
+
 class Login extends Component {
+  handleSubmit = event => {
+    event.preventDefault()
+    this.props.onSubmitLogin(this.props.signInEmail, this.props.signInPassword)
+
+  }
   render() {
-  
     return (
-      <LoginDiv>
+      <LoginForm onSubmit={this.handleSubmit}>
         <h1>Login</h1>
         <label id="email">Email</label>
         <input
@@ -119,16 +137,18 @@ class Login extends Component {
         />
 
         <button
-          onClick={() =>
-            this.props.onSubmitLogin(
-              this.props.signInEmail,
-              this.props.signInPassword
-            )
-          }
+          type="submit"
+          value="Login"
+          // onClick={() =>
+          //   this.props.onSubmitLogin(
+          //     this.props.signInEmail,
+          //     this.props.signInPassword
+          //   )
+          // }
         >
           Login
         </button>
-      </LoginDiv>
+      </LoginForm>
     )
   }
 }

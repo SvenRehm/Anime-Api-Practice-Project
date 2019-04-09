@@ -19,7 +19,6 @@ const rootReducer = combineReducers({
   requestCategorys,
   requestRecommendedAnime,
   requestSingleMoreInfo,
-
   requestList,
   Login,
   Register

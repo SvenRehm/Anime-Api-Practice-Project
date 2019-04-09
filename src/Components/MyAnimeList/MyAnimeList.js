@@ -103,6 +103,9 @@ const MyAnimeListStyles = styled.div`
         margin-top: 10px;
         margin-left: 15px;
         font-size: 1.3em;
+        line-height: 1.2;
+        letter-spacing: 0.2px;
+        text-align: left;
       }
       p {
         grid-column: 1 / span 1;
@@ -117,7 +120,7 @@ const MyAnimeListStyles = styled.div`
         color: ${props => props.theme.secondary};
         grid-column: 2 / span 2;
         grid-row: 1;
-        filter: brightness(50%);
+        opacity: 0.6;
       }
     }
   }
@@ -142,7 +145,7 @@ class MyAnimeList extends Component {
     const { animeList } = this.props
     const AnimeList = animeList.map((category, i) => {
       const { userId } = this.props
-      
+
       return (
         <li key={i}>
           <p>{i + 1}</p>

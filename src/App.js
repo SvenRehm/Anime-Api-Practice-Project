@@ -79,24 +79,29 @@ const mapDispatchToProps = dispatch => {
 //   fontFamily: "Roboto"
 // }
 
+// eslint-disable-next-line
 const blacktheme = {
   primary: "#272727", //darkest
-  secondary: "#B3C2B8", //white
+  secondary: "#d3d3d3", //white
   accent: "#FF0000", //red
   background: "#121212",
-  border: "#272727",
-  fontFamily: "Roboto"
+  border: "#121212",
+  hover: "#3d3d3d",
+  selected: "#515151",
+  hovertext: "#FBFAF5",
+  fontFamily: "Montserrat"
 }
-
-
+// eslint-disable-next-line
 const whitetheme = {
   primary: "#FBFAF5", //hell weis
   secondary: "#2A2D2E", //dunkel black
   accent: "#8ED7EB", // blau hell
   background: "#F7F7F7", //grau
   border: "#BABABA", // dunkel grau
-
-  fontFamily: "Roboto"
+  hover: "#e0e0e0",
+  selected: "#BABABA",
+  hovertext: "#2A2D2E",
+  fontFamily: "Montserrat"
 }
 const GlobalStyle = createGlobalStyle`
   body {

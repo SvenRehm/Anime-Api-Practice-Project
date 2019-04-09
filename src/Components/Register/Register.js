@@ -32,7 +32,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const RegisterStyles = styled.div`
+const RegisterForm = styled.form`
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   grid-template-rows: repeat(9, 90px);
@@ -41,7 +41,7 @@ const RegisterStyles = styled.div`
     height: 90%;
     align-self: start;
     background: ${props => props.theme.primary};
-  
+
     grid-row: 2 / span 7;
     grid-column: 5 / span 4;
     border: 1px solid ${props => props.theme.border};
@@ -85,7 +85,7 @@ const RegisterStyles = styled.div`
     width: 80%;
     border: none;
     color: ${props => props.theme.secondary};
-    background: ${props => props.theme.darkgrey};
+    background: ${props => props.theme.background};
   }
 
   input[name="RegisterName"] {
@@ -107,7 +107,10 @@ const RegisterStyles = styled.div`
     justify-self: center;
 
     align-self: center;
-
+    line-height: 1.2;
+    letter-spacing: 0.2px;
+    text-align: left;
+    font-size: 2.5em;
     grid-column: 5 / span 4;
     grid-row: 2;
     color: ${props => props.theme.secondary};
@@ -125,6 +128,14 @@ const RegisterStyles = styled.div`
   }
 `
 class Register extends Component {
+  handleSubmit = event => {
+    event.preventDefault()
+    this.props.onSubmitRegister(
+      this.props.registerEmail,
+      this.props.registerPassword,
+      this.props.registerName
+    )
+  }
   render() {
     const {
       registerPassword,
@@ -133,7 +144,7 @@ class Register extends Component {
       message
     } = this.props
     return (
-      <RegisterStyles>
+      <RegisterForm onSubmit={this.handleSubmit}>
         <p>{message}</p>
         <h1>Register</h1>
         <label id="username">Username</label>
@@ -162,17 +173,19 @@ class Register extends Component {
           value={registerPassword}
         />
         <button
-          onClick={() =>
-            this.props.onSubmitRegister(
-              this.props.registerEmail,
-              this.props.registerPassword,
-              this.props.registerName
-            )
-          }
+          type="submit"
+          value="Register"
+          // onClick={() =>
+          //   this.props.onSubmitRegister(
+          //     this.props.registerEmail,
+          //     this.props.registerPassword,
+          //     this.props.registerName
+          //   )
+          // }
         >
           Register
         </button>
-      </RegisterStyles>
+      </RegisterForm>
     )
   }
 }

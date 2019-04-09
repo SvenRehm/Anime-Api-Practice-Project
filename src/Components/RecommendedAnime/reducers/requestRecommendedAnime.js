@@ -30,14 +30,19 @@ export const requestRecommendedAnime = (state = initialState, action = {}) => {
         ...state,
         recommendedAnime: action.payload,
         pagination: action.pagination,
-
         isLoading: false
       }
+    case REQUEST_RECOMMENDED_ANIME_FAILED:
+      return Object.assign({}, state, {
+        error: action.payload,
+        isPending: false
+      })
 
     case "REQUEST_SECOND_PAGE_SUCCES":
       //RETRUN INTITALSTATE/THAN RETRURN REDUX STATE/THAN INJECT NEW STATE
       return {
         ...state,
+
         recommendedAnime: [...state.recommendedAnime, ...action.payload],
         pagination: action.pagination
       }
@@ -58,12 +63,6 @@ export const requestRecommendedAnime = (state = initialState, action = {}) => {
         ...state,
         status: action.payload
       }
-
-    case REQUEST_RECOMMENDED_ANIME_FAILED:
-      return Object.assign({}, state, {
-        error: action.payload,
-        isPending: false
-      })
 
     default:
       return state

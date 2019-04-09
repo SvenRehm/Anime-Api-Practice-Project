@@ -2,7 +2,7 @@ import React from "react"
 
 import { AnimeCard } from "../../Styled"
 import { Link } from "react-router-dom"
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 const CardC = ({ title, src, id, episodeCount, averageRating }) => {
   const isLoading = false
 
@@ -16,7 +16,10 @@ const CardC = ({ title, src, id, episodeCount, averageRating }) => {
         <h4>{title}</h4>
       </Link>
       <h5>{episodeCount} - Episodes</h5>
-      <p> Rating: {averageRating}</p>
+      <p>
+        {" "}
+        <FontAwesomeIcon className="star" icon="star" /> {averageRating}
+      </p>
     </AnimeCard>
   )
 }

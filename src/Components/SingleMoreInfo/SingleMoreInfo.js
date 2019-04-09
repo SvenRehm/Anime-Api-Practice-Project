@@ -159,10 +159,12 @@ class SingleMoreInfo extends Component {
 
     const animeListData = this.props.animeListData
 
-    const isAnimeOnList = animeListData.find(
-      // eslint-disable-next-line
-      i => i == this.props.match.params.id
-    )
+    const isAnimeOnList = animeListData
+      ? animeListData.find(
+          // eslint-disable-next-line
+          i => i == this.props.match.params.id
+        )
+      : null
 
     return !this.props.isPending ? (
       <LayoutGrid>
@@ -174,17 +176,17 @@ class SingleMoreInfo extends Component {
         <h1>{canonicalTitle}</h1>
         <Rankings>
           <h2>
-            <FontAwesomeIcon className="heart" icon="heart" /> {popularityRank}
+            <FontAwesomeIcon className="heart" icon="heart" /> Rank#{" "}
+            {popularityRank}
           </h2>
           <h2>
-            <FontAwesomeIcon className="star" icon="star" /> {ratingRank} (
-            {averageRating})
+            <FontAwesomeIcon className="star" icon="star" /> Rank# {ratingRank}{" "}
+            ({averageRating})
           </h2>
         </Rankings>
         <div className="text">
           <h2>Synopsis</h2>
           <p>{synopsis}</p>
-          <p>load more</p>
         </div>
         <table className="table-styles">
           <tbody>

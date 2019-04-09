@@ -44,7 +44,7 @@ export const Authenticate = (jwt, location) => dispatch => {
         type: "AUTHENTICATE",
         payload: res.data
       })
-      history.push("/MyAnimeList")
+     
     })
     .catch(err => {
       localStorage.removeItem("cool-jwt")

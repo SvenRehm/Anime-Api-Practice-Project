@@ -3,7 +3,6 @@ import styled from "styled-components"
 //grid in recommended anime/and searchoutput
 export const Grid = styled.div`
   display: grid;
-
   grid-gap: 1em;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   margin: 100px 1em;
@@ -64,13 +63,15 @@ export const LayoutGrid = styled.div`
 
   h1 {
     grid-column: 6 / span 5;
-    grid-row: 4;
-    margin-bottom: 1em;
+    grid-row: 3 / span 2;
     color: #f9f9f9;
-    align-self: start;
+    align-self: center;
+    justify-self: start;
     z-index: 2;
-
-    font-family: "Merriweather Sans", sans-serif;
+    line-height: 1.2;
+    letter-spacing: 0.2px;
+    text-align: left;
+    font-size: 2.5em;
   }
   button {
     cursor: pointer;
@@ -112,16 +113,21 @@ export const LayoutGrid = styled.div`
     margin-bottom: 4em;
 
     h2 {
-      line-height: 2em;
       color: ${props => props.theme.secondary};
+      line-height: 1.88;
+      letter-spacing: 0.2px;
     }
     p {
       color: ${props => props.theme.secondary};
-      overflow: hidden;
+      /* overflow: hidden; */
       /* white-space: nowrap; */
-      text-overflow: ellipsis;
-      max-height: 150px;
+      /* text-overflow: ellipsis; */
+      /* max-height: 150px; */
       /* add height */
+      font-size: 17px;
+      line-height: 1.88;
+      letter-spacing: 0.2px;
+      text-align: left;
     }
   }
   ul {
@@ -203,7 +209,7 @@ export const Rankings = styled.div`
     margin-bottom: 1em;
     grid-column: 1 / span 3;
     font-weight: 300;
-    text-align: center;
+    text-align: left;
     color: ${props => props.theme.secondary};
   }
   h2:last-child {
@@ -211,7 +217,7 @@ export const Rankings = styled.div`
     grid-column: 4 / span 3;
     font-weight: 300;
     justify-content: end;
-    text-align: center;
+    text-align: right;
   }
 `
 
@@ -224,7 +230,7 @@ export const AnimeCard = styled.div`
     min-height: 270px;
     max-height: 300px;
     cursor: pointer;
-    background-color: ${props => props.theme.lightgrey};
+    background-color: ${props => props.theme.hover};
     margin-bottom: 5px;
   }
   img {
@@ -238,12 +244,12 @@ export const AnimeCard = styled.div`
   p {
     font-size: 0.7em;
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 10px;
+    left: -10px;
     padding: 5px;
+    color: ${props => props.theme.secondary};
+    background-color: ${props => props.theme.primary};
 
-    color: white;
-    background: black;
     .star {
       color: gold;
     }

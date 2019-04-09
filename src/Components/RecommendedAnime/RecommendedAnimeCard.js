@@ -21,7 +21,7 @@ const RecommendedAnimeCard = ({
       </Link>
       <h5>{episodeCount} - Episodes</h5>
       <p>
-        <FontAwesomeIcon className="star" icon="star" />{averageRating}
+        <FontAwesomeIcon className="star" icon="star" /> {averageRating}
       </p>
     </AnimeCard>
   )
