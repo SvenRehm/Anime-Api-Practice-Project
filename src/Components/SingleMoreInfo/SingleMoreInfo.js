@@ -11,7 +11,16 @@ import styled from "styled-components"
 import { LayoutGrid, CategoriesList, Rankings } from "../../Styled"
 import { Link } from "react-router-dom"
 import { getJwt } from "../helpers/jwt"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { IconContext } from "react-icons"
+import {
+  IoMdHeart,
+  IoMdStar,
+  IoMdAdd,
+  IoMdRemove,
+  IoMdLogIn
+} from "react-icons/io"
+import { CircleSpinner } from "react-spinners-kit"
+
 const mapStateToProps = state => {
   const {
     youtubeVideoId,
@@ -87,7 +96,7 @@ const GreyBackground = styled.div`
     z-index: 2;
     align-self: center;
     justify-self: center;
-    width: 40%;
+
     height: 70px;
   }
   div.coverImage {
@@ -97,7 +106,7 @@ const GreyBackground = styled.div`
     align-self: start;
     z-index: 2;
     height: 100%;
-    background: ${props => props.theme.primary};
+    /* background: ${props => props.theme.primary}; */
     z-index: 2;
     color: ${props => props.theme.secondary};
   }
@@ -110,8 +119,6 @@ const GreyBackground = styled.div`
     background: ${props => props.theme.lightgrey};
   }
 `
-
-//SingleMoreInfo
 
 class SingleMoreInfo extends Component {
   componentDidMount() {
@@ -129,6 +136,7 @@ class SingleMoreInfo extends Component {
       Number(this.props.id)
     )
   }
+
   render() {
     const jwt = getJwt()
     const {
@@ -171,78 +179,106 @@ class SingleMoreInfo extends Component {
         <div className="darkimg">
           <img alt="" src={coverImage === null ? null : coverImage.large} />
         </div>
-        <img alt="" src={posterImage.medium} />
-
         <h1>{canonicalTitle}</h1>
         <Rankings>
           <h2>
-            <FontAwesomeIcon className="heart" icon="heart" /> Rank#{" "}
-            {popularityRank}
+            <IconContext.Provider
+              value={{
+                className: "heart"
+              }}
+            >
+              <IoMdHeart />
+            </IconContext.Provider>
+            Rank# {popularityRank}
           </h2>
           <h2>
-            <FontAwesomeIcon className="star" icon="star" /> Rank# {ratingRank}{" "}
+            <IconContext.Provider
+              value={{
+                className: "star"
+              }}
+            >
+              <IoMdStar />
+            </IconContext.Provider>
+            Rank# {ratingRank}
+            {/* <FontAwesomeIcon className="star" icon="star" /> Rank# {ratingRank}{" "} */}
             ({averageRating})
           </h2>
         </Rankings>
+        <CategoriesList>{category}</CategoriesList>
+        <div className="AnimeInfo">
+          <img alt="" src={posterImage.medium} />
+          <table className="table-styles">
+            <tbody>
+              <tr>
+                <td>TYPE</td>
+                <td className="right-align">{subtype}</td>
+              </tr>
+
+              <tr>
+                <td>STATUS</td>
+                <td className="right-align green">{status}</td>
+              </tr>
+              <tr>
+                <td>averageRating</td>
+                <td className="right-align">{averageRating}</td>
+              </tr>
+              <tr>
+                <td>EPISODES</td>
+                <td className="right-align">{episodeCount}</td>
+              </tr>
+
+              <tr>
+                <td>startDate</td>
+                <td className="right-align">{startDate}</td>
+              </tr>
+              <tr>
+                <td>endDate</td>
+                <td className="right-align">{endDate}</td>
+              </tr>
+              <tr>
+                <td>Age</td>
+                <td className="right-align">{ageRatingGuide}</td>
+              </tr>
+            </tbody>
+          </table>
+          {!jwt ? (
+            <Link id="logintoadd" to="/Login">
+              <IconContext.Provider
+                value={{
+                  className: "logintoadd"
+                }}
+              >
+                <IoMdLogIn />
+              </IconContext.Provider>
+            </Link>
+          ) : !isAnimeOnList ? (
+            <button onClick={this.addToPlaylist}>
+              <IconContext.Provider
+                value={{
+                  className: "plusicon"
+                }}
+              >
+                <IoMdAdd />
+              </IconContext.Provider>
+            </button>
+          ) : (
+            <button onClick={this.removeFromPlaylist}>
+              <IconContext.Provider
+                value={{
+                  className: "minusicon"
+                }}
+              >
+                <IoMdRemove />
+              </IconContext.Provider>
+            </button>
+          )}
+        </div>
+
         <div className="text">
           <h2>Synopsis</h2>
           <p>{synopsis}</p>
         </div>
-        <table className="table-styles">
-          <tbody>
-            <tr>
-              <td>TYPE</td>
-              <td className="right-align">{subtype}</td>
-            </tr>
 
-            <tr>
-              <td>STATUS</td>
-              <td className="right-align green">{status}</td>
-            </tr>
-            <tr>
-              <td>averageRating</td>
-              <td className="right-align">{averageRating}</td>
-            </tr>
-            <tr>
-              <td>EPISODES</td>
-              <td className="right-align">{episodeCount}</td>
-            </tr>
-
-            <tr>
-              <td>startDate</td>
-              <td className="right-align">{startDate}</td>
-            </tr>
-            <tr>
-              <td>endDate</td>
-              <td className="right-align">{endDate}</td>
-            </tr>
-            <tr>
-              <td>Age</td>
-              <td className="right-align">{ageRatingGuide}</td>
-            </tr>
-          </tbody>
-        </table>
-        {!jwt ? (
-          <Link className="logintoadd" to="/Login">
-            Log In
-          </Link>
-        ) : !isAnimeOnList ? (
-          <button onClick={this.addToPlaylist}>
-            <FontAwesomeIcon
-              className="plusicon"
-              icon={["fas", "plus-circle"]}
-            />
-          </button>
-        ) : (
-          <button onClick={this.removeFromPlaylist}>
-            <FontAwesomeIcon
-              className="minusicon"
-              icon={["fas", "minus-circle"]}
-            />
-          </button>
-        )}
-
-        <CategoriesList>{category}</CategoriesList>
         {youtubeVideoId === "" ? (
           <iframe
             title="animeintro"
@@ -263,7 +299,14 @@ class SingleMoreInfo extends Component {
       <GreyBackground>
         <div className="coverImage" />
         <div className="image" />
-        <FontAwesomeIcon spin className="spinner" icon={["fas", "spinner"]} />
+
+        <div className="spinner">
+          <CircleSpinner
+            size={50}
+            color="white"
+            loading={this.props.isPending}
+          />
+        </div>
       </GreyBackground>
     )
   }

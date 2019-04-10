@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   isLoading: false,
+  infiteScrollingLoad: false,
   recommendedAnime: [],
   pagination: {
     first: "",
@@ -38,10 +39,16 @@ export const requestRecommendedAnime = (state = initialState, action = {}) => {
         isPending: false
       })
 
+    case "REQUEST_SECOND_PAGE_PENDING":
+      return {
+        ...state,
+        infiteScrollingLoad: true
+      }
     case "REQUEST_SECOND_PAGE_SUCCES":
       //RETRUN INTITALSTATE/THAN RETRURN REDUX STATE/THAN INJECT NEW STATE
       return {
         ...state,
+        infiteScrollingLoad: false,
 
         recommendedAnime: [...state.recommendedAnime, ...action.payload],
         pagination: action.pagination

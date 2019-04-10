@@ -25,8 +25,11 @@ const StyledNav = styled.ul`
     padding: 1.1em;
     font-size: 17px;
     &:hover {
-      background: ${props => props.theme.hover};
-      color: ${props => props.theme.hovertext};
+      /* background: ${props => props.theme.hover}; */
+      /* color: ${props => props.theme.accent}; */
+      color: ${props => props.theme.primary};
+      background: ${props => props.theme.accent};
+
     }
   }
 

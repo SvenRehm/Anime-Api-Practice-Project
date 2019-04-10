@@ -12,9 +12,9 @@ import SortFilterBox from "./SortFilterBox"
 import SortStatus from "./SortStatus"
 import SortTypeBox from "./SortTypeBox"
 import InfiniteScroll from "react-infinite-scroller"
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Grid } from "../../Styled"
-
+import styled from "styled-components"
 const mapStateToProps = state => {
   const {
     id,
@@ -60,7 +60,25 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
+const Loader = styled.div`
+  z-index: 3;
+  /* float: right; */
+  margin: 0 auto;
 
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  /* text-align: center; */
+  /* margin-left: auto;
+  margin-right: 0; */
+  /* margin-right: 40px;
+  margin-bottom: 40px; */
+  .spinner {
+    color: white;
+    width: 50px;
+    height: 50px;
+  }
+`
 class RecommendedAnime extends Component {
   componentDidMount() {
     //loading recommended anime
@@ -130,6 +148,15 @@ class RecommendedAnime extends Component {
         initialLoad={false}
         useWindow={true}
         threshold={500}
+        loader={
+          <Loader className="loader" key={0}>
+            <FontAwesomeIcon
+              spin
+              className="spinner"
+              icon={["fas", "spinner"]}
+            />
+          </Loader>
+        }
         hasMore={this.props.recommendedAnime.length <= 600}
       >
         <SortStatus onChangeStatus={this.props.onChangeStatus} />

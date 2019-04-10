@@ -95,7 +95,7 @@ const blacktheme = {
 const whitetheme = {
   primary: "#FBFAF5", //hell weis
   secondary: "#2A2D2E", //dunkel black
-  accent: "#8ED7EB", // blau hell
+  accent: "#66FCF1", // blau hell
   background: "#F7F7F7", //grau
   border: "#BABABA", // dunkel grau
   hover: "#e0e0e0",
@@ -107,7 +107,6 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: ${props => props.theme.fontFamily};
     background:${props => props.theme.background};
-    
   }
 `
 
