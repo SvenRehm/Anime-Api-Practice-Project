@@ -15,6 +15,8 @@ import InfiniteScroll from "react-infinite-scroller"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Grid } from "../../Styled"
 import styled from "styled-components"
+
+
 const mapStateToProps = state => {
   const {
     id,
@@ -134,7 +136,7 @@ class RecommendedAnime extends Component {
         />
       )
     })
-
+   
     return (
       <InfiniteScroll
         pageStart={0}
@@ -162,7 +164,12 @@ class RecommendedAnime extends Component {
         <SortStatus onChangeStatus={this.props.onChangeStatus} />
         <SortTypeBox onChangeSelectType={this.props.onChangeSelectType} />
         <SortFilterBox onChangeSelect={this.props.onChangeSelect} />
-        <Grid>{RecommendedAnime}</Grid>
+
+        <Grid>
+         
+          {RecommendedAnime}
+         
+        </Grid>
       </InfiniteScroll>
     )
   }

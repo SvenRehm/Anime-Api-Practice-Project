@@ -7,6 +7,7 @@ export const Grid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   margin: 100px 1em;
   background: ${props => props.theme.background};
+  
 `
 
 //LayoutGrid SingleInfo
@@ -264,6 +265,7 @@ export const Rankings = styled.div`
 export const AnimeCard = styled.div`
   position: relative;
   /* border-bottom: 1px solid grey; */
+
   div.load {
     width: 100%;
     min-height: 270px;

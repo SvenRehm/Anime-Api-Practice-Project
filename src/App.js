@@ -89,7 +89,7 @@ const blacktheme = {
   hover: "#3d3d3d",
   selected: "#515151",
   hovertext: "#FBFAF5",
-  fontFamily: "Montserrat"
+  fontFamily: "'Merriweather Sans', sans-serif;"
 }
 // eslint-disable-next-line
 const whitetheme = {
@@ -114,7 +114,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      theme: blacktheme
+      theme: whitetheme 
     }
   }
   render() {
