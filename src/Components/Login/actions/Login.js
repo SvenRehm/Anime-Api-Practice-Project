@@ -30,7 +30,8 @@ export const submitLogin = (loginEmail, loginPassword) => dispatch => {
       })
       dispatch(Authenticate(res.data))
       localStorage.setItem("cool-jwt", res.data)
-      history.push("/")
+      // history.push("/")
+      history.goBack()
     })
     .catch(error => dispatch({ type: "SUBMIT_LOGIN_FAILED", payload: error }))
 }
@@ -44,7 +45,6 @@ export const Authenticate = (jwt, location) => dispatch => {
         type: "AUTHENTICATE",
         payload: res.data
       })
-     
     })
     .catch(err => {
       localStorage.removeItem("cool-jwt")

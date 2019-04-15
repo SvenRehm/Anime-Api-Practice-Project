@@ -174,7 +174,7 @@ class SingleMoreInfo extends Component {
           i => i == this.props.match.params.id
         )
       : null
-
+    
     return !this.props.isPending ? (
       <LayoutGrid>
         <div className="darkimg">

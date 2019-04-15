@@ -264,6 +264,7 @@ export const Rankings = styled.div`
 //animecard
 
 export const AnimeCard = styled.div`
+
   div.load {
     width: 100%;
     min-height: 270px;

@@ -15,7 +15,8 @@ import InfiniteScroll from "react-infinite-scroller"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Grid } from "../../Styled"
 import styled from "styled-components"
-
+import { Spring, config } from "react-spring/renderprops"
+import { Trail } from "react-spring/renderprops"
 
 const mapStateToProps = state => {
   const {
@@ -64,17 +65,13 @@ const mapDispatchToProps = dispatch => {
 }
 const Loader = styled.div`
   z-index: 3;
-  /* float: right; */
+
   margin: 0 auto;
 
   width: 50px;
   height: 50px;
   overflow: hidden;
-  /* text-align: center; */
-  /* margin-left: auto;
-  margin-right: 0; */
-  /* margin-right: 40px;
-  margin-bottom: 40px; */
+
   .spinner {
     color: white;
     width: 50px;
@@ -124,8 +121,20 @@ class RecommendedAnime extends Component {
     //mapping over received anime
 
     const RecommendedAnime = recommendedAnime.map((category, i) => {
+      // let count = recommendedAnime.length < 21 ? true : false
+      // const delay = count ? (150 * i) / 3 : (100 * i) / 10
+
       return (
+        // <Spring
+        //   key={i}
+        //   delay={delay}
+        //   config={config.slow}
+        //   from={{ opacity: 0 }}
+        //   to={{ opacity: 1 }}
+        // >
+        //   {props => (
         <RecommendedAnimeCard
+          // style={props}
           key={i}
           id={recommendedAnime[i].id}
           src={recommendedAnime[i].posterImage}
@@ -135,6 +144,9 @@ class RecommendedAnime extends Component {
           ratingRank={recommendedAnime[i].ratingRank}
           isLoading={isLoading}
         />
+        // )
+        // }
+        // </Spring>
       )
     })
 
@@ -160,13 +172,37 @@ class RecommendedAnime extends Component {
             />
           </Loader>
         }
-        hasMore={this.props.recommendedAnime.length <= 600}
+        hasMore={this.props.recommendedAnime.length <= 100}
       >
         <SortStatus onChangeStatus={this.props.onChangeStatus} />
         <SortTypeBox onChangeSelectType={this.props.onChangeSelectType} />
         <SortFilterBox onChangeSelect={this.props.onChangeSelect} />
-
-        <Grid>{RecommendedAnime}</Grid>
+        <Grid>
+          <Trail
+            items={recommendedAnime}
+            keys={recommendedAnime => recommendedAnime.id}
+            from={{ opacity: 0 }}
+            to={{ opacity: 1 }}
+            enter={{ opacity: 1 }}
+            leave={{ opacity: 0 }}
+            config={config.stiff}
+          >
+            {recommendedAnime => props => (
+              <RecommendedAnimeCard
+                style={props}
+                key={recommendedAnime.id}
+                id={recommendedAnime.id}
+                src={recommendedAnime.posterImage}
+                title={recommendedAnime.cannontitle}
+                averageRating={recommendedAnime.averageRating}
+                episodeCount={recommendedAnime.episodeCount}
+                ratingRank={recommendedAnime.ratingRank}
+                isLoading={isLoading}
+              />
+            )}
+          </Trail>
+        </Grid>
+        {/* <Grid>{RecommendedAnime}</Grid> */}
       </InfiniteScroll>
     )
   }

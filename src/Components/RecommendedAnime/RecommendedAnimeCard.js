@@ -4,7 +4,6 @@ import { Link } from "react-router-dom"
 import { AnimeCard } from "../../Styled"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-
 const RecommendedAnimeCard = ({
   src,
   title,
@@ -12,14 +11,16 @@ const RecommendedAnimeCard = ({
   episodeCount,
   id,
   ratingRank,
-  isLoading
+  isLoading,
   // opacity
+  style
 }) => {
+ 
   return (
-    <AnimeCard>
+    <AnimeCard style={style}>
       <Link to={"/anime/" + id}>
-        {isLoading ? <div className="load" /> : <img alt="" src={src} />}
-
+        {/* {isLoading ? <div className="load" /> : <img alt="" src={src} />} */}
+        <img alt="" src={src} />
         <h4>{title}</h4>
       </Link>
       <h5>{episodeCount} - Episodes</h5>
