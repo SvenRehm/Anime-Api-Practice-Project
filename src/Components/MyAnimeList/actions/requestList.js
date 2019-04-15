@@ -13,7 +13,6 @@ export const requestList = animelistids => dispatch => {
     .then(responses => {
       return responses
     })
-
     .then(responses => Promise.all(responses.map(r => r.json())))
     .then(data => {
       //MAPPING OVER RESPONSE AND GIVING AN OBJECT BACK
@@ -33,4 +32,12 @@ export const requestList = animelistids => dispatch => {
     .catch(error =>
       dispatch({ type: "REQUEST_ANIME_LIST_FAILED", payload: error })
     )
+}
+
+export const RemoveFromePlaylist = (id, animeid) => dispatch => {
+  dispatch({
+    type: "DELETE_ONE_PLAYLIST",
+    id: id,
+    payload: animeid
+  })
 }

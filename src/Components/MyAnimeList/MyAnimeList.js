@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import styled from "styled-components"
-
+import { CSSTransition, TransitionGroup } from "react-transition-group-v2"
 import { loginRemoveFromePlaylist } from "../Login/actions/Login"
-import { requestList } from "./actions/requestList"
+import { requestList, RemoveFromePlaylist } from "./actions/requestList"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const mapStateToProps = state => {
@@ -24,13 +24,46 @@ const mapDispatchToProps = dispatch => {
   return {
     onRequestList: animeid => dispatch(requestList(animeid)),
     onLoginRemoveFromePlaylist: (userId, animeid) =>
-      dispatch(loginRemoveFromePlaylist(userId, animeid))
+      dispatch(loginRemoveFromePlaylist(userId, animeid)),
+    onRemoveFromePlaylist: (userId, animeid) =>
+      dispatch(RemoveFromePlaylist(userId, animeid))
   }
 }
 const MyAnimeListStyles = styled.div`
   display: grid;
   grid-template-rows: repeat(10, 100px);
   grid-template-columns: repeat(12, minmax(0, 1fr));
+  /* appear - on page load */
+  .fade-appear {
+    opacity: 0;
+    z-index: 1;
+  }
+  .fade-appear.fade-appear-active {
+    opacity: 1;
+    transition: opacity 1000ms linear;
+  }
+
+  /* enter */
+  .fade-enter {
+    opacity: 0;
+    z-index: 1;
+  }
+  .fade-enter.fade-enter-active {
+    opacity: 1;
+    transition: opacity 1000ms linear 1000ms;
+  }
+
+  /* exit */
+  .fade-exit {
+    opacity: 1;
+  }
+  .fade-exit.fade-exit-active {
+    opacity: 0;
+    transition: opacity 1000ms linear;
+  }
+  .fade-exit-done {
+    opacity: 0;
+  }
 
   h2 {
     grid-column: 2 / span 8;
@@ -134,43 +167,53 @@ class MyAnimeList extends Component {
     }
   }
   componentWillReceiveProps(newProps) {
-    //sort Update (rating...)
     if (newProps.animeListData !== this.props.animeListData) {
       this.props.onRequestList(newProps.animeListData)
     }
   }
   removeFromPlaylist = (userid, animeid) => {
     this.props.onLoginRemoveFromePlaylist(userid, animeid)
+
+    this.props.onRemoveFromePlaylist(userid, animeid)
   }
   render() {
     const { animeList } = this.props
+
     const AnimeList = animeList.map((category, i) => {
       const { userId } = this.props
 
       return (
-        <li key={i}>
-          <p>{i + 1}</p>
-          <img src={animeList[i].posterimage} alt="animesmallimage" />
-          <h1>{animeList[i].title}</h1>
-          <h3>
-            {animeList[i].subtype}, {parseInt(animeList[i].startDate)}
-          </h3>
-          <button
-            onClick={() => this.removeFromPlaylist(userId, animeList[i].id)}
-          >
-            <FontAwesomeIcon
-              className="minusicon"
-              icon={["fas", "minus-circle"]}
-            />
-          </button>
-        </li>
+        <CSSTransition key={i} timeout={500} classNames="fade">
+          <li key={i}>
+            <p>{i + 1}</p>
+            <img src={animeList[i].posterimage} alt="animesmallimage" />
+            <h1>{animeList[i].title}</h1>
+            <h3>
+              {animeList[i].subtype}, {parseInt(animeList[i].startDate)}
+            </h3>
+            <button
+              onClick={() => this.removeFromPlaylist(userId, animeList[i].id)}
+            >
+              <FontAwesomeIcon
+                className="minusicon"
+                icon={["fas", "minus-circle"]}
+              />
+            </button>
+          </li>
+        </CSSTransition>
       )
     })
 
     return (
       <MyAnimeListStyles>
         <h2>My Anime List</h2>
-        {this.props.animeListData < 2 ? <h1>LOADING</h1> : <ul>{AnimeList}</ul>}
+
+        {this.props.animeListData < 2 ? (
+          <h1>LOADING</h1>
+        ) : (
+          // <ul>{AnimeList}</ul>
+          <TransitionGroup component="ul">{AnimeList}</TransitionGroup>
+        )}
       </MyAnimeListStyles>
     )
   }

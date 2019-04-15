@@ -8,29 +8,6 @@ export const Grid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   margin: 100px 1em;
   background: ${props => props.theme.background};
-  .fade-appear {
-    opacity: 0.01;
-  }
-
-  .fade-appear.fade-appear-active {
-    opacity: 1;
-    transition: opacity 2s ease-in;
-  }
-  .fade-enter {
-    opacity: 0.01;
-  }
-  .fade-enter.example-enter-active {
-    opacity: 1;
-    transition: opacity 2000ms ease in;
-  }
-  .fade-leave {
-    opacity: 1;
-  }
-
-  .fade-leave.example-leave-active {
-    opacity: 1;
-    transition: opacity 300ms ease in;
-  }
 `
 
 //LayoutGrid SingleInfo

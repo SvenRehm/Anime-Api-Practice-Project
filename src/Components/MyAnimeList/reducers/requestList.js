@@ -17,6 +17,17 @@ export const requestList = (state = initialState, action = {}) => {
         // animeList: action.payload
         isLoading: false
       }
+    case "DELETE_ONE_PLAYLIST":
+      const animelist = state.animeList.filter(
+        items => items.id !== action.payload
+      )
+      
+      return {
+        ...state,
+        animeList: animelist,
+
+        isLoading: false
+      }
     case "LOGOUT":
       return {
         ...state,

@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
+
 import {
   requestSingleMoreInfo,
   requestSingleCategories
@@ -179,7 +180,9 @@ class SingleMoreInfo extends Component {
         <div className="darkimg">
           <img alt="" src={coverImage === null ? null : coverImage.large} />
         </div>
+
         <h1>{canonicalTitle}</h1>
+
         <Rankings>
           <h2>
             <IconContext.Provider
