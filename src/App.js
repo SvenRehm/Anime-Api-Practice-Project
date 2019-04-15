@@ -114,7 +114,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      theme: whitetheme 
+      theme: whitetheme
     }
   }
   render() {

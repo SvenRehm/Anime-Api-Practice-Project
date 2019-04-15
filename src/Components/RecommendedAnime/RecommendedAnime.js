@@ -122,6 +122,7 @@ class RecommendedAnime extends Component {
     const { recommendedAnime, isLoading } = this.props
 
     //mapping over received anime
+
     const RecommendedAnime = recommendedAnime.map((category, i) => {
       return (
         <RecommendedAnimeCard
@@ -136,7 +137,7 @@ class RecommendedAnime extends Component {
         />
       )
     })
-   
+
     return (
       <InfiniteScroll
         pageStart={0}
@@ -165,11 +166,7 @@ class RecommendedAnime extends Component {
         <SortTypeBox onChangeSelectType={this.props.onChangeSelectType} />
         <SortFilterBox onChangeSelect={this.props.onChangeSelect} />
 
-        <Grid>
-         
-          {RecommendedAnime}
-         
-        </Grid>
+        <Grid>{RecommendedAnime}</Grid>
       </InfiniteScroll>
     )
   }

@@ -5,6 +5,7 @@ import styled from "styled-components"
 import { loginRemoveFromePlaylist } from "../Login/actions/Login"
 import { requestList } from "./actions/requestList"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
 const mapStateToProps = state => {
   return {
     animeId: state.Login.user.animeList,

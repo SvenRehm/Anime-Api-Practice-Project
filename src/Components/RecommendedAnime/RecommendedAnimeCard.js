@@ -13,22 +13,20 @@ const RecommendedAnimeCard = ({
   id,
   ratingRank,
   isLoading
+  // opacity
 }) => {
- 
   return (
-    
-      <AnimeCard>
-        <Link to={"/anime/" + id}>
-          {isLoading ? <div className="load" /> : <img alt="" src={src} />}
+    <AnimeCard>
+      <Link to={"/anime/" + id}>
+        {isLoading ? <div className="load" /> : <img alt="" src={src} />}
 
-          <h4>{title}</h4>
-        </Link>
-        <h5>{episodeCount} - Episodes</h5>
-        <p>
-          <FontAwesomeIcon className="star" icon="star" /> {averageRating}
-        </p>
-      </AnimeCard>
-    
+        <h4>{title}</h4>
+      </Link>
+      <h5>{episodeCount} - Episodes</h5>
+      <p>
+        <FontAwesomeIcon className="star" icon="star" /> {averageRating}
+      </p>
+    </AnimeCard>
   )
 }
 

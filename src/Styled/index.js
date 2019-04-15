@@ -1,13 +1,36 @@
 import styled from "styled-components"
 
 //grid in recommended anime/and searchoutput
+
 export const Grid = styled.div`
   display: grid;
   grid-gap: 1.2em;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   margin: 100px 1em;
   background: ${props => props.theme.background};
-  
+  .fade-appear {
+    opacity: 0.01;
+  }
+
+  .fade-appear.fade-appear-active {
+    opacity: 1;
+    transition: opacity 2s ease-in;
+  }
+  .fade-enter {
+    opacity: 0.01;
+  }
+  .fade-enter.example-enter-active {
+    opacity: 1;
+    transition: opacity 2000ms ease in;
+  }
+  .fade-leave {
+    opacity: 1;
+  }
+
+  .fade-leave.example-leave-active {
+    opacity: 1;
+    transition: opacity 300ms ease in;
+  }
 `
 
 //LayoutGrid SingleInfo
@@ -262,10 +285,8 @@ export const Rankings = styled.div`
 `
 
 //animecard
-export const AnimeCard = styled.div`
-  position: relative;
-  /* border-bottom: 1px solid grey; */
 
+export const AnimeCard = styled.div`
   div.load {
     width: 100%;
     min-height: 270px;
@@ -279,8 +300,6 @@ export const AnimeCard = styled.div`
     width: 100%;
     height: auto;
     cursor: pointer;
-
-    transition: all 350ms ease-in-out;
   }
   p {
     font-size: 0.7em;
@@ -322,3 +341,62 @@ export const AnimeCard = styled.div`
     }
   }
 `
+
+// export const AnimeCard = styled.div`
+//   position: relative;
+//   /* border-bottom: 1px solid grey; */
+//   opacity: ${props => props.opacity};
+//   div.load {
+//     width: 100%;
+//     min-height: 270px;
+//     max-height: 300px;
+//     cursor: pointer;
+//     background-color: ${props => props.theme.hover};
+//     margin-bottom: 5px;
+//   }
+//   img {
+//     /* max-width: 180px; */
+//     width: 100%;
+//     height: auto;
+//     cursor: pointer;
+//   }
+//   p {
+//     font-size: 0.7em;
+//     position: absolute;
+//     top: 10px;
+//     left: -10px;
+//     padding: 5px;
+//     border: solid 1px ${props => props.theme.border};
+//     color: ${props => props.theme.secondary};
+//     background-color: ${props => props.theme.primary};
+
+//     .star {
+//       color: gold;
+//     }
+//   }
+//   h4 {
+//     font-size: 0.91em;
+//     overflow: hidden;
+//     white-space: nowrap;
+//     text-overflow: ellipsis;
+//     max-width: 180px;
+//   }
+//   h5 {
+//     font-weight: 400;
+//     font-size: 0.7em;
+//     color: ${props => props.theme.secondary};
+//   }
+//   a {
+//     text-decoration: none;
+//     color: ${props => props.theme.secondary};
+//     padding: 0;
+//     margin: 0;
+//     font-size: 0.8em;
+//     cursor: pointer;
+//     transition: all 200ms ease-in-out;
+//     color: ${props => props.theme.color};
+//     &:hover {
+//       color: ${props => props.theme.accent};
+//     }
+//   }
+// `
