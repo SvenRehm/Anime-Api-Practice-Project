@@ -5,7 +5,9 @@ import styled from "styled-components"
 import { loginRemoveFromePlaylist } from "../Login/actions/Login"
 import { requestList, RemoveFromePlaylist } from "./actions/requestList"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { Spring, config } from "react-spring/renderprops"
+import { Transition, Spring, config, animated } from "react-spring/renderprops"
+import { Loader } from "../../Styled/animation"
+import { GooSpinner } from "react-spinners-kit"
 const mapStateToProps = state => {
   return {
     animeId: state.Login.user.animeList,
@@ -29,14 +31,22 @@ const mapDispatchToProps = dispatch => {
       dispatch(RemoveFromePlaylist(userId, animeid))
   }
 }
+
+const ListLoad = styled(Loader)`
+  display: grid;
+  grid-column: 1/-1;
+  grid-row: 1 / span 8;
+  margin: 0 0;
+  align-self: center;
+  justify-self: center;
+`
 const MyAnimeListStyles = styled.div`
   display: grid;
   grid-template-rows: repeat(10, 100px);
   grid-template-columns: repeat(12, minmax(0, 1fr));
- 
-  
+
   h2 {
-    grid-column: 2 / span 8;
+    grid-column: 1/-1;
     grid-row: 2;
     font-size: 2em;
     justify-self: center;
@@ -149,7 +159,7 @@ class MyAnimeList extends Component {
 
   render() {
     const { animeList } = this.props
-
+    const { userId } = this.props
     const AnimeList = animeList.map((category, i) => {
       const { userId } = this.props
 
@@ -187,7 +197,44 @@ class MyAnimeList extends Component {
       <MyAnimeListStyles>
         <h2>My Anime List</h2>
 
-        {this.props.animeListData < 2 ? <h1>LOADING</h1> : <ul>{AnimeList}</ul>}
+        {this.props.animeListData < 2 ? (
+          <ListLoad className="loader" key={0}>
+            <GooSpinner size={100} />
+          </ListLoad>
+        ) : (
+          // <ul>
+
+          // {AnimeList}</ul>
+          <ul>
+            <Transition
+              items={animeList}
+              keys={item => item.id}
+              from={{ opacity: 0 }}
+              enter={{ opacity: 1 }}
+              leave={{ opacity: 0 }}
+              trail={150}
+            >
+              {item => props => (
+                <li style={props} key={item.id}>
+                  <p>{+1}</p>
+                  <img src={item.posterimage} alt="animesmallimage" />
+                  <h1>{item.title}</h1>
+                  <h3>
+                    {item.subtype}, {parseInt(item.startDate)}
+                  </h3>
+                  <button
+                    onClick={() => this.removeFromPlaylist(userId, item.id)}
+                  >
+                    <FontAwesomeIcon
+                      className="minusicon"
+                      icon={["fas", "minus-circle"]}
+                    />
+                  </button>
+                </li>
+              )}
+            </Transition>
+          </ul>
+        )}
       </MyAnimeListStyles>
     )
   }

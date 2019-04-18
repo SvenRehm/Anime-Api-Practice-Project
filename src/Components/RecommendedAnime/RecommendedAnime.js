@@ -12,11 +12,12 @@ import SortFilterBox from "./SortFilterBox"
 import SortStatus from "./SortStatus"
 import SortTypeBox from "./SortTypeBox"
 import InfiniteScroll from "react-infinite-scroller"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+
 import { Grid } from "../../Styled"
-import styled from "styled-components"
-import { Spring, config } from "react-spring/renderprops"
-import { Trail } from "react-spring/renderprops"
+import { GooSpinner } from "react-spinners-kit"
+import { Loader } from "../../Styled/animation"
+
+import { Trail, config } from "react-spring/renderprops"
 
 const mapStateToProps = state => {
   const {
@@ -63,21 +64,7 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
-const Loader = styled.div`
-  z-index: 3;
 
-  margin: 0 auto;
-
-  width: 50px;
-  height: 50px;
-  overflow: hidden;
-
-  .spinner {
-    color: white;
-    width: 50px;
-    height: 50px;
-  }
-`
 class RecommendedAnime extends Component {
   componentDidMount() {
     //loading recommended anime
@@ -120,35 +107,35 @@ class RecommendedAnime extends Component {
 
     //mapping over received anime
 
-    const RecommendedAnime = recommendedAnime.map((category, i) => {
-      // let count = recommendedAnime.length < 21 ? true : false
-      // const delay = count ? (150 * i) / 3 : (100 * i) / 10
+    // const RecommendedAnime = recommendedAnime.map((category, i) => {
+    //   // let count = recommendedAnime.length < 21 ? true : false
+    //   // const delay = count ? (150 * i) / 3 : (100 * i) / 10
 
-      return (
-        // <Spring
-        //   key={i}
-        //   delay={delay}
-        //   config={config.slow}
-        //   from={{ opacity: 0 }}
-        //   to={{ opacity: 1 }}
-        // >
-        //   {props => (
-        <RecommendedAnimeCard
-          // style={props}
-          key={i}
-          id={recommendedAnime[i].id}
-          src={recommendedAnime[i].posterImage}
-          title={recommendedAnime[i].cannontitle}
-          averageRating={recommendedAnime[i].averageRating}
-          episodeCount={recommendedAnime[i].episodeCount}
-          ratingRank={recommendedAnime[i].ratingRank}
-          isLoading={isLoading}
-        />
-        // )
-        // }
-        // </Spring>
-      )
-    })
+    //   return (
+    //     // <Spring
+    //     //   key={i}
+    //     //   delay={delay}
+    //     //   config={config.slow}
+    //     //   from={{ opacity: 0 }}
+    //     //   to={{ opacity: 1 }}
+    //     // >
+    //     //   {props => (
+    //     <RecommendedAnimeCard
+    //       // style={props}
+    //       key={i}
+    //       id={recommendedAnime[i].id}
+    //       src={recommendedAnime[i].posterImage}
+    //       title={recommendedAnime[i].cannontitle}
+    //       averageRating={recommendedAnime[i].averageRating}
+    //       episodeCount={recommendedAnime[i].episodeCount}
+    //       ratingRank={recommendedAnime[i].ratingRank}
+    //       isLoading={isLoading}
+    //     />
+    //     // )
+    //     // }
+    //     // </Spring>
+    //   )
+    // })
 
     return (
       <InfiniteScroll
@@ -162,14 +149,10 @@ class RecommendedAnime extends Component {
         }
         initialLoad={false}
         useWindow={true}
-        threshold={500}
+        threshold={700}
         loader={
           <Loader className="loader" key={0}>
-            <FontAwesomeIcon
-              spin
-              className="spinner"
-              icon={["fas", "spinner"]}
-            />
+            <GooSpinner size={100} />
           </Loader>
         }
         hasMore={this.props.recommendedAnime.length <= 100}

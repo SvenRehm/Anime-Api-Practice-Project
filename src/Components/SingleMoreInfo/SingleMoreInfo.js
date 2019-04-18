@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-
 import {
   requestSingleMoreInfo,
   requestSingleCategories
@@ -20,7 +19,7 @@ import {
   IoMdRemove,
   IoMdLogIn
 } from "react-icons/io"
-import { CircleSpinner } from "react-spinners-kit"
+import { GooSpinner } from "react-spinners-kit"
 
 const mapStateToProps = state => {
   const {
@@ -86,19 +85,22 @@ const GreyBackground = styled.div`
   display: grid;
   grid-gap: 1em;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-rows: repeat(10, 100px);
+  grid-template-rows: repeat(7, 100px);
   overflow: hidden;
 
   background: ${props => props.theme.background};
   color: ${props => props.theme.secondary};
   .spinner {
     grid-column: 1/-1;
-    grid-row: 1 / span 4;
+    grid-row: 1 / span 6;
     z-index: 2;
     align-self: center;
     justify-self: center;
 
-    height: 70px;
+ 
+    div > div>div{
+      background-color:${props => props.theme.secondary};;
+    }
   }
   div.coverImage {
     margin-top: 57px;
@@ -174,7 +176,7 @@ class SingleMoreInfo extends Component {
           i => i == this.props.match.params.id
         )
       : null
-    
+
     return !this.props.isPending ? (
       <LayoutGrid>
         <div className="darkimg">
@@ -304,11 +306,7 @@ class SingleMoreInfo extends Component {
         <div className="image" />
 
         <div className="spinner">
-          <CircleSpinner
-            size={50}
-            color="white"
-            loading={this.props.isPending}
-          />
+          <GooSpinner size={100} Color="red" loading={this.props.isPending} />
         </div>
       </GreyBackground>
     )
