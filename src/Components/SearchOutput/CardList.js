@@ -1,15 +1,8 @@
 import React from "react"
 import CardC from "./Card"
-import styled from "styled-components"
 
-export const Grid = styled.div`
-  display: grid;
+import { Grid } from "../../Styled"
 
-  margin: 1em;
-  margin-top: 0;
-  grid-gap: 1em;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-`
 const CardList = ({ filteredAnime }) => {
   return (
     <Grid>
@@ -18,10 +11,13 @@ const CardList = ({ filteredAnime }) => {
             return (
               <CardC
                 key={i}
+                id={filteredAnime[i].id}
                 synopsis={filteredAnime[i].synopsis}
-                title={filteredAnime[i].attributes.titles.en_jp}
-                imgUrl={filteredAnime[i].attributes.posterImage.large}
+                title={filteredAnime[i].attributes.canonicalTitle}
+                src={filteredAnime[i].attributes.posterImage.medium}
                 url={filteredAnime[i].url}
+                averageRating={filteredAnime[i].attributes.averageRating}
+                episodeCount={filteredAnime[i].attributes.episodeCount}
               />
             )
           })

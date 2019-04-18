@@ -12,15 +12,12 @@ import SortFilterBox from "./SortFilterBox"
 import SortStatus from "./SortStatus"
 import SortTypeBox from "./SortTypeBox"
 import InfiniteScroll from "react-infinite-scroller"
-import styled from "styled-components"
 
-export const Grid = styled.div`
-  display: grid;
-  margin: 1em;
-  grid-gap: 1em;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  background: ${props => props.theme.primary};
-`
+import { Grid } from "../../Styled"
+import { GooSpinner } from "react-spinners-kit"
+import { Loader } from "../../Styled/animation"
+
+import { Trail, config } from "react-spring/renderprops"
 
 const mapStateToProps = state => {
   const {
@@ -28,7 +25,7 @@ const mapStateToProps = state => {
     recommendedAnime,
     subtype,
     episodeCount,
-    isPending,
+    isLoading,
     sort,
     status,
     pagination,
@@ -44,7 +41,7 @@ const mapStateToProps = state => {
     sort: sort,
     status: status,
 
-    isPending: isPending,
+    isLoading: isLoading,
     episodeCount: episodeCount,
     error: error
   }
@@ -88,7 +85,6 @@ class RecommendedAnime extends Component {
     }
     //subtype (tv/movie..)
     if (newProps.subtype !== this.props.subtype) {
-      console.log(newProps.subtype)
       this.props.onRequestRecommendedAnime(
         newProps.subtype,
         this.props.sort,
@@ -98,7 +94,6 @@ class RecommendedAnime extends Component {
 
     //sataus of the animes (finished/current..)
     if (newProps.status !== this.props.status) {
-      console.log(newProps.subtype)
       this.props.onRequestRecommendedAnime(
         this.props.subtype,
         this.props.sort,
@@ -108,21 +103,39 @@ class RecommendedAnime extends Component {
   }
 
   render() {
-    const { recommendedAnime } = this.props
+    const { recommendedAnime, isLoading } = this.props
 
     //mapping over received anime
-    const RecommendedAnime = recommendedAnime.map((category, i) => {
-      return (
-        <RecommendedAnimeCard
-          key={i}
-          id={recommendedAnime[i].id}
-          src={recommendedAnime[i].posterImage}
-          title={recommendedAnime[i].cannontitle}
-          averageRating={recommendedAnime[i].averageRating}
-          episodeCount={recommendedAnime[i].episodeCount}
-        />
-      )
-    })
+
+    // const RecommendedAnime = recommendedAnime.map((category, i) => {
+    //   // let count = recommendedAnime.length < 21 ? true : false
+    //   // const delay = count ? (150 * i) / 3 : (100 * i) / 10
+
+    //   return (
+    //     // <Spring
+    //     //   key={i}
+    //     //   delay={delay}
+    //     //   config={config.slow}
+    //     //   from={{ opacity: 0 }}
+    //     //   to={{ opacity: 1 }}
+    //     // >
+    //     //   {props => (
+    //     <RecommendedAnimeCard
+    //       // style={props}
+    //       key={i}
+    //       id={recommendedAnime[i].id}
+    //       src={recommendedAnime[i].posterImage}
+    //       title={recommendedAnime[i].cannontitle}
+    //       averageRating={recommendedAnime[i].averageRating}
+    //       episodeCount={recommendedAnime[i].episodeCount}
+    //       ratingRank={recommendedAnime[i].ratingRank}
+    //       isLoading={isLoading}
+    //     />
+    //     // )
+    //     // }
+    //     // </Spring>
+    //   )
+    // })
 
     return (
       <InfiniteScroll
@@ -136,13 +149,43 @@ class RecommendedAnime extends Component {
         }
         initialLoad={false}
         useWindow={true}
-        threshold={500}
-        hasMore={this.props.recommendedAnime.length <= 200}
+        threshold={700}
+        loader={
+          <Loader className="loader" key={0}>
+            <GooSpinner size={100} />
+          </Loader>
+        }
+        hasMore={this.props.recommendedAnime.length <= 100}
       >
         <SortStatus onChangeStatus={this.props.onChangeStatus} />
         <SortTypeBox onChangeSelectType={this.props.onChangeSelectType} />
         <SortFilterBox onChangeSelect={this.props.onChangeSelect} />
-        <Grid>{RecommendedAnime}</Grid>
+        <Grid>
+          <Trail
+            items={recommendedAnime}
+            keys={recommendedAnime => recommendedAnime.id}
+            from={{ opacity: 0 }}
+            to={{ opacity: 1 }}
+            enter={{ opacity: 1 }}
+            leave={{ opacity: 0 }}
+            config={config.stiff}
+          >
+            {recommendedAnime => props => (
+              <RecommendedAnimeCard
+                style={props}
+                key={recommendedAnime.id}
+                id={recommendedAnime.id}
+                src={recommendedAnime.posterImage}
+                title={recommendedAnime.cannontitle}
+                averageRating={recommendedAnime.averageRating}
+                episodeCount={recommendedAnime.episodeCount}
+                ratingRank={recommendedAnime.ratingRank}
+                isLoading={isLoading}
+              />
+            )}
+          </Trail>
+        </Grid>
+        {/* <Grid>{RecommendedAnime}</Grid> */}
       </InfiniteScroll>
     )
   }

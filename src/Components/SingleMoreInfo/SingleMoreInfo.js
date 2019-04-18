@@ -5,14 +5,24 @@ import {
   requestSingleCategories
 } from "./actions/requestSingleMoreInfo"
 import { loginAddToPlaylist } from "../Login/actions/Login"
-import { addToPlaylist } from "./actions/addToPlaylist"
+import { loginRemoveFromePlaylist } from "../Login/actions/Login"
 import { withRouter } from "react-router-dom"
-// import { LayoutGrid } from "../Styled/index"
 import styled from "styled-components"
+import { LayoutGrid, CategoriesList, Rankings } from "../../Styled"
+import { Link } from "react-router-dom"
+import { getJwt } from "../helpers/jwt"
+import { IconContext } from "react-icons"
+import {
+  IoMdHeart,
+  IoMdStar,
+  IoMdAdd,
+  IoMdRemove,
+  IoMdLogIn
+} from "react-icons/io"
+import { GooSpinner } from "react-spinners-kit"
 
 const mapStateToProps = state => {
   const {
-    isPending,
     youtubeVideoId,
     coverImage,
     posterImage,
@@ -30,13 +40,15 @@ const mapStateToProps = state => {
   } = state.requestSingleMoreInfo.singleMoreInfo.attributes
 
   return {
+    LoggedIn: state.Login.LoggedIn,
+    isPending: state.requestSingleMoreInfo.isPending,
+    animeListData: state.Login.user.animelist,
     userId: state.Login.user.id,
     id: state.requestSingleMoreInfo.singleMoreInfo.id,
     youtubeVideoId: youtubeVideoId,
     popularityRank: popularityRank,
     ratingRank: ratingRank,
     singleCatergories: state.requestSingleMoreInfo.singleCatergories,
-    isPending: isPending,
     singleMoreInfo: state.requestSingleMoreInfo.singleMoreInfo,
     coverImage: coverImage,
     averageRating: averageRating,
@@ -63,8 +75,9 @@ const mapDispatchToProps = dispatch => {
       dispatch(requestSingleCategories(animeid)),
     onLoginAddToPlaylist: (userId, animeid) =>
       dispatch(loginAddToPlaylist(userId, animeid)),
-    onAddToPlaylist: (userId, animeid) =>
-      dispatch(addToPlaylist(userId, animeid))
+
+    onLoginRemoveFromePlaylist: (userId, animeid) =>
+      dispatch(loginRemoveFromePlaylist(userId, animeid))
   }
 }
 //loading styles
@@ -72,164 +85,44 @@ const GreyBackground = styled.div`
   display: grid;
   grid-gap: 1em;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-rows: repeat(12, 100px);
+  grid-template-rows: repeat(7, 100px);
   overflow: hidden;
 
-  background: ${props => props.theme.primary};
+  background: ${props => props.theme.background};
   color: ${props => props.theme.secondary};
-  div {
+  .spinner {
     grid-column: 1/-1;
-    grid-row: 1 / span 3;
-    align-self: end;
-    height: 100%;
-    background-color: ${props => props.theme.primary};
+    grid-row: 1 / span 6;
     z-index: 2;
-  }
-`
-//rankings at the top
-const Rankings = styled.div`
-  grid-column: 6 / span 5;
-  grid-row: 4;
-  align-self: start;
-  margin-top: 1em;
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  border-bottom: solid 2px ${props => props.theme.accent};
-  h2 {
-    margin-bottom: 1em;
-    grid-column: 1 / span 3;
-    font-weight: 300;
-  }
-  h2:last-child {
-    grid-column: 4 / span 3;
-    font-weight: 300;
-    justify-content: end;
-    text-align: center;
-  }
-`
-//SingleMoreInfo
-export const LayoutGrid = styled.div`
-  display: grid;
-  grid-gap: 1em;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-rows: repeat(10, 100px);
-  overflow: hidden;
+    align-self: center;
+    justify-self: center;
 
-  background: ${props => props.theme.primary};
-  color: ${props => props.theme.secondary};
-
-  div.darkimg {
-    grid-column: 1/-1;
-    grid-row: 1 / span 3;
-    align-self: end;
-    z-index: 2;
-    filter: brightness(50%);
-    img {
-      align-self: end;
-      max-width: 100%;
-      height: auto;
+ 
+    div > div>div{
+      background-color:${props => props.theme.secondary};;
     }
   }
-  img {
-    max-width: 80%;
-    grid-column: 3 / span 3;
-    grid-row: 3 / span 4;
-    align-self: end;
-    z-index: 2;
-  }
-
-  h1 {
-    grid-column: 6 / span 4;
-    grid-row: 3;
-    margin-bottom: 1em;
-
-    align-self: end;
-    z-index: 2;
-  }
-  button {
-    width: 80%;
-    grid-column: 3 / span 3;
-    height: 30px;
-    grid-row: 8;
-  }
-  div.text {
+  div.coverImage {
+    margin-top: 57px;
+    grid-column: 1/-1;
+    grid-row: 1 / span 4;
     align-self: start;
-
-    grid-column: 6 / span 5;
-    grid-row: 11 / span 4;
-
-    line-height: 1.5em;
-    font-size: 0.9em;
-    margin-bottom: 4em;
-
-    h2 {
-      line-height: 2em;
-    }
-    p {
-      color: white;
-      overflow: hidden;
-      /* white-space: nowrap; */
-      text-overflow: ellipsis;
-      max-height: 150px;
-      /* add height */
-    }
-  }
-  ul {
-    grid-column: 6 / span 5;
-    grid-row: 5;
-  }
-  table {
-    color: white;
-    max-width: 80%;
-    grid-column: 3 / span 3;
-    grid-row: 7 / span 5;
-    text-transform: uppercase;
-    font-size: 0.7em;
-    .right-align {
-      text-align: right;
-      font-weight: 700;
-    }
-    .green {
-      color: green;
-    }
-  }
-  iframe {
-    width: 100%;
-    height: 100%;
-    grid-column: 6 / span 5;
-    grid-row: 7 / span 4;
     z-index: 2;
+    height: 100%;
+    /* background: ${props => props.theme.primary}; */
+    z-index: 2;
+    color: ${props => props.theme.secondary};
+  }
+  div.image {
+    grid-column: 3 / span 3;
+    grid-row: 4 / span 4;
+    align-self: start;
+    height: 100%;
+    z-index: 2;
+    background: ${props => props.theme.lightgrey};
   }
 `
-//categories styles
-const CategoriesList = styled.ul`
-  float: left;
-  list-style: none;
-  li {
-    float: left;
-    list-style: none;
-    text-align: center;
-    background-color: #000000;
 
-    width: 150px;
-
-    text-decoration: none;
-    margin-bottom: 5px;
-    margin-right: 5px;
-    width: 150px;
-    line-height: 50px;
-    a {
-      text-decoration: none;
-      color: #ffffff;
-      display: block;
-      &:hover {
-        text-decoration: none;
-        color: ${props => props.theme.accent};
-        /* background-color: ${props => props.theme.darkgrey}; */
-      }
-    }
-  }
-`
 class SingleMoreInfo extends Component {
   componentDidMount() {
     let id = this.props.match.params.id
@@ -237,14 +130,18 @@ class SingleMoreInfo extends Component {
     this.props.onRequestSingleCategories(id)
   }
 
-  handleClick = () => {
-    console.log("added to playlist", this.props.id)
-
+  addToPlaylist = () => {
     this.props.onLoginAddToPlaylist(this.props.userId, this.props.id)
-    // this.props.onAddToPlaylist(this.props.userId, this.props.id)
-    console.log(this.props.userId)
   }
+  removeFromPlaylist = () => {
+    this.props.onLoginRemoveFromePlaylist(
+      this.props.userId,
+      Number(this.props.id)
+    )
+  }
+
   render() {
+    const jwt = getJwt()
     const {
       canonicalTitle,
       synopsis,
@@ -271,65 +168,126 @@ class SingleMoreInfo extends Component {
       )
     })
 
+    const animeListData = this.props.animeListData
+
+    const isAnimeOnList = animeListData
+      ? animeListData.find(
+          // eslint-disable-next-line
+          i => i == this.props.match.params.id
+        )
+      : null
+
     return !this.props.isPending ? (
       <LayoutGrid>
         <div className="darkimg">
           <img alt="" src={coverImage === null ? null : coverImage.large} />
         </div>
-        <img alt="" src={posterImage.medium} />
 
         <h1>{canonicalTitle}</h1>
+
         <Rankings>
-          <h2>PopularityRank:#{popularityRank}</h2>
           <h2>
-            RatingRank:#{ratingRank} ({averageRating})
+            <IconContext.Provider
+              value={{
+                className: "heart"
+              }}
+            >
+              <IoMdHeart />
+            </IconContext.Provider>
+            Rank# {popularityRank}
+          </h2>
+          <h2>
+            <IconContext.Provider
+              value={{
+                className: "star"
+              }}
+            >
+              <IoMdStar />
+            </IconContext.Provider>
+            Rank# {ratingRank}
+            {/* <FontAwesomeIcon className="star" icon="star" /> Rank# {ratingRank}{" "} */}
+            ({averageRating})
           </h2>
         </Rankings>
+        <CategoriesList>{category}</CategoriesList>
+        <div className="AnimeInfo">
+          <img alt="" src={posterImage.medium} />
+          <table className="table-styles">
+            <tbody>
+              <tr>
+                <td>TYPE</td>
+                <td className="right-align">{subtype}</td>
+              </tr>
+
+              <tr>
+                <td>STATUS</td>
+                <td className="right-align green">{status}</td>
+              </tr>
+              <tr>
+                <td>averageRating</td>
+                <td className="right-align">{averageRating}</td>
+              </tr>
+              <tr>
+                <td>EPISODES</td>
+                <td className="right-align">{episodeCount}</td>
+              </tr>
+
+              <tr>
+                <td>startDate</td>
+                <td className="right-align">{startDate}</td>
+              </tr>
+              <tr>
+                <td>endDate</td>
+                <td className="right-align">{endDate}</td>
+              </tr>
+              <tr>
+                <td>Age</td>
+                <td className="right-align">{ageRatingGuide}</td>
+              </tr>
+            </tbody>
+          </table>
+          {!jwt ? (
+            <Link id="logintoadd" to="/Login">
+              <IconContext.Provider
+                value={{
+                  className: "logintoadd"
+                }}
+              >
+                <IoMdLogIn />
+              </IconContext.Provider>
+            </Link>
+          ) : !isAnimeOnList ? (
+            <button onClick={this.addToPlaylist}>
+              <IconContext.Provider
+                value={{
+                  className: "plusicon"
+                }}
+              >
+                <IoMdAdd />
+              </IconContext.Provider>
+            </button>
+          ) : (
+            <button onClick={this.removeFromPlaylist}>
+              <IconContext.Provider
+                value={{
+                  className: "minusicon"
+                }}
+              >
+                <IoMdRemove />
+              </IconContext.Provider>
+            </button>
+          )}
+        </div>
+
         <div className="text">
           <h2>Synopsis</h2>
           <p>{synopsis}</p>
-          <p>load more</p>
         </div>
-        <table className="table-styles">
-          <tbody>
-            <tr>
-              <td>TYPE</td>
-              <td className="right-align">{subtype}</td>
-            </tr>
 
-            <tr>
-              <td>STATUS</td>
-              <td className="right-align green">{status}</td>
-            </tr>
-            <tr>
-              <td>averageRating</td>
-              <td className="right-align">{averageRating}</td>
-            </tr>
-            <tr>
-              <td>EPISODES</td>
-              <td className="right-align">{episodeCount}</td>
-            </tr>
-
-            <tr>
-              <td>startDate</td>
-              <td className="right-align">{startDate}</td>
-            </tr>
-            <tr>
-              <td>endDate</td>
-              <td className="right-align">{endDate}</td>
-            </tr>
-            <tr>
-              <td>Age</td>
-              <td className="right-align">{ageRatingGuide}</td>
-            </tr>
-          </tbody>
-        </table>
-        <button onClick={this.handleClick}>Add To Playlist</button>
-        <CategoriesList>{category}</CategoriesList>
         {youtubeVideoId === "" ? (
           <iframe
             title="animeintro"
-            src={`https://www.youtube.com/embed/fsxkO9P5hYQ`}
+            src={`https://www.youtube.com/embed/`}
             frameBorder="0"
             allowFullScreen
           />
@@ -344,8 +302,11 @@ class SingleMoreInfo extends Component {
       </LayoutGrid>
     ) : (
       <GreyBackground>
-        <div>
-          <h1>Loading DATA</h1>
+        <div className="coverImage" />
+        <div className="image" />
+
+        <div className="spinner">
+          <GooSpinner size={100} Color="red" loading={this.props.isPending} />
         </div>
       </GreyBackground>
     )

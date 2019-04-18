@@ -5,7 +5,8 @@ import {
 } from "../../../constants/action-types"
 
 const initialState = {
-  isPending: false,
+  isLoading: false,
+  infiteScrollingLoad: false,
   recommendedAnime: [],
   pagination: {
     first: "",
@@ -22,7 +23,7 @@ export const requestRecommendedAnime = (state = initialState, action = {}) => {
   switch (action.type) {
     case REQUEST_RECOMMENDED_ANIME_PENDING:
       return Object.assign({}, state, {
-        isPending: true
+        isLoading: true
       })
 
     case REQUEST_RECOMMENDED_ANIME_SUCCESS:
@@ -30,13 +31,25 @@ export const requestRecommendedAnime = (state = initialState, action = {}) => {
         ...state,
         recommendedAnime: action.payload,
         pagination: action.pagination,
-        isPending: false
+        isLoading: false
       }
+    case REQUEST_RECOMMENDED_ANIME_FAILED:
+      return Object.assign({}, state, {
+        error: action.payload,
+        isPending: false
+      })
 
+    case "REQUEST_SECOND_PAGE_PENDING":
+      return {
+        ...state,
+        infiteScrollingLoad: true
+      }
     case "REQUEST_SECOND_PAGE_SUCCES":
       //RETRUN INTITALSTATE/THAN RETRURN REDUX STATE/THAN INJECT NEW STATE
       return {
         ...state,
+        infiteScrollingLoad: false,
+
         recommendedAnime: [...state.recommendedAnime, ...action.payload],
         pagination: action.pagination
       }
@@ -57,12 +70,6 @@ export const requestRecommendedAnime = (state = initialState, action = {}) => {
         ...state,
         status: action.payload
       }
-
-    case REQUEST_RECOMMENDED_ANIME_FAILED:
-      return Object.assign({}, state, {
-        error: action.payload,
-        isPending: false
-      })
 
     default:
       return state

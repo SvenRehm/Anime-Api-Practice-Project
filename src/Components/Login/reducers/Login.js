@@ -2,7 +2,9 @@ const initialState = {
   signInEmail: "",
   signInPassword: "",
   LoggedIn: false,
+  message: "",
   user: {
+    id: "0",
     animelist: []
   }
 }
@@ -16,16 +18,46 @@ export const Login = (state = initialState, action = {}) => {
     case "SUBMIT_LOGIN":
       return Object.assign({}, state, {
         LoggedIn: true,
-        user: action.payload,
         signInEmail: "",
         signInPassword: ""
       })
+    case "SUBMIT_LOGIN_FAILED":
+      return Object.assign({}, state, {
+        signInEmail: "",
+        signInPassword: "",
+        message: action.payload.response.data.message
+      })
+    case "AUTHENTICATE":
+      return {
+        ...state,
+        LoggedIn: true,
+        user: action.payload
+      }
+    case "REALOAD_USER":
+      return {
+        ...state,
+        LoggedIn: true,
+        user: action.payload
+      }
     case "LOGIN_ADD_TO_PLAYLIST":
       return {
         ...state,
         user: {
           ...state.user,
-          animelist: [...action.payload]
+          animelist: [...state.user.animelist, action.payload]
+        }
+      }
+    case "DELETE_FROM_PLAYLIST":
+      return {
+        ...state
+      }
+
+    case "LOGOUT":
+      return {
+        ...state,
+        LoggedIn: false,
+        user: {
+          animelist: []
         }
       }
     default:

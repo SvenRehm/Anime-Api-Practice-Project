@@ -1,7 +1,8 @@
 const initialState = {
   registerEmail: "",
   registerPassword: "",
-  registerName: ""
+  registerName: "",
+  message: ""
 }
 
 export const Register = (state = initialState, action = {}) => {
@@ -15,7 +16,14 @@ export const Register = (state = initialState, action = {}) => {
     case "SUBMIT_REGISTER":
       return Object.assign({}, state, {
         submitRegister: true,
-        data: action.payload
+        message: action.payload.message,
+        registerEmail: "",
+        registerPassword: "",
+        registerName: ""
+      })
+    case "SUBMIT_REGISTER_FAILED":
+      return Object.assign({}, state, {
+        message: action.payload.response.data.message
       })
     default:
       return state

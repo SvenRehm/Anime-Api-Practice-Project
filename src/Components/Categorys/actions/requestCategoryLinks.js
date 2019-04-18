@@ -22,7 +22,7 @@ export const requestCategoryLinks = () => dispatch => {
         type: REQUEST_CATEGORY_LINKS_SUCCESS,
         payload: animeCategoryLinks
       })
-      //CALLING CATION THAT USES THE LINKS
+      //CALLING ACTION THAT USES THE LINKS
       dispatch(requestCategorys(animeCategoryLinks))
     })
 

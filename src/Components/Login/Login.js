@@ -25,66 +25,130 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const LoginDiv = styled.div`
+const LoginForm = styled.form`
   display: grid;
-
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-rows: repeat(12, 100px);
-  h2 {
-    color: white;
-    grid-row: 4;
+  grid-template-rows: repeat(9, 90px);
+  &::before {
+    content: "";
+    height: 80%;
+    align-self: start;
+    background: ${props => props.theme.primary};
+
+    grid-row: 2 / span 7;
+    grid-column: 5 / span 4;
+    border: 1px solid ${props => props.theme.border};
   }
-  h2.mail {
-    color: white;
-    grid-row: 4;
-    grid-column: 3 / span 1;
-  }
-  button {
-    grid-row: 5;
-    grid-column: 4;
-    height: 20px;
+  label {
+    grid-row: 3;
+    grid-column: 5 / span 4;
+
+    height: 2em;
+    line-height: 1.2;
+    letter-spacing: 0.2px;
+    text-align: left;
+    justify-self: center;
+    align-self: end;
+
+    color: ${props => props.theme.secondary};
+    width: 80%;
+    & #email {
+      line-height: 1.2;
+      letter-spacing: 0.2px;
+      text-align: left;
+      grid-row: 3;
+    }
+    &#password {
+      line-height: 1.2;
+      letter-spacing: 0.2px;
+      text-align: left;
+      grid-row: 4;
+    }
   }
   input {
-    width: 200px;
-    height: 20px;
-    margin-right: 1em;
-    grid-column: 1;
-    grid-row: 5;
+    padding: 6px;
+    justify-self: center;
+    height: 2em;
+    font-size: 17px;
+    width: 80%;
+    border: none;
+    color: ${props => props.theme.secondary};
+    background: ${props => props.theme.background};
   }
-  input.right {
-    width: 200px;
-    height: 20px;
-    margin-right: 1em;
-    grid-column: 3;
+
+  input[name="email"] {
+    grid-row: 4;
+    grid-column: 5 / span 4;
+  }
+  input[name="password"] {
     grid-row: 5;
+    grid-column: 5 / span 4;
+  }
+
+  h1 {
+    justify-self: center;
+    align-self: center;
+    grid-column: 5 / span 4;
+    grid-row: 2;
+    color: ${props => props.theme.secondary};
+    line-height: 1.2;
+    letter-spacing: 0.2px;
+    text-align: left;
+    font-size: 2.5em;
+  }
+  button {
+    grid-row: 6;
+    grid-column: 5 / span 4;
+    width: 160px;
+    height: 50px;
+    color: ${props => props.theme.secondary};
+    text-transform: uppercase;
+    background-color: ${props => props.theme.primary};
+    border: 1px solid ${props => props.theme.secondary};
+    justify-self: center;
   }
 `
+
 class Login extends Component {
+  handleSubmit = event => {
+    event.preventDefault()
+    this.props.onSubmitLogin(this.props.signInEmail, this.props.signInPassword)
+
+  }
   render() {
-    console.log(this.props.signInPassword)
-    console.log(this.props.signInEmail)
     return (
-      <LoginDiv>
+      <LoginForm onSubmit={this.handleSubmit}>
         <h1>Login</h1>
-        <h2>signInPassword</h2>
-        <input onChange={this.props.onChangePasswordField} type="text" />
-        <h2 className="mail">signInEmail</h2>
+        <label id="email">Email</label>
         <input
-          className="right"
+          placeholder="Email exm. abc@gmail.com"
+          name="email"
+          value={this.props.signInEmail}
           onChange={this.props.onChangeEmailField}
-          type="text"
+          type="email"
         />
+        <label id="password">Password</label>
+        <input
+          placeholder="Password"
+          onChange={this.props.onChangePasswordField}
+          type="password"
+          name="password"
+          value={this.props.signInPassword}
+        />
+
         <button
-          onClick={() =>
-            this.props.onSubmitLogin(
-              this.props.signInEmail,
-              this.props.signInPassword
-            )
-          }
+          type="submit"
+          value="Login"
+          // onClick={() =>
+          //   this.props.onSubmitLogin(
+          //     this.props.signInEmail,
+          //     this.props.signInPassword
+          //   )
+          // }
         >
-          submit
+          Login
         </button>
-      </LoginDiv>
+      </LoginForm>
     )
   }
 }

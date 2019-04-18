@@ -13,7 +13,8 @@ const mapStateToProps = state => {
   return {
     registerPassword: state.Register.registerPassword,
     registerEmail: state.Register.registerEmail,
-    registerName: state.Register.registerName
+    registerName: state.Register.registerName,
+    message: state.Register.message
   }
 }
 
@@ -31,83 +32,160 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const LoginDiv = styled.div`
+const RegisterForm = styled.form`
   display: grid;
-
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-rows: repeat(12, 100px);
-  h2 {
-    color: white;
-    grid-row: 4;
+  grid-template-rows: repeat(9, 90px);
+  &::before {
+    content: "";
+    height: 90%;
+    align-self: start;
+    background: ${props => props.theme.primary};
+
+    grid-row: 2 / span 7;
+    grid-column: 5 / span 4;
+    border: 1px solid ${props => props.theme.border};
   }
-  h2.mail {
-    color: white;
-    grid-row: 4;
-    grid-column: 3 / span 1;
+  p {
+    grid-row: 3;
+
+    grid-column: 5 / span 4;
+
+    justify-self: center;
+    align-self: start;
+    color: ${props => props.theme.secondary};
   }
-  button {
-    grid-row: 5;
-    grid-column: 7;
-    height: 20px;
+  label {
+    grid-row: 3;
+    grid-column: 5 / span 4;
+    width: 70%;
+
+    height: 2em;
+    justify-self: center;
+    align-self: end;
+
+    color: ${props => props.theme.secondary};
+    width: 80%;
+    & #username {
+      grid-row: 3;
+    }
+    &#password {
+      grid-row: 5;
+    }
+
+    &#email {
+      grid-row: 4;
+    }
   }
   input {
-    width: 200px;
-    height: 20px;
-    margin-right: 1em;
-    grid-column: 1;
-    grid-row: 5;
+    padding: 6px;
+    justify-self: center;
+    height: 2em;
+    font-size: 17px;
+    width: 80%;
+    border: none;
+    color: ${props => props.theme.secondary};
+    background: ${props => props.theme.background};
   }
-  input.right {
-    width: 200px;
-    height: 20px;
-    margin-right: 1em;
-    grid-column: 3;
-    grid-row: 5;
+
+  input[name="RegisterName"] {
+    grid-row: 4;
+
+    grid-column: 5 / span 4;
   }
-  input.moreright {
-    width: 200px;
-    height: 20px;
-    margin-right: 1em;
-    grid-column: 5;
+  input[name="RegisterPassword"] {
+    grid-row: 6;
+
+    grid-column: 5 / span 4;
+  }
+  input[name="RegisterEmail"] {
     grid-row: 5;
+
+    grid-column: 5 / span 4;
+  }
+  h1 {
+    justify-self: center;
+
+    align-self: center;
+    line-height: 1.2;
+    letter-spacing: 0.2px;
+    text-align: left;
+    font-size: 2.5em;
+    grid-column: 5 / span 4;
+    grid-row: 2;
+    color: ${props => props.theme.secondary};
+  }
+  button {
+    grid-row: 7;
+    grid-column: 5 / span 4;
+    width: 160px;
+    height: 50px;
+    color: ${props => props.theme.secondary};
+    text-transform: uppercase;
+    background-color: ${props => props.theme.primary};
+    border: 1px solid ${props => props.theme.border};
+    justify-self: center;
   }
 `
 class Register extends Component {
+  handleSubmit = event => {
+    event.preventDefault()
+    this.props.onSubmitRegister(
+      this.props.registerEmail,
+      this.props.registerPassword,
+      this.props.registerName
+    )
+  }
   render() {
-    console.log(this.props.registerPassword)
-    console.log(this.props.registerEmail)
-    console.log(this.props.registerName)
+    const {
+      registerPassword,
+      registerEmail,
+      registerName,
+      message
+    } = this.props
     return (
-      <LoginDiv>
-        <h1>Login</h1>
-        <h2>signInPassword</h2>
+      <RegisterForm onSubmit={this.handleSubmit}>
+        <p>{message}</p>
+        <h1>Register</h1>
+        <label id="username">Username</label>
         <input
-          onChange={this.props.onChangeRegisterPasswordField}
-          type="text"
-        />
-        <h2 className="mail">signInEmail</h2>
-        <input
-          className="right"
-          onChange={this.props.onChangeRegisterEmailField}
-          type="text"
-        />
-        <input
-          className="moreright"
+          placeholder="Username"
           onChange={this.props.onChangeRegisterNameField}
           type="text"
+          name="RegisterName"
+          value={registerName}
+        />
+
+        <label id="email">Email</label>
+        <input
+          placeholder="Email exm. abc@gmail.com"
+          onChange={this.props.onChangeRegisterEmailField}
+          type="email"
+          name="RegisterEmail"
+          value={registerEmail}
+        />
+        <label id="password">Password</label>
+        <input
+          placeholder="Password"
+          onChange={this.props.onChangeRegisterPasswordField}
+          type="password"
+          name="RegisterPassword"
+          value={registerPassword}
         />
         <button
-          onClick={() =>
-            this.props.onSubmitRegister(
-              this.props.registerEmail,
-              this.props.registerPassword,
-              this.props.registerName
-            )
-          }
+          type="submit"
+          value="Register"
+          // onClick={() =>
+          //   this.props.onSubmitRegister(
+          //     this.props.registerEmail,
+          //     this.props.registerPassword,
+          //     this.props.registerName
+          //   )
+          // }
         >
-          submit
+          Register
         </button>
-      </LoginDiv>
+      </RegisterForm>
     )
   }
 }
