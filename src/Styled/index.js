@@ -8,6 +8,7 @@ export const Grid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   margin: 100px 1em;
   background: ${props => props.theme.background};
+  
 `
 
 //LayoutGrid SingleInfo
@@ -19,33 +20,32 @@ export const LayoutGrid = styled.div`
   overflow: hidden;
   background: ${props => props.theme.background};
 
-  a#logintoadd {
+  a#loginToAdd {
     position: absolute;
-    top: 20px;
-    right: 15%;
-
+    top: 2%;
+    left: 65%;
     border: 1px solid ${props => props.theme.border};
     color: ${props => props.theme.secondary};
     background: ${props => props.theme.primary};
     text-decoration: none;
     width: 55px;
-
-    text-align: center;
-
-    cursor: pointer;
     height: 30px;
+    text-align: center;
+    cursor: pointer;
+    &:focus {
+      outline: none;
+    }
+    &:hover {
+      color: ${props => props.theme.hovertext};
+      background-color: ${props => props.theme.hover};
+    }
+
+    /* icon inside the button*/
     .logintoadd {
       width: 20px;
       height: 20px;
       vertical-align: middle;
       transform: translate(0, 10%);
-    }
-    &:focus {
-      outline: none;
-    }
-    &:hover {
-      color: ${props => props.theme.primary};
-      background: ${props => props.theme.accent};
     }
   }
   div.darkimg {
@@ -68,8 +68,10 @@ export const LayoutGrid = styled.div`
 
     align-self: start;
     z-index: 2;
+    
     img {
       max-width: 80%;
+      filter: brightness(70%);
     }
     table {
       color: ${props => props.theme.secondary};
@@ -85,40 +87,48 @@ export const LayoutGrid = styled.div`
     }
     button {
       position: absolute;
-      top: 20px;
-      right: 15%;
+      top: 0;
+      left: 0;
       cursor: pointer;
       border: 1px solid ${props => props.theme.border};
-      /* width: 80%; */
-      width: 55px;
-      height: 30px;
-      grid-column: 3 / span 3;
-      grid-row: 9;
+      width: 80%;
+      height: 81%;
       color: ${props => props.theme.secondary};
-      background: ${props => props.theme.accent};
-
+      /* background: ${props => props.theme.primary}; */
+      /* background:rgba(39,39,39,.7); */
+      background:transparent;
       text-align: center;
-      &:hover {
-        background: ${props => props.theme.primary};
-        border: 1px solid ${props => props.theme.accent};
+      transition:all 350ms ease-in;
+
+      /* &:hover {
+        color: ${props => props.theme.hovertext};
+     
+      } */
+      &:hover img{
+        filter: brightness(100%);
+     
       }
       .minusicon {
-        width: 22px;
-        height: 22px;
+        width: 70px;
+        height: 70px;
         vertical-align: middle;
+        transition:all 350ms ease-in;
+      
       }
       .plusicon {
-        width: 22px;
-        height: 22px;
+        width: 70px;
+        height: 70px;
 
         vertical-align: middle;
+        transition:all 350ms ease-in;
       }
       &:hover .minusicon {
-        background: ${props => props.theme.primary};
-        color: red;
+        color: ${props => props.theme.primary};
+        
       }
       &:hover .plusicon {
-        color: green;
+        color: ${props => props.theme.primary};
+       
       }
       &:focus {
         outline: none;
@@ -264,7 +274,6 @@ export const Rankings = styled.div`
 //animecard
 
 export const AnimeCard = styled.div`
-
   div.load {
     width: 100%;
     min-height: 270px;

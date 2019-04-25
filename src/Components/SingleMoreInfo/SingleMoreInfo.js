@@ -1,10 +1,10 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import {
-  requestSingleMoreInfo,
-  requestSingleCategories
+   requestSingleMoreInfo,
+   requestSingleCategories
 } from "./actions/requestSingleMoreInfo"
-import { loginAddToPlaylist } from "../Login/actions/Login"
+import { loginAddToPlaylist, loginAddToPlaylist2 } from "../Login/actions/Login"
 import { loginRemoveFromePlaylist } from "../Login/actions/Login"
 import { withRouter } from "react-router-dom"
 import styled from "styled-components"
@@ -13,72 +13,73 @@ import { Link } from "react-router-dom"
 import { getJwt } from "../helpers/jwt"
 import { IconContext } from "react-icons"
 import {
-  IoMdHeart,
-  IoMdStar,
-  IoMdAdd,
-  IoMdRemove,
-  IoMdLogIn
+   IoMdHeart,
+   IoMdStar,
+   IoMdAdd,
+   IoMdRemove,
+   IoMdLogIn
 } from "react-icons/io"
 import { GooSpinner } from "react-spinners-kit"
 
 const mapStateToProps = state => {
-  const {
-    youtubeVideoId,
-    coverImage,
-    posterImage,
-    averageRating,
-    synopsis,
-    canonicalTitle,
-    subtype,
-    status,
-    ageRatingGuide,
-    episodeCount,
-    startDate,
-    endDate,
-    popularityRank,
-    ratingRank
-  } = state.requestSingleMoreInfo.singleMoreInfo.attributes
+   const {
+      youtubeVideoId,
+      coverImage,
+      posterImage,
+      averageRating,
+      synopsis,
+      canonicalTitle,
+      subtype,
+      status,
+      ageRatingGuide,
+      episodeCount,
+      startDate,
+      endDate,
+      popularityRank,
+      ratingRank
+   } = state.requestSingleMoreInfo.singleMoreInfo.attributes
 
-  return {
-    LoggedIn: state.Login.LoggedIn,
-    isPending: state.requestSingleMoreInfo.isPending,
-    animeListData: state.Login.user.animelist,
-    userId: state.Login.user.id,
-    id: state.requestSingleMoreInfo.singleMoreInfo.id,
-    youtubeVideoId: youtubeVideoId,
-    popularityRank: popularityRank,
-    ratingRank: ratingRank,
-    singleCatergories: state.requestSingleMoreInfo.singleCatergories,
-    singleMoreInfo: state.requestSingleMoreInfo.singleMoreInfo,
-    coverImage: coverImage,
-    averageRating: averageRating,
-    posterImage: posterImage,
-    synopsis: synopsis,
-    status: status,
-    episodeCount: episodeCount,
-    ageRatingGuide: ageRatingGuide,
-    subtype: subtype,
-    canonicalTitle: canonicalTitle,
-    startDate: startDate,
-    endDate: endDate,
-    categories:
-      state.requestSingleMoreInfo.singleMoreInfo.relationships.categories.links
-        .related
-  }
+   return {
+      LoggedIn: state.Login.LoggedIn,
+      isPending: state.requestSingleMoreInfo.isPending,
+      animeids: state.Login.user.animeids,
+      userId: state.Login.user.id,
+      id: state.requestSingleMoreInfo.singleMoreInfo.id,
+      youtubeVideoId: youtubeVideoId,
+      popularityRank: popularityRank,
+      ratingRank: ratingRank,
+      singleCatergories: state.requestSingleMoreInfo.singleCatergories,
+      singleMoreInfo: state.requestSingleMoreInfo.singleMoreInfo,
+      coverImage: coverImage,
+      averageRating: averageRating,
+      posterImage: posterImage,
+      synopsis: synopsis,
+      status: status,
+      episodeCount: episodeCount,
+      ageRatingGuide: ageRatingGuide,
+      subtype: subtype,
+      canonicalTitle: canonicalTitle,
+      startDate: startDate,
+      endDate: endDate,
+      categories:
+         state.requestSingleMoreInfo.singleMoreInfo.relationships.categories
+            .links.related
+   }
 }
 
 const mapDispatchToProps = dispatch => {
-  return {
-    onRequestSingleMoreInfo: animeid =>
-      dispatch(requestSingleMoreInfo(animeid)),
-    onRequestSingleCategories: animeid =>
-      dispatch(requestSingleCategories(animeid)),
-    onLoginAddToPlaylist: (userId, animeid) =>
-      dispatch(loginAddToPlaylist(userId, animeid)),
-
-    onLoginRemoveFromePlaylist: (userId, animeid) =>
-      dispatch(loginRemoveFromePlaylist(userId, animeid))
-  }
+   return {
+      onRequestSingleMoreInfo: animeid =>
+         dispatch(requestSingleMoreInfo(animeid)),
+      onRequestSingleCategories: animeid =>
+         dispatch(requestSingleCategories(animeid)),
+      onLoginAddToPlaylist: (userId, animeid) =>
+         dispatch(loginAddToPlaylist(userId, animeid)),
+      onLoginAddToPlaylist2: (userId, animeid) =>
+         dispatch(loginAddToPlaylist2(userId, animeid)),
+      onLoginRemoveFromePlaylist: (userId, animeid) =>
+         dispatch(loginRemoveFromePlaylist(userId, animeid))
+   }
 }
 //loading styles
 const GreyBackground = styled.div`
@@ -124,198 +125,204 @@ const GreyBackground = styled.div`
 `
 
 class SingleMoreInfo extends Component {
-  componentDidMount() {
-    let id = this.props.match.params.id
-    this.props.onRequestSingleMoreInfo(id)
-    this.props.onRequestSingleCategories(id)
-  }
+   componentDidMount() {
+      let id = this.props.match.params.id
+      this.props.onRequestSingleMoreInfo(id)
+      this.props.onRequestSingleCategories(id)
+   }
 
-  addToPlaylist = () => {
-    this.props.onLoginAddToPlaylist(this.props.userId, this.props.id)
-  }
-  removeFromPlaylist = () => {
-    this.props.onLoginRemoveFromePlaylist(
-      this.props.userId,
-      Number(this.props.id)
-    )
-  }
+   addToPlaylist = () => {
+      this.props.onLoginAddToPlaylist(this.props.userId, this.props.id)
+   }
+   addToPlaylist2 = () => {
+      this.props.onLoginAddToPlaylist2(this.props.userId, this.props.id)
+   }
+   removeFromPlaylist = () => {
+      this.props.onLoginRemoveFromePlaylist(this.props.userId, this.props.id)
+      console.log(this.props.userId, this.props.id)
+   }
 
-  render() {
-    const jwt = getJwt()
-    const {
-      canonicalTitle,
-      synopsis,
-      posterImage,
-      coverImage,
-      subtype,
-      status,
-      episodeCount,
-      ageRatingGuide,
-      startDate,
-      endDate,
-      averageRating,
-      singleCatergories,
-      popularityRank,
-      ratingRank,
-      youtubeVideoId
-    } = this.props
+   render() {
+      const jwt = getJwt()
+      const {
+         canonicalTitle,
+         synopsis,
+         posterImage,
+         coverImage,
+         subtype,
+         status,
+         episodeCount,
+         ageRatingGuide,
+         startDate,
+         endDate,
+         averageRating,
+         singleCatergories,
+         popularityRank,
+         ratingRank,
+         youtubeVideoId
+      } = this.props
 
-    const category = singleCatergories.map((category, i) => {
-      return (
-        <li key={i}>
-          <a href="/">{singleCatergories[i].attributes.title}</a>
-        </li>
+      const category = singleCatergories.map((category, i) => {
+         return (
+            <li key={i}>
+               <a href="/">{singleCatergories[i].attributes.title}</a>
+            </li>
+         )
+      })
+
+      const animeListData = this.props.animeids
+
+      const isAnimeOnList = animeListData
+         ? animeListData.find(
+              // eslint-disable-next-line
+              i => i == this.props.match.params.id
+           )
+         : null
+
+      return !this.props.isPending ? (
+         <LayoutGrid>
+            <div className="darkimg">
+               <img
+                  alt=""
+                  src={coverImage === null ? null : coverImage.large}
+               />
+            </div>
+
+            <h1>{canonicalTitle}</h1>
+
+            <Rankings>
+               <h2>
+                  <IconContext.Provider
+                     value={{
+                        className: "heart"
+                     }}
+                  >
+                     <IoMdHeart />
+                  </IconContext.Provider>
+                  Rank# {popularityRank}
+               </h2>
+               <h2>
+                  <IconContext.Provider
+                     value={{
+                        className: "star"
+                     }}
+                  >
+                     <IoMdStar />
+                  </IconContext.Provider>
+                  Rank# {ratingRank}({averageRating})
+               </h2>
+            </Rankings>
+            <CategoriesList>{category}</CategoriesList>
+            <div className="AnimeInfo">
+               <img alt="" src={posterImage.medium} />
+               <table className="table-styles">
+                  <tbody>
+                     <tr>
+                        <td>TYPE</td>
+                        <td className="right-align">{subtype}</td>
+                     </tr>
+
+                     <tr>
+                        <td>STATUS</td>
+                        <td className="right-align green">{status}</td>
+                     </tr>
+                     <tr>
+                        <td>averageRating</td>
+                        <td className="right-align">{averageRating}</td>
+                     </tr>
+                     <tr>
+                        <td>EPISODES</td>
+                        <td className="right-align">{episodeCount}</td>
+                     </tr>
+
+                     <tr>
+                        <td>startDate</td>
+                        <td className="right-align">{startDate}</td>
+                     </tr>
+                     <tr>
+                        <td>endDate</td>
+                        <td className="right-align">{endDate}</td>
+                     </tr>
+                     <tr>
+                        <td>Age</td>
+                        <td className="right-align">{ageRatingGuide}</td>
+                     </tr>
+                  </tbody>
+               </table>
+               {!jwt ? (
+                  <Link id="loginToAdd" to="/Login">
+                     <IconContext.Provider
+                        value={{
+                           className: "logintoadd"
+                        }}
+                     >
+                        <IoMdLogIn />
+                     </IconContext.Provider>
+                  </Link>
+               ) : !isAnimeOnList ? (
+                  <button onClick={this.addToPlaylist2}>
+                     <IconContext.Provider
+                        value={{
+                           className: "plusicon"
+                        }}
+                     >
+                        <IoMdAdd />
+                     </IconContext.Provider>
+                  </button>
+               ) : (
+                  <button onClick={this.removeFromPlaylist}>
+                     <IconContext.Provider
+                        value={{
+                           className: "minusicon"
+                        }}
+                     >
+                        <IoMdRemove />
+                     </IconContext.Provider>
+                  </button>
+               )}
+            </div>
+
+            <div className="text">
+               <h2>Synopsis</h2>
+               <p>{synopsis}</p>
+            </div>
+
+            {youtubeVideoId === "" ? (
+               <iframe
+                  title="animeintro"
+                  src={`https://www.youtube.com/embed/`}
+                  frameBorder="0"
+                  allowFullScreen
+               />
+            ) : (
+               <iframe
+                  title="animeintro"
+                  src={`https://www.youtube.com/embed/${youtubeVideoId}`}
+                  frameBorder="0"
+                  allowFullScreen
+               />
+            )}
+         </LayoutGrid>
+      ) : (
+         <GreyBackground>
+            <div className="coverImage" />
+            <div className="image" />
+
+            <div className="spinner">
+               <GooSpinner
+                  size={100}
+                  Color="red"
+                  loading={this.props.isPending}
+               />
+            </div>
+         </GreyBackground>
       )
-    })
-
-    const animeListData = this.props.animeListData
-
-    const isAnimeOnList = animeListData
-      ? animeListData.find(
-          // eslint-disable-next-line
-          i => i == this.props.match.params.id
-        )
-      : null
-
-    return !this.props.isPending ? (
-      <LayoutGrid>
-        <div className="darkimg">
-          <img alt="" src={coverImage === null ? null : coverImage.large} />
-        </div>
-
-        <h1>{canonicalTitle}</h1>
-
-        <Rankings>
-          <h2>
-            <IconContext.Provider
-              value={{
-                className: "heart"
-              }}
-            >
-              <IoMdHeart />
-            </IconContext.Provider>
-            Rank# {popularityRank}
-          </h2>
-          <h2>
-            <IconContext.Provider
-              value={{
-                className: "star"
-              }}
-            >
-              <IoMdStar />
-            </IconContext.Provider>
-            Rank# {ratingRank}
-            {/* <FontAwesomeIcon className="star" icon="star" /> Rank# {ratingRank}{" "} */}
-            ({averageRating})
-          </h2>
-        </Rankings>
-        <CategoriesList>{category}</CategoriesList>
-        <div className="AnimeInfo">
-          <img alt="" src={posterImage.medium} />
-          <table className="table-styles">
-            <tbody>
-              <tr>
-                <td>TYPE</td>
-                <td className="right-align">{subtype}</td>
-              </tr>
-
-              <tr>
-                <td>STATUS</td>
-                <td className="right-align green">{status}</td>
-              </tr>
-              <tr>
-                <td>averageRating</td>
-                <td className="right-align">{averageRating}</td>
-              </tr>
-              <tr>
-                <td>EPISODES</td>
-                <td className="right-align">{episodeCount}</td>
-              </tr>
-
-              <tr>
-                <td>startDate</td>
-                <td className="right-align">{startDate}</td>
-              </tr>
-              <tr>
-                <td>endDate</td>
-                <td className="right-align">{endDate}</td>
-              </tr>
-              <tr>
-                <td>Age</td>
-                <td className="right-align">{ageRatingGuide}</td>
-              </tr>
-            </tbody>
-          </table>
-          {!jwt ? (
-            <Link id="logintoadd" to="/Login">
-              <IconContext.Provider
-                value={{
-                  className: "logintoadd"
-                }}
-              >
-                <IoMdLogIn />
-              </IconContext.Provider>
-            </Link>
-          ) : !isAnimeOnList ? (
-            <button onClick={this.addToPlaylist}>
-              <IconContext.Provider
-                value={{
-                  className: "plusicon"
-                }}
-              >
-                <IoMdAdd />
-              </IconContext.Provider>
-            </button>
-          ) : (
-            <button onClick={this.removeFromPlaylist}>
-              <IconContext.Provider
-                value={{
-                  className: "minusicon"
-                }}
-              >
-                <IoMdRemove />
-              </IconContext.Provider>
-            </button>
-          )}
-        </div>
-
-        <div className="text">
-          <h2>Synopsis</h2>
-          <p>{synopsis}</p>
-        </div>
-
-        {youtubeVideoId === "" ? (
-          <iframe
-            title="animeintro"
-            src={`https://www.youtube.com/embed/`}
-            frameBorder="0"
-            allowFullScreen
-          />
-        ) : (
-          <iframe
-            title="animeintro"
-            src={`https://www.youtube.com/embed/${youtubeVideoId}`}
-            frameBorder="0"
-            allowFullScreen
-          />
-        )}
-      </LayoutGrid>
-    ) : (
-      <GreyBackground>
-        <div className="coverImage" />
-        <div className="image" />
-
-        <div className="spinner">
-          <GooSpinner size={100} Color="red" loading={this.props.isPending} />
-        </div>
-      </GreyBackground>
-    )
-  }
+   }
 }
 
 export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(SingleMoreInfo)
+   connect(
+      mapStateToProps,
+      mapDispatchToProps
+   )(SingleMoreInfo)
 )

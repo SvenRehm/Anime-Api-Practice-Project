@@ -8,6 +8,7 @@ const FadeInAnimation = keyframes`
 
 export const FadeIn = styled(BaseAnimation)`
   animation-name: ${FadeInAnimation};
+
 `
 
 export const Loader = styled.div`
