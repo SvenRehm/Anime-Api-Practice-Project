@@ -3,7 +3,7 @@ import {
    REQUEST_SINGLE_MORE_INFO_SUCCESS,
    REQUEST_SINGLE_MORE_INFO_FAILED
 } from "../../../constants/action-types"
-import { reloadUser, getAnimelist } from "../../Login/actions/Login"
+import { reloadUser } from "../../Login/actions/Login"
 import { getJwt } from "../../helpers/jwt"
 
 export const requestSingleMoreInfo = animeid => dispatch => {
@@ -22,7 +22,6 @@ export const requestSingleMoreInfo = animeid => dispatch => {
             payload: info
          })
          dispatch(reloadUser(jwt))
-         dispatch(getAnimelist(jwt))
       })
       .catch(error =>
          dispatch({ type: REQUEST_SINGLE_MORE_INFO_FAILED, payload: error })

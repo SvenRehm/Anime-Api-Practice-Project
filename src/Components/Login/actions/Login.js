@@ -30,7 +30,7 @@ export const submitLogin = (loginEmail, loginPassword) => dispatch => {
          })
 
          dispatch(Authenticate(res.data))
-         dispatch(getAnimelist(res.data))
+         // dispatch(getAnimelist(res.data))
          localStorage.setItem("cool-jwt", res.data)
          // history.push("/")
          history.goBack()
@@ -47,6 +47,8 @@ export const Authenticate = jwt => dispatch => {
             type: "AUTHENTICATE",
             payload: res.data
          })
+
+         dispatch(getAnimelist(res.data.id))
       })
       .catch(err => {
          localStorage.removeItem("cool-jwt")
@@ -54,11 +56,31 @@ export const Authenticate = jwt => dispatch => {
       })
 }
 
-export const getAnimelist = jwt => dispatch => {
+// export const getAnimelist = jwt => dispatch => {
+//    axios
+//       .get(`${api}/animelist`, {
+//          headers: { Authorization: `Bearer ${jwt}` }
+//       })
+//       .then(res => {
+//          const animelistIDS = res.data.map((animeid, i) => {
+//             return animeid.anime_id
+//          })
+//          dispatch({
+//             type: "GET_ANIMELIST",
+//             payload: res.data,
+//             anime_id: animelistIDS
+//          })
+//       })
+//       .catch(err => {
+//          localStorage.removeItem("cool-jwt")
+//          // history.push("/Login")
+//       })
+// }
+
+export const getAnimelist = id => dispatch => {
    axios
-      .get(`${api}/animelist`, {
-         headers: { Authorization: `Bearer ${jwt}` }
-      })
+
+      .get(`${api}/getAnimeToken`, { params: { id: id } })
       .then(res => {
          const animelistIDS = res.data.map((animeid, i) => {
             return animeid.anime_id
@@ -70,11 +92,10 @@ export const getAnimelist = jwt => dispatch => {
          })
       })
       .catch(err => {
-         localStorage.removeItem("cool-jwt")
-         history.push("/Login")
+         console.log(err)
+         // history.push("/Login")
       })
 }
-
 export const reloadUser = jwt => dispatch => {
    axios
       .get(`${api}/getUser`, {
@@ -85,6 +106,7 @@ export const reloadUser = jwt => dispatch => {
             type: "REALOAD_USER",
             payload: res.data
          })
+         dispatch(getAnimelist(res.data.id))
       })
       .catch(err => {
          localStorage.removeItem("cool-jwt")

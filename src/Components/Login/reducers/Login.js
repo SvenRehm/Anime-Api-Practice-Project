@@ -5,7 +5,9 @@ const initialState = {
    message: "",
    user: {
       id: "0",
-      animelist: [],
+      animelist: [
+         { id: "", anime_id: "", episodes_watched: "", status: "", notes: "" }
+      ],
       animeids: []
    }
 }

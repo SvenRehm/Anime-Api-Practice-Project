@@ -8,6 +8,7 @@ import { Authenticate, getAnimelist } from "../Login/actions/Login"
 const mapStateToProps = state => {
    return {
       user: state.Login.user,
+      id: state.Login.user.id,
       loggedIn: state.Login.LoggedIn
    }
 }
@@ -15,7 +16,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
    return {
       onAuthenticate: jwt => dispatch(Authenticate(jwt)),
-      onGetAnimelist: jwt => dispatch(getAnimelist(jwt))
+      onGetAnimelist: id => dispatch(getAnimelist(id))
    }
 }
 
@@ -27,7 +28,7 @@ export default function(ComposedComponent) {
             this.props.history.push("/Login")
          } else {
             this.props.onAuthenticate(jwt)
-            this.props.onGetAnimelist(jwt)
+            this.props.onGetAnimelist(this.props.id)
          }
       }
 
