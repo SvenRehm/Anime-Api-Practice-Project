@@ -1,6 +1,6 @@
 import { history } from "../../../App"
 import axios from "axios"
-import { getJwt } from "../../helpers/jwt"
+// import { getJwt } from "../../helpers/jwt"
 export const changePasswordField = text => {
    return {
       type: "CHANGE_PASSWORD_FIELD",
@@ -128,7 +128,6 @@ export const loginAddToPlaylist = (id, animeid) => dispatch => {
 }
 
 export const loginAddToPlaylist2 = (id, animeid) => dispatch => {
-   console.log(animeid)
    axios
       .put(`${api}/addplaylist`, {
          id: id,
@@ -146,7 +145,7 @@ export const loginAddToPlaylist2 = (id, animeid) => dispatch => {
 }
 
 export const loginRemoveFromePlaylist = (id, animeid) => dispatch => {
-   const jwt = getJwt()
+   // const jwt = getJwt()
    axios
       .delete(`${api}/removefromplaylist`, {
          data: { id: id, anime_id: animeid }
@@ -156,8 +155,9 @@ export const loginRemoveFromePlaylist = (id, animeid) => dispatch => {
             type: "DELETE_FROM_PLAYLIST",
             payload: animeid
          })
-         dispatch(Authenticate(jwt))
-         dispatch(getAnimelist(jwt))
+         // dispatch(reloadUser(jwt))
+         // dispatch(Authenticate(jwt))
+         dispatch(getAnimelist(id))
       })
 }
 
