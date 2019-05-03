@@ -4,7 +4,7 @@ import {
    requestSingleMoreInfo,
    requestSingleCategories
 } from "./actions/requestSingleMoreInfo"
-import { loginAddToPlaylist, loginAddToPlaylist2 } from "../Login/actions/Login"
+import { loginAddToPlaylist2 } from "../Login/actions/Login"
 import { loginRemoveFromePlaylist } from "../Login/actions/Login"
 import { withRouter } from "react-router-dom"
 import styled from "styled-components"
@@ -73,8 +73,7 @@ const mapDispatchToProps = dispatch => {
          dispatch(requestSingleMoreInfo(animeid)),
       onRequestSingleCategories: animeid =>
          dispatch(requestSingleCategories(animeid)),
-      onLoginAddToPlaylist: (userId, animeid) =>
-         dispatch(loginAddToPlaylist(userId, animeid)),
+
       onLoginAddToPlaylist2: (userId, animeid) =>
          dispatch(loginAddToPlaylist2(userId, animeid)),
       onLoginRemoveFromePlaylist: (userId, animeid) =>

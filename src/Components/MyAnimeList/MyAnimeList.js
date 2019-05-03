@@ -2,7 +2,10 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import styled from "styled-components"
 
-import { loginRemoveFromePlaylist } from "../Login/actions/Login"
+import {
+   loginRemoveFromePlaylist,
+   addEpisodeToAnime
+} from "../Login/actions/Login"
 import { requestList, RemoveFromePlaylist } from "./actions/requestList"
 
 import { Spring, config } from "react-spring/renderprops"
@@ -32,7 +35,9 @@ const mapDispatchToProps = dispatch => {
       onLoginRemoveFromePlaylist: (userId, animeid) =>
          dispatch(loginRemoveFromePlaylist(userId, animeid)),
       onRemoveFromePlaylist: (userId, animeid) =>
-         dispatch(RemoveFromePlaylist(userId, animeid))
+         dispatch(RemoveFromePlaylist(userId, animeid)),
+      onAddEpisodeToAnime: (userId, animeid, plusone) =>
+         dispatch(addEpisodeToAnime(userId, animeid, plusone))
    }
 }
 
@@ -44,6 +49,7 @@ const ListLoad = styled(Loader)`
    align-self: center;
    justify-self: center;
 `
+
 const MyAnimeListStyles = styled.div`
    display: grid;
    grid-template-rows: repeat(10, 100px);
@@ -137,7 +143,7 @@ const MyAnimeListStyles = styled.div`
          }
          
 
-            }
+            
          }
          p {
             color:white;
@@ -217,7 +223,7 @@ const MyAnimeListStyles = styled.div`
             color: white;
             overflow: hidden;
             /* white-space: nowrap; */
-            text-overflow: ellipsis;
+            /* text-overflow: ellipsis; */
 
             span {
                font-size: 15px;
@@ -253,6 +259,11 @@ class MyAnimeList extends Component {
    removeFromPlaylist = (userid, animeid) => {
       this.props.onLoginRemoveFromePlaylist(userid, animeid)
       this.props.onRemoveFromePlaylist(userid, animeid)
+   }
+
+   addEpisodeToAnime = (userid, animeid, plusone) => {
+      console.log(userid, animeid, plusone)
+      this.props.onAddEpisodeToAnime(userid, animeid, plusone)
    }
 
    render() {
@@ -295,9 +306,10 @@ class MyAnimeList extends Component {
                            <button
                               className="plusbutton"
                               onClick={() =>
-                                 this.removeFromPlaylist(
+                                 this.addEpisodeToAnime(
                                     userId,
-                                    animeList[i].id
+                                    animeList[i].id,
+                                    animeListData[i].episodes_watched + 1
                                  )
                               }
                            >

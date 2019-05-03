@@ -83,6 +83,24 @@ export const Login = (state = initialState, action = {}) => {
                animeids: [...state.user.animeids, action.payload]
             }
          }
+
+      case "ADD_EPISODE_TO_ANIME":
+         const animelist = state.user.animelist.map(items => {
+            if (items.anime_id == action.animeid) {
+               items = { ...items, episodes_watched: action.payload }
+               return items
+            } else {
+               return items
+            }
+         })
+         console.log(animelist)
+         return {
+            ...state,
+            user: {
+               ...state.user,
+               animelist: [...animelist]
+            }
+         }
       case "DELETE_FROM_PLAYLIST":
          return {
             ...state

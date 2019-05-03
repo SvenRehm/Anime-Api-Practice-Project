@@ -113,19 +113,19 @@ export const reloadUser = jwt => dispatch => {
       })
 }
 
-export const loginAddToPlaylist = (id, animeid) => dispatch => {
-   axios
-      .put(`${api}/addplaylist`, {
-         id: id,
-         animeid: animeid
-      })
-      .then(res => {
-         dispatch({
-            type: "LOGIN_ADD_TO_PLAYLIST",
-            payload: animeid
-         })
-      })
-}
+// export const loginAddToPlaylist = (id, animeid) => dispatch => {
+//    axios
+//       .put(`${api}/addplaylist`, {
+//          id: id,
+//          animeid: animeid
+//       })
+//       .then(res => {
+//          dispatch({
+//             type: "LOGIN_ADD_TO_PLAYLIST",
+//             payload: animeid
+//          })
+//       })
+// }
 
 export const loginAddToPlaylist2 = (id, animeid) => dispatch => {
    axios
@@ -140,6 +140,22 @@ export const loginAddToPlaylist2 = (id, animeid) => dispatch => {
          dispatch({
             type: "LOGIN_ADD_TO_PLAYLIST2",
             payload: animeid
+         })
+      })
+}
+
+export const addEpisodeToAnime = (id, animeid, plusone) => dispatch => {
+   axios
+      .put(`${api}/update`, {
+         id: id,
+         anime_id: animeid,
+         episodes_watched: plusone
+      })
+      .then(res => {
+         dispatch({
+            type: "ADD_EPISODE_TO_ANIME",
+            animeid: animeid,
+            payload: plusone
          })
       })
 }
