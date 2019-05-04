@@ -50,42 +50,130 @@ const ListLoad = styled(Loader)`
    justify-self: center;
 `
 
+const AnimeCardsList = styled.ul`
+
+   grid-column: 4 / span 6;
+   grid-row: 4/-1;
+   color: ${props => props.theme.secondary};
+   list-style: none;
+   /* display: grid;
+   grid-auto-rows: repeat(auto-fill, minmax(130px, 130px));  */
+   grid-gap: 0.7em;
+
+   li {
+      min-height: 120px;
+      max-height: 120px;
+      display: grid;
+      width: 100%;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      background-color: #414141;
+      /* background-color: ${props => props.theme.primary}; */
+      border: 1px solid ${props => props.theme.border};
+      margin-bottom: 1.5em;
+      &:last-child {
+         margin-bottom: 2em;
+      }
+      img {
+      height: 110%;
+      width: auto;
+      align-self: center;
+      /* justify-self: end; */
+      margin-left: 10px;
+      grid-row: 1;
+      grid-column: 1 / span 1;
+      box-shadow: 5px 5px 10px #030303;
+   }
+   h1 {
+      grid-column: 2 / span 3;
+      grid-row: 1;
+      align-self: center;
+      font-size: 19px;
+      line-height: 1.2;
+      letter-spacing: 0.2px;
+      text-align: left;
+      color: white;
+      overflow: hidden;
+      /* white-space: nowrap; */
+      /* text-overflow: ellipsis; */
+
+      span {
+         font-size: 15px;
+         font-weight: 300;
+         color: #9b9b9b;
+      }
+   }
+
+   
+   }
+      `
+
+const InlineList = styled.ul`
+   grid-column: 5 / span 3;
+   grid-row: 1;
+   list-style-type: none;
+   align-self: center;
+   justify-self: center;
+
+   button.editbutton {
+      width: 70px;
+      height: 27px;
+      line-height: 27px;
+      color: White;
+      background-color: #0088f1;
+      border: none;
+      cursor: pointer;
+   }
+   button.plusbutton {
+      margin-left: 5px;
+      width: 25px;
+      height: 22px;
+      transform: translateY(+20%);
+      color: ${props => props.theme.secondary};
+      background-color: #414141;
+      border: none;
+      line-height: 22px;
+      cursor: pointer;
+
+      .plusicon {
+         width: 22px;
+         height: 22px;
+         color: #0088f1;
+      }
+      &:hover {
+         color: ${props => props.theme.accent};
+      }
+      &:focus {
+         outline: none;
+      }
+   }
+   li:first-child {
+      font-size: 15px;
+      border: none;
+      display: inline;
+      /* padding: 0.5em 1em 0.5em 2em; */
+      border-left: solid 1px #707070;
+   }
+   li {
+      padding: 0.3em 0 0.3em 0;
+      font-size: 15px;
+      border: none;
+      display: inline;
+      /* padding: 0.5em 2em 0.5em 2em; */
+      border-left: solid 1px #707070;
+      span {
+         line-height: 17px;
+         display: inline-block;
+         width: 110px;
+         text-align: center;
+         margin-left: 15px;
+      }
+   }
+`
+
 const MyAnimeListStyles = styled.div`
    display: grid;
    grid-template-rows: repeat(10, 100px);
    grid-template-columns: repeat(12, minmax(0, 1fr));
-   button.editbutton{
-      width:70px;
-      height:27px;
-      line-height:27px;     
-      color: White;
-      background-color: #0088F1;
-      border: none;
-      cursor: pointer;
-   }
-   button.plusbutton{
-     margin-left:5px;
-           width: 25px;
-           height: 22px;
-           transform: translateY(+20%);
-           color: ${props => props.theme.secondary};
-           background-color: #414141;
-           border: none;
-         line-height:22px;           
-           cursor: pointer;
-           
-           .plusicon {
-          
-              width: 22px;
-              height: 22px;
-              color: #0088F1;
-           }
-           &:hover {
-              color: ${props => props.theme.accent};
-           }
-           &:focus {
-              outline: none;
-           }}
 
    h2 {
       grid-column: 1/-1;
@@ -93,155 +181,6 @@ const MyAnimeListStyles = styled.div`
       font-size: 2em;
       justify-self: center;
       color: ${props => props.theme.secondary};
-   }
-   h1 {
-      color: ${props => props.theme.secondary};
-      grid-column: 1 / span 3;
-      grid-row: 2;
-   }
-   ul.animecards {
-      grid-column: 4 / span 6;
-      grid-row: 4/-1;
-      color: ${props => props.theme.secondary};
-      list-style: none;
-      display: grid;
-      grid-auto-rows: repeat(auto-fill, minmax(130px, 130px));
-      grid-gap: 0.7em;
-
-      li {
-         min-height: 120px;
-         max-height: 120px;
-         display: grid;
-         width: 100%;
-         grid-template-columns: repeat(7, minmax(0, 1fr));
-         background-color: #414141;
-         /* background-color: ${props => props.theme.primary}; */
-         border: 1px solid ${props => props.theme.border};
-         margin-bottom: 1em;
-         &:last-child {
-            margin-bottom: 2em;
-         }
-
-         ul.cardinfo{
-            grid-column: 5 / span 3;
-            grid-row: 1;
-            list-style-type: none;
-            align-self: center;
-            justify-self: center;
-            /* li:last-child{
-               border-right: solid 1px #707070;
-            } */
-            li{
-               font-size:15px;
-               border:none;
-               display: inline;
-               
-               padding: 0.5em 2em 0.5em 2em;
-            border-left: solid 1px #707070;
-            
-       
-         }
-         
-
-            
-         }
-         p {
-            color:white;
-            font-size:17px;
-            align-self: center;
-            justify-self: center;
-            grid-column: 5 / span 2;
-            grid-row: 1;
-            padding: 0.5em 2em 0.5em 2em;
-            border-left: solid 1px #707070;
-            border-right: solid 1px #707070;
-         }
-         h3{
-           
-            color:white;
-            justify-self: start;
-            font-size:17px;
-            align-self: center;
-     
-       
-            padding: 0.5em 2em 0.5em 5em;
-         
-            border-right: solid 1px #707070;
-               grid-row: 1;
-               grid-column: 6 / span 2;
-               font-size:17px;
-               font-weight: 300;
-               
-        
-         }
-         /* button {
-            grid-column: 6;
-            grid-row: 1;
-            width: 50px;
-            height: 50px;
-            justify-self: center;
-            align-self: center;
-            text-transform: uppercase;
-            color: ${props => props.theme.secondary};
-            background: ${props => props.theme.primary};
-            border: none;
-            text-align: center;
-            font-weight: 400;
-            cursor: pointer;
-            .minusicon {
-               line-height: 50px;
-               width: 22px;
-               height: 22px;
-               color: red;
-            }
-            &:hover {
-               color: ${props => props.theme.accent};
-            }
-            &:focus {
-               outline: none;
-            }
-         } */
-         img {
-            height: 110%;
-            width: auto;
-            align-self: center;
-            /* justify-self: end; */
-            margin-left: 10px;
-            grid-row: 1;
-            grid-column: 1 / span 1;
-            box-shadow: 5px 5px 10px #030303;
-         }
-         h1 {
-            
-            grid-column: 2 / span 3;
-            grid-row: 1;
-            align-self: center;
-            font-size: 19px;
-            line-height: 1.2;
-            letter-spacing: 0.2px;
-            text-align: left;
-            color: white;
-            overflow: hidden;
-            /* white-space: nowrap; */
-            /* text-overflow: ellipsis; */
-
-            span {
-               font-size: 15px;
-               font-weight: 300;
-               color: #9b9b9b;
-            }
-         }
-
-         /* h3 {
-            font-size: 1em;
-            margin-left: 15px;
-            align-self: center;
-            color: ${props => props.theme.secondary};
-            grid-column: 2 / span 2;
-            grid-row: 1;
-            opacity: 0.6;
-         } */
-      }
    }
 `
 
@@ -296,64 +235,48 @@ class MyAnimeList extends Component {
                            {parseInt(animeList[i].startDate)}
                         </span>
                      </h1>
-                     <ul className="cardinfo">
+                     <InlineList>
                         <li>
-                           {" "}
-                           {animeListData[i].episodes_watched}/
-                           {animeList[i].episodeCount
-                              ? animeList[i].episodeCount
-                              : 0}
-                           <button
-                              className="plusbutton"
-                              onClick={() =>
-                                 this.addEpisodeToAnime(
-                                    userId,
-                                    animeList[i].id,
-                                    animeListData[i].episodes_watched + 1
-                                 )
-                              }
-                           >
+                           <span>
                               {" "}
-                              <IconContext.Provider
-                                 value={{
-                                    className: "plusicon"
-                                 }}
+                              {animeListData[i].episodes_watched}/
+                              {animeList[i].episodeCount
+                                 ? animeList[i].episodeCount
+                                 : 0}
+                              <button
+                                 className="plusbutton"
+                                 disabled={
+                                    animeListData[i].episodes_watched >=
+                                    animeList[i].episodeCount
+                                 }
+                                 onClick={() =>
+                                    this.addEpisodeToAnime(
+                                       userId,
+                                       animeList[i].id,
+                                       animeListData[i].episodes_watched + 1
+                                    )
+                                 }
                               >
-                                 <IoMdAdd />
-                              </IconContext.Provider>
-                           </button>
+                                 <IconContext.Provider
+                                    value={{
+                                       className: "plusicon"
+                                    }}
+                                 >
+                                    <IoMdAdd />
+                                 </IconContext.Provider>
+                              </button>
+                           </span>
                         </li>
-                        <li> {animeListData[i].status} </li>
+                        <li>
+                           <span>{animeListData[i].status}</span>{" "}
+                        </li>
                         <li>
                            {" "}
-                           <button className="editbutton">Show More</button>
+                           <span>
+                              <button className="editbutton">Show More</button>
+                           </span>
                         </li>
-                     </ul>
-
-                     {/* <p>
-                        {animeListData[i].episodes_watched}/
-                        {animeList[i].episodeCount
-                           ? animeList[i].episodeCount
-                           : 0}
-                     </p> */}
-
-                     {/* <h3> {animeListData[i].status}</h3> */}
-                     {/* <h3>
-                        {animeList[i].subtype},{" "}
-                        {parseInt(animeList[i].startDate)}
-                     </h3> */}
-                     {/* <h4>{animeListData[i].status}</h4> */}
-                     {/* 
-                     <button
-                        onClick={() =>
-                           this.removeFromPlaylist(userId, animeList[i].id)
-                        }
-                     >
-                        <FontAwesomeIcon
-                           className="minusicon"
-                           icon={["fas", "minus-circle"]}
-                        />
-                     </button> */}
+                     </InlineList>
                   </li>
                )}
             </Spring>
@@ -369,7 +292,7 @@ class MyAnimeList extends Component {
                   <GooSpinner size={100} />
                </ListLoad>
             ) : (
-               <ul className="animecards">{AnimeList}</ul>
+               <AnimeCardsList>{AnimeList}</AnimeCardsList>
             )}
          </MyAnimeListStyles>
          //       <ul>
