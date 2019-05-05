@@ -24,7 +24,15 @@ export const requestList = animelistids => dispatch => {
             posterimage: id.data.attributes.posterImage.tiny,
             episodeCount: id.data.attributes.episodeCount,
             totalLength: id.data.attributes.totalLength,
-            startDate: id.data.attributes.startDate
+            startDate: id.data.attributes.startDate,
+            endDate: id.data.attributes.endDate,
+            ageRatingGuide: id.data.attributes.ageRatingGuide,
+            status: id.data.attributes.status,
+            averageRating: id.data.attributes.averageRating,
+            popularityRank: id.data.attributes.popularityRank,
+            nsfw: id.data.attributes.nsfw,
+
+            isExpanded: false
          }))
          //   const animelist = data
          dispatch({ type: "REQUEST_ANIME_LIST_SUCCES", payload: animelist })
@@ -40,5 +48,13 @@ export const RemoveFromePlaylist = (id, animeid) => dispatch => {
       type: "DELETE_ONE_PLAYLIST",
       id: id,
       payload: animeid
+   })
+}
+
+export const ExpandListItem = (animeid, expand) => dispatch => {
+   dispatch({
+      type: "EXPAND_LIST_ITEM",
+      animeid: animeid,
+      payload: expand
    })
 }

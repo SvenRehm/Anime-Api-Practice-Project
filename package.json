@@ -7,6 +7,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.8.1",
     "@fortawesome/free-solid-svg-icons": "^5.8.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
+    "@kunukn/react-collapse": "^1.0.5",
     "animate-css-styled-components": "^1.0.2",
     "axios": "^0.18.0",
     "history": "^4.9.0",

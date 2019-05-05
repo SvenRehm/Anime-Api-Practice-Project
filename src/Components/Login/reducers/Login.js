@@ -86,6 +86,7 @@ export const Login = (state = initialState, action = {}) => {
 
       case "ADD_EPISODE_TO_ANIME":
          const animelist = state.user.animelist.map(items => {
+            // eslint-disable-next-line
             if (items.anime_id == action.animeid) {
                items = { ...items, episodes_watched: action.payload }
                return items
@@ -93,7 +94,7 @@ export const Login = (state = initialState, action = {}) => {
                return items
             }
          })
-         console.log(animelist)
+
          return {
             ...state,
             user: {
