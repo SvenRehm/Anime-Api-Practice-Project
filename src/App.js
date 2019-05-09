@@ -83,7 +83,7 @@ const mapDispatchToProps = dispatch => {
 const blacktheme = {
    primary: "#272727", //darkest
    secondary: "#d3d3d3", //white
-   accent: "#FF0000", //red
+   accent: "#0088f1", //red
    background: "#121212",
    border: "#121212",
    hover: "#3d3d3d",
@@ -91,6 +91,23 @@ const blacktheme = {
    hovertext: "#FBFAF5",
    fontFamily: "'Merriweather Sans', sans-serif;"
 }
+
+// eslint-disable-next-line
+const blacktheme2 = {
+   primary: "#212121",
+   primary_dark: "#121212",
+   primary_light: "#484848",
+
+   secondary: "#1976d2",
+   secondary_dark: "#004ba0",
+   secondary_light: "#63a4ff",
+
+   primary_text: "#ffffff",
+   secondary_text: "#ffffff",
+
+   fontFamily: "'Roboto', sans-serif;"
+}
+
 // eslint-disable-next-line
 const whitetheme = {
    primary: "#FBFAF5", //hell weis
@@ -106,7 +123,7 @@ const whitetheme = {
 const GlobalStyle = createGlobalStyle`
   body {
     font-family: ${props => props.theme.fontFamily};
-    background:${props => props.theme.background};
+    background:${props => props.theme.primary_dark};
   }
 `
 
@@ -114,7 +131,7 @@ class App extends Component {
    constructor() {
       super()
       this.state = {
-         theme: blacktheme
+         theme: blacktheme2
       }
    }
    render() {
