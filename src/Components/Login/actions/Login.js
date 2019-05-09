@@ -113,20 +113,6 @@ export const reloadUser = jwt => dispatch => {
       })
 }
 
-// export const loginAddToPlaylist = (id, animeid) => dispatch => {
-//    axios
-//       .put(`${api}/addplaylist`, {
-//          id: id,
-//          animeid: animeid
-//       })
-//       .then(res => {
-//          dispatch({
-//             type: "LOGIN_ADD_TO_PLAYLIST",
-//             payload: animeid
-//          })
-//       })
-// }
-
 export const loginAddToPlaylist2 = (id, animeid) => dispatch => {
    axios
       .put(`${api}/addplaylist`, {

@@ -9,13 +9,15 @@ import {
 import {
    requestList,
    RemoveFromePlaylist,
-   ExpandListItem
+   ExpandListItem,
+   changeStatus
 } from "./actions/requestList"
 import { Spring, config } from "react-spring/renderprops"
 import { Loader } from "../../Styled/animation"
 import { GooSpinner } from "react-spinners-kit"
 import { IconContext } from "react-icons"
 import { IoMdAdd } from "react-icons/io"
+import MyStatus from "../MyAnimeList/MyStatus"
 
 const mapStateToProps = state => {
    return {
@@ -42,7 +44,9 @@ const mapDispatchToProps = dispatch => {
       onAddEpisodeToAnime: (userId, animeid, plusone) =>
          dispatch(addEpisodeToAnime(userId, animeid, plusone)),
       onExpandListItem: (animeid, expand) =>
-         dispatch(ExpandListItem(animeid, expand))
+         dispatch(ExpandListItem(animeid, expand)),
+      onChangeStatus: (userId, animeid, e) =>
+         dispatch(changeStatus(userId, animeid, e))
    }
 }
 
@@ -66,11 +70,9 @@ const AnimeCardsList = styled.ul`
 
    li {
       background-color: #414141;
-      margin-bottom: 1.5em;
-     
+      margin-bottom: 2.5em;
       /* grid-template-columns: repeat(7, minmax(0, 1fr)); */
       height: 120px;
-      
       transition: height 0.4s ease-in-out;
       /* overflow-y: (${props => (props.expand ? "hidden " : "visible")}); */
       /* overflow-y: hidden ; */
@@ -82,23 +84,23 @@ const AnimeCardsList = styled.ul`
         /* margin:0em auto 3em auto; */
          margin: 0em 0em 3em 140px;
         visibility: visible;
-  opacity: 1;
-  transition: opacity 1s linear;
-  color: ${props => props.theme.secondary};
+         opacity: 1;
+       transition: opacity 1s linear;
+       color: ${props => props.theme.secondary};
       /* width: 50%; */
       visibility: visible;
-  opacity: 1;
-  transition: opacity 1s linear;
+          opacity: 1;
+       transition: opacity 1s linear;
         border-top:1px solid ${props => props.theme.secondary};
         padding-top:4em;
         padding-right:250px;
        
-margin: 0em 0em 3em 140px;
+   margin: 0em 0em 3em 140px;
      
-  color: ${props => props.theme.secondary};
+   color: ${props => props.theme.secondary};
       /* width: 50%; */
-width:700px;
-height: 200px;
+      width:700px;
+      height: 200px;
       line-height: 1.4;
       text-transform: uppercase;
       font-size: 0.7em;
@@ -119,7 +121,7 @@ height: 200px;
   opacity: 0;
   transition: visibility 0s 300ms, opacity 300ms linear;
 }
-      div {
+      div.noexpand {
          /* min-height: 120px; */
          height: 120px;
          display: grid;
@@ -170,25 +172,14 @@ height: 200px;
   
   
       } 
-      /* &.expanded div {
-         &::before{
-            content:"";
-            position:absolute;
-            bottom:0;
-            left:0;
-            right:0;
-            margin: auto;
-        height:1px;
-        width:70%;
-        background:#707070;
-      }  */
+      
      
       }
       &:last-child {
          margin-bottom: 2em;
       }
       img {
-         height: 110%;
+         height: 120%;
          width: auto;
          align-self: center;
          /* justify-self: end; */
@@ -224,8 +215,8 @@ const InlineList = styled.ul`
    grid-row: 1;
    list-style-type: none;
    align-self: center;
-   justify-self: center;
-
+   /* justify-self: center; */
+   justify-self: end;
    button.editbutton {
       width: 70px;
       height: 27px;
@@ -263,21 +254,23 @@ const InlineList = styled.ul`
       border: none;
       display: inline;
       /* padding: 0.5em 1em 0.5em 2em; */
-      border-left: solid 1px #707070;
+      /* border-left: solid 1px #707070; */
    }
    li {
-      padding: 0.3em 0 0.3em 0;
+      display: inline;
+      /* padding: 0.3em 0 0.3em 0;
       font-size: 15px;
       border: none;
-      display: inline;
-      /* padding: 0.5em 2em 0.5em 2em; */
-      border-left: solid 1px #707070;
+      */
+      margin-left: 5px;
+      /* border-left: solid 1px #707070; */
       span {
-         line-height: 17px;
+         /* line-height: 17px; */
+
          display: inline-block;
-         width: 110px;
+         width: 130px;
          text-align: center;
-         margin-left: 15px;
+         /* margin-left: 15px; */
       }
    }
 `
@@ -319,6 +312,10 @@ class MyAnimeList extends Component {
       this.props.onExpandListItem(animeid, expand)
    }
 
+   onChangeStatus = (userId, animeid, status) => {
+      this.props.onChangeStatus(userId, animeid, status)
+   }
+
    render() {
       const { animeList, animeListData } = this.props
       // const { userId } = this.props
@@ -331,8 +328,12 @@ class MyAnimeList extends Component {
                key={i}
                delay={(200 * i) / 2}
                config={config.slow}
-               from={{ opacity: 0 }}
-               to={{ opacity: 1 }}
+               from={{
+                  opacity: 0
+               }}
+               to={{
+                  opacity: 1
+               }}
             >
                {props => (
                   <li
@@ -341,15 +342,13 @@ class MyAnimeList extends Component {
                      className={`${animeList[i].isExpanded ? "expanded" : ""}`}
                   >
                      {/* <p>{i + 1}</p> */}
-
-                     <div>
+                     <div className="noexpand">
                         <img
                            src={animeList[i].posterimage}
                            alt="animesmallimage"
                         />
                         <h1>
-                           {animeList[i].title}
-                           <br />
+                           {animeList[i].title} <br />
                            <span>
                               {animeList[i].subtype},
                               {parseInt(animeList[i].startDate)}
@@ -358,8 +357,12 @@ class MyAnimeList extends Component {
                         <InlineList>
                            <li>
                               <span>
-                                 {" "}
-                                 {animeListData[i].episodes_watched}/
+                                 {animeListData[i].status === "Completed"
+                                    ? animeList[i].episodeCount
+                                       ? animeList[i].episodeCount
+                                       : 0
+                                    : animeListData[i].episodes_watched}
+                                 /
                                  {animeList[i].episodeCount
                                     ? animeList[i].episodeCount
                                     : 0}
@@ -388,10 +391,17 @@ class MyAnimeList extends Component {
                               </span>
                            </li>
                            <li>
-                              <span>{animeListData[i].status}</span>{" "}
+                              {/* <span>{animeListData[i].status}</span> */}
+                              <span>
+                                 <MyStatus
+                                    defaultValue={animeListData[i].status}
+                                    userId={userId}
+                                    animeid={animeList[i].id}
+                                    onChangeStatus={this.onChangeStatus}
+                                 />
+                              </span>
                            </li>
                            <li>
-                              {" "}
                               <span>
                                  <button
                                     className="editbutton"
@@ -402,7 +412,7 @@ class MyAnimeList extends Component {
                                        )
                                     }
                                  >
-                                    Show More
+                                    Info
                                  </button>
                               </span>
                            </li>
@@ -411,49 +421,49 @@ class MyAnimeList extends Component {
                      <table className="table">
                         <tbody>
                            <tr>
-                              <td>Status</td>
+                              <td> Status </td>
                               <td className="right-align">
                                  {animeList[i].status}
                               </td>
                            </tr>
                            <tr>
-                              <td>Start Date</td>
+                              <td> Start Date </td>
                               <td className="right-align">
                                  {animeList[i].startDate}
                               </td>
                            </tr>
                            <tr>
-                              <td>End Date</td>
+                              <td> End Date </td>
                               <td className="right-align">
                                  {animeList[i].endDate}
                               </td>
                            </tr>
                            <tr>
-                              <td>Average Rating</td>
+                              <td> Average Rating </td>
                               <td className="right-align">
                                  {animeList[i].averageRating}
                               </td>
                            </tr>
                            <tr>
-                              <td>Popularity Rank</td>
+                              <td> Popularity Rank </td>
                               <td className="right-align">
                                  {animeList[i].popularityRank}
                               </td>
                            </tr>
                            <tr>
-                              <td>ageRatingGuide</td>
+                              <td> ageRatingGuide </td>
                               <td className="right-align">
                                  {animeList[i].ageRatingGuide}
                               </td>
                            </tr>
                            <tr>
-                              <td>nsfw</td>
+                              <td> nsfw </td>
                               <td className="right-align">
                                  {animeList[i].nsfw ? "yes" : "no"}
                               </td>
                            </tr>
                            <tr>
-                              <td>MY Notes</td>
+                              <td> MY Notes </td>
                               <td className="right-align">
                                  {animeListData[i].notes}
                               </td>
@@ -468,14 +478,13 @@ class MyAnimeList extends Component {
 
       return (
          <MyAnimeListStyles>
-            <h2>My Anime List</h2>
-
+            <h2> My Anime List </h2>
             {!animeListData && !this.props.animeList ? (
                <ListLoad className="loader" key={0}>
                   <GooSpinner size={100} />
                </ListLoad>
             ) : (
-               <AnimeCardsList>{AnimeList}</AnimeCardsList>
+               <AnimeCardsList> {AnimeList} </AnimeCardsList>
             )}
          </MyAnimeListStyles>
          //       <ul>

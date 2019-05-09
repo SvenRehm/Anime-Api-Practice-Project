@@ -3,12 +3,11 @@ import styled from "styled-components"
 //grid in recommended anime/and searchoutput
 
 export const Grid = styled.div`
-  display: grid;
-  grid-gap: 1.2em;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  margin: 100px 1em;
-  background: ${props => props.theme.background};
-  
+   display: grid;
+   grid-gap: 1.2em;
+   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+   margin: 100px 1em;
+   background: ${props => props.theme.background};
 `
 
 //LayoutGrid SingleInfo
@@ -192,141 +191,141 @@ export const LayoutGrid = styled.div`
 `
 //Single moreinfo categorielist
 export const CategoriesList = styled.ul`
-  display: grid;
-  grid-gap: 0.3em;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  list-style: none;
+   display: grid;
+   grid-gap: 0.3em;
+   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+   list-style: none;
 
-  li {
-    position: relative;
-    list-style: none;
-    text-align: center;
-    border: 1px solid ${props => props.theme.border};
-    text-decoration: none;
-    line-height: 40px;
-    height: 40px;
-    background: ${props => props.theme.primary};
-    &:hover {
-      color: ${props => props.theme.primary};
-      background: ${props => props.theme.accent};
-    }
-    a {
-      width: 100%;
-      font-weight: 500;
-      height: 100%;
-      display: blocK;
+   li {
+      position: relative;
+      list-style: none;
+      text-align: center;
+      border: 1px solid ${props => props.theme.border};
       text-decoration: none;
-      color: ${props => props.theme.secondary};
+      line-height: 40px;
+      height: 40px;
       background: ${props => props.theme.primary};
-      transition: all 250ms ease-in-out;
-
       &:hover {
-        color: ${props => props.theme.primary};
-        background: ${props => props.theme.accent};
+         color: ${props => props.theme.primary};
+         background: ${props => props.theme.accent};
       }
-    }
-  }
+      a {
+         width: 100%;
+         font-weight: 500;
+         height: 100%;
+         display: blocK;
+         text-decoration: none;
+         color: ${props => props.theme.secondary};
+         background: ${props => props.theme.primary};
+         transition: all 250ms ease-in-out;
+
+         &:hover {
+            color: ${props => props.theme.primary};
+            background: ${props => props.theme.accent};
+         }
+      }
+   }
 `
 
 //singlemoreinfo  ranks
 export const Rankings = styled.div`
-  grid-column: 6 / span 5;
-  grid-row: 5;
-  align-self: start;
-  margin-top: 1em;
-  z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  border-bottom: solid 1px ${props => props.theme.border};
-  .heart {
-    color: red;
-    width: 30px;
-    height: 30px;
-    vertical-align: middle;
-    transform: translateY(-10%);
-    margin-right: 10px;
-  }
-  .star {
-    color: gold;
-    width: 30px;
-    height: 30px;
-    vertical-align: middle;
-    transform: translateY(-10%);
-    margin-right: 10px;
-  }
+   grid-column: 6 / span 5;
+   grid-row: 5;
+   align-self: start;
+   margin-top: 1em;
+   z-index: 2;
+   display: grid;
+   grid-template-columns: repeat(6, minmax(0, 1fr));
+   border-bottom: solid 1px ${props => props.theme.border};
+   .heart {
+      color: red;
+      width: 30px;
+      height: 30px;
+      vertical-align: middle;
+      transform: translateY(-10%);
+      margin-right: 10px;
+   }
+   .star {
+      color: gold;
+      width: 30px;
+      height: 30px;
+      vertical-align: middle;
+      transform: translateY(-10%);
+      margin-right: 10px;
+   }
 
-  h2 {
-    margin-bottom: 1em;
-    grid-column: 1 / span 3;
-    font-weight: 300;
-    text-align: left;
-    color: ${props => props.theme.secondary};
-  }
-  h2:last-child {
-    color: ${props => props.theme.secondary};
-    grid-column: 4 / span 3;
-    font-weight: 300;
-    justify-content: end;
-    text-align: right;
-  }
+   h2 {
+      margin-bottom: 1em;
+      grid-column: 1 / span 3;
+      font-weight: 300;
+      text-align: left;
+      color: ${props => props.theme.secondary};
+   }
+   h2:last-child {
+      color: ${props => props.theme.secondary};
+      grid-column: 4 / span 3;
+      font-weight: 300;
+      justify-content: end;
+      text-align: right;
+   }
 `
 
 //animecard
 
 export const AnimeCard = styled.div`
-  div.load {
-    width: 100%;
-    min-height: 270px;
-    max-height: 300px;
-    cursor: pointer;
-    background-color: ${props => props.theme.hover};
-    margin-bottom: 5px;
-  }
-  img {
-    /* max-width: 180px; */
-    width: 100%;
-    height: auto;
-    cursor: pointer;
-  }
-  p {
-    font-size: 0.7em;
-    position: absolute;
-    top: 10px;
-    left: -10px;
-    padding: 5px;
-    border: solid 1px ${props => props.theme.border};
-    color: ${props => props.theme.secondary};
-    background-color: ${props => props.theme.primary};
+   div.load {
+      width: 100%;
+      min-height: 270px;
+      max-height: 300px;
+      cursor: pointer;
+      background-color: ${props => props.theme.hover};
+      margin-bottom: 5px;
+   }
+   img {
+      /* max-width: 180px; */
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+   }
+   p {
+      font-size: 0.7em;
+      position: absolute;
+      top: 10px;
+      left: -10px;
+      padding: 5px;
+      border: solid 1px ${props => props.theme.border};
+      color: ${props => props.theme.secondary};
+      background-color: ${props => props.theme.primary};
 
-    .star {
-      color: gold;
-    }
-  }
-  h4 {
-    font-size: 0.91em;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    max-width: 180px;
-  }
-  h5 {
-    font-weight: 400;
-    font-size: 0.7em;
-    color: ${props => props.theme.secondary};
-  }
-  a {
-    text-decoration: none;
-    color: ${props => props.theme.secondary};
-    padding: 0;
-    margin: 0;
-    font-size: 0.8em;
-    cursor: pointer;
-    transition: all 200ms ease-in-out;
-    color: ${props => props.theme.color};
-    &:hover {
-      color: ${props => props.theme.accent};
-    }
-  }
+      .star {
+         color: gold;
+      }
+   }
+   h4 {
+      font-size: 0.91em;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-width: 180px;
+   }
+   h5 {
+      font-weight: 400;
+      font-size: 0.7em;
+      color: ${props => props.theme.secondary};
+   }
+   a {
+      text-decoration: none;
+      color: ${props => props.theme.secondary};
+      padding: 0;
+      margin: 0;
+      font-size: 0.8em;
+      cursor: pointer;
+      transition: all 200ms ease-in-out;
+      color: ${props => props.theme.color};
+      &:hover {
+         color: ${props => props.theme.accent};
+      }
+   }
 `
 
 // export const AnimeCard = styled.div`

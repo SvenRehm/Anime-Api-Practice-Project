@@ -1,3 +1,6 @@
+import axios from "axios"
+
+const api = "http://localhost:5000"
 //ACTION THAT USES THE LINKS
 export const requestList = animelistids => dispatch => {
    dispatch({
@@ -57,4 +60,20 @@ export const ExpandListItem = (animeid, expand) => dispatch => {
       animeid: animeid,
       payload: expand
    })
+}
+
+export const changeStatus = (id, animeid, status) => dispatch => {
+   axios
+      .put(`${api}/update`, {
+         id: id,
+         anime_id: animeid,
+         status: status
+      })
+      .then(res => {
+         dispatch({
+            type: "CHANGE_STATUS_ANIMELIST",
+            animeid: animeid,
+            payload: status
+         })
+      })
 }

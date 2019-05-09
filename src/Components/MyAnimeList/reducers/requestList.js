@@ -25,6 +25,10 @@ export const requestList = (state = initialState, action = {}) => {
             animeList: animelist,
             isLoading: false
          }
+      case "CHANGE_STATUS_ANIMELIST":
+         return {
+            ...state
+         }
 
       case "EXPAND_LIST_ITEM":
          const expandedlist = state.animeList.map(items => {
