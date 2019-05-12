@@ -136,7 +136,31 @@ class RecommendedAnime extends Component {
       //     // </Spring>
       //   )
       // })
-
+      const RecommendedAnime = (
+         <Trail
+            items={recommendedAnime}
+            keys={recommendedAnime => recommendedAnime.id}
+            from={{ opacity: 0 }}
+            to={{ opacity: 1 }}
+            enter={{ opacity: 1 }}
+            leave={{ opacity: 0 }}
+            config={config.stiff}
+         >
+            {recommendedAnime => props => (
+               <RecommendedAnimeCard
+                  style={props}
+                  key={recommendedAnime.id * 2}
+                  id={recommendedAnime.id}
+                  src={recommendedAnime.posterImage}
+                  title={recommendedAnime.cannontitle}
+                  averageRating={recommendedAnime.averageRating}
+                  episodeCount={recommendedAnime.episodeCount}
+                  ratingRank={recommendedAnime.ratingRank}
+                  isLoading={isLoading}
+               />
+            )}
+         </Trail>
+      )
       return (
          <InfiniteScroll
             pageStart={0}
@@ -160,31 +184,7 @@ class RecommendedAnime extends Component {
             <SortStatus onChangeStatus={this.props.onChangeStatus} />
             <SortTypeBox onChangeSelectType={this.props.onChangeSelectType} />
             <SortFilterBox onChangeSelect={this.props.onChangeSelect} />
-            <Grid>
-               <Trail
-                  items={recommendedAnime}
-                  keys={recommendedAnime => recommendedAnime.id}
-                  from={{ opacity: 0 }}
-                  to={{ opacity: 1 }}
-                  enter={{ opacity: 1 }}
-                  leave={{ opacity: 0 }}
-                  config={config.stiff}
-               >
-                  {recommendedAnime => props => (
-                     <RecommendedAnimeCard
-                        style={props}
-                        key={recommendedAnime.id * 2}
-                        id={recommendedAnime.id}
-                        src={recommendedAnime.posterImage}
-                        title={recommendedAnime.cannontitle}
-                        averageRating={recommendedAnime.averageRating}
-                        episodeCount={recommendedAnime.episodeCount}
-                        ratingRank={recommendedAnime.ratingRank}
-                        isLoading={isLoading}
-                     />
-                  )}
-               </Trail>
-            </Grid>
+            <Grid>{RecommendedAnime}</Grid>
             {/* <Grid>{RecommendedAnime}</Grid> */}
          </InfiniteScroll>
       )

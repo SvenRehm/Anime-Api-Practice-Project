@@ -69,8 +69,11 @@ export const LayoutGrid = styled.div`
     z-index: 2;
     
     img {
-      max-width: 80%;
-      filter: brightness(70%);
+  
+    width: 80%;
+    min-height: 500px; 
+    height: auto;
+    
     }
     table {
       color: ${props => props.theme.primary_text};
@@ -283,6 +286,7 @@ export const AnimeCard = styled.div`
    img {
       /* max-width: 180px; */
       width: 100%;
+      min-height: 271px;
       height: auto;
       cursor: pointer;
    }

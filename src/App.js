@@ -18,32 +18,8 @@ import ScrollToTop from "./Components/ScrollToTop/ScrollToTop"
 import { ThemeProvider, createGlobalStyle } from "styled-components"
 import Auth from "./Components/Auth/Auth"
 import { createBrowserHistory } from "history"
-import { library } from "@fortawesome/fontawesome-svg-core"
-import {
-   faHeart,
-   faStar,
-   faPlusSquare,
-   faPlusCircle,
-   faMinusCircle,
-   faSpinner
-} from "@fortawesome/free-solid-svg-icons"
-import {
-   faPlusSquare as farPlusSquare,
-   faMinusSquare as farMinusSquare
-} from "@fortawesome/free-regular-svg-icons"
 
 export const history = createBrowserHistory()
-
-//fontawesome
-library.add(
-   faHeart,
-   faStar,
-   faPlusSquare,
-   faPlusCircle,
-   faMinusCircle,
-   faSpinner
-)
-library.add(farPlusSquare, farMinusSquare)
 
 const mapStateToProps = state => {
    return {
@@ -96,10 +72,12 @@ const blacktheme = {
 const blacktheme2 = {
    primary: "#212121",
    primary_dark: "#121212",
-   primary_light: "#484848",
+   primary_light: "#424242",
+   primary_light2: "#616161",
 
    secondary: "#1976d2",
    secondary_dark: "#004ba0",
+
    secondary_light: "#63a4ff",
 
    primary_text: "#ffffff",
@@ -124,7 +102,26 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: ${props => props.theme.fontFamily};
     background:${props => props.theme.primary_dark};
+    
+   
   }
+  body::-webkit-scrollbar-track
+{
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #212121;
+}
+body::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #212121;
+}
+body::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
 `
 
 class App extends Component {

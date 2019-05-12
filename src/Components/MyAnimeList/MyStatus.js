@@ -20,7 +20,7 @@ const MultiSelect = styled(Select)`
 padding:1px;
   }
   .react-select__single-value{
-    color:${props => props.theme.hovertext};
+    color:${props => props.theme.primary_text};
     font-size:11px;
   }
   .react-select__indicator-separator {
@@ -33,20 +33,20 @@ padding:1px;
     color: ${props => props.theme.primary_text};
     &:hover {
       border-color: none;
-  color:${props => props.theme.hovertext};
-      background: ${props => props.theme.hover};
+  color:${props => props.theme.primary_text};
+      background: ${props => props.theme.primary_light};
     }
     
   }
   .react-select__control {
     /* background: ${props => props.theme.primary}; */
-    background: ${props => props.theme.primary_light};
+    background: ${props => props.theme.primary};
     min-height:30px;
     width: 135px;
   
     color: ${props => props.theme.primary_text};
     /* border-color:${props => props.theme.border}; */
-        border-color:${props => props.theme.primary_dark};
+        border-color:${props => props.theme.primary_light2};
     /* border: 2px solid ${props => props.theme.border}; */
     border-radius: 0;
   
@@ -54,12 +54,12 @@ padding:1px;
     cursor: pointer;
     box-shadow: none;
     &:hover{
-      border-color:${props => props.theme.primary_dark};
+      border-color:${props => props.theme.primary_light2};
       /* border-color:${props => props.theme.border}; */
       color:${props => props.theme.primary_text};
     }
     &:focus{
-      border-color:${props => props.theme.primary_dark};
+      border-color:${props => props.theme.primary_light2};
       /* border-color:${props => props.theme.border}; */
       color:${props => props.theme.primary_text};
     }
@@ -88,7 +88,7 @@ padding:1px;
 
  
 .react-select__control--is-focused{
-  border-color:${props => props.theme.primary_dark};
+  border-color:${props => props.theme.primary_medium};
   box-shadow:none;
   /* border-color:${props => props.theme.border}; */
   color:${props => props.theme.primary_text};

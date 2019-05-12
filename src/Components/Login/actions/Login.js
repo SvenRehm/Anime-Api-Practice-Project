@@ -56,27 +56,6 @@ export const Authenticate = jwt => dispatch => {
       })
 }
 
-// export const getAnimelist = jwt => dispatch => {
-//    axios
-//       .get(`${api}/animelist`, {
-//          headers: { Authorization: `Bearer ${jwt}` }
-//       })
-//       .then(res => {
-//          const animelistIDS = res.data.map((animeid, i) => {
-//             return animeid.anime_id
-//          })
-//          dispatch({
-//             type: "GET_ANIMELIST",
-//             payload: res.data,
-//             anime_id: animelistIDS
-//          })
-//       })
-//       .catch(err => {
-//          localStorage.removeItem("cool-jwt")
-//          // history.push("/Login")
-//       })
-// }
-
 export const getAnimelist = id => dispatch => {
    axios
 
