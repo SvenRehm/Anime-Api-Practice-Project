@@ -89,27 +89,24 @@ export const LayoutGrid = styled.div`
     }
     button {
       position: absolute;
-      top: 0;
-      left: 0;
+     margin: 40% 20% 20% 25%;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
       cursor: pointer;
-      border: 1px solid ${props => props.theme.border};
-      width: 80%;
-      height: 81%;
+      border-radius:50%;
+      border: 1px solid ${props => props.theme.primary_dark};
+
+      width:  150px;
+      height: 150px;
       color: ${props => props.theme.secondary};
       /* background: ${props => props.theme.primary}; */
       /* background:rgba(39,39,39,.7); */
-      background:transparent;
+      background:rgba(25,118,210, .3);
+   
+      box-shadow: 5px 5px 10px #030303;
       text-align: center;
       transition:all 350ms ease-in;
 
-      /* &:hover {
-        color: ${props => props.theme.hovertext};
-     
-      } */
-      &:hover img{
-        filter: brightness(100%);
-     
-      }
       .minusicon {
         width: 70px;
         height: 70px;
@@ -124,14 +121,11 @@ export const LayoutGrid = styled.div`
         vertical-align: middle;
         transition:all 350ms ease-in;
       }
-      &:hover .minusicon {
-        color: ${props => props.theme.primary};
+      &:hover {
+        background:rgba(25,118,210, .5);
         
       }
-      &:hover .plusicon {
-        color: ${props => props.theme.primary};
-       
-      }
+      
       &:focus {
         outline: none;
       }

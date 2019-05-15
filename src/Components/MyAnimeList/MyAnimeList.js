@@ -291,15 +291,41 @@ const MyAnimeListStyles = styled.div`
 `
 
 class MyAnimeList extends Component {
+   constructor(props) {
+      super()
+      this.state = {
+         animeids: props.animeids,
+         animeList: props.animeList
+      }
+   }
+
    componentDidMount() {
       if (this.props.animeListData) {
          this.props.onRequestList(this.props.animeids)
       }
    }
-   componentWillReceiveProps(newProps) {
-      if (newProps.animeListData !== this.props.animeListData) {
-         this.props.onRequestList(newProps.animeids)
+   // componentWillReceiveProps(newProps) {
+   //    console.log(newProps.animeListData)
+   //    if (newProps.animeListData !== this.props.animeListData) {
+   //       this.props.onRequestList(newProps.animeids)
+   //    }
+   // }
+   componentDidUpdate(prevProps, prevState) {
+      if (prevState.animeids !== this.state.animeids) {
+         console.log(
+            "prevstate",
+            prevState.animeids,
+            "current ",
+            this.state.animeids
+         )
+         this.props.onRequestList(this.state.animeids)
       }
+   }
+
+   static getDerivedStateFromProps(nextProps, prevState) {
+      if (nextProps.animeids !== prevState.animeids) {
+         return { animeids: nextProps.animeids }
+      } else return null
    }
 
    removeFromPlaylist = (userid, animeid) => {

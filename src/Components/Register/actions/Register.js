@@ -1,45 +1,46 @@
 // import { history } from "../../../App"
 import axios from "axios"
 
-const api = "http://localhost:5000"
+const api = "https://powerful-cove-90393.herokuapp.com"
+
 export const changeRegisterPasswordField = text => {
-  return {
-    type: "CHANGE_REGISTER_PASSWORD_FIELD",
-    payload: text
-  }
+   return {
+      type: "CHANGE_REGISTER_PASSWORD_FIELD",
+      payload: text
+   }
 }
 export const changeRegisterNameField = text => {
-  return {
-    type: "CHANGE_REGISTER_NAME_FIELD",
-    payload: text
-  }
+   return {
+      type: "CHANGE_REGISTER_NAME_FIELD",
+      payload: text
+   }
 }
 export const changeRegisterEmailField = text => {
-  return {
-    type: "CHANGE_REGISTER_EMAIL_FIELD",
-    payload: text
-  }
+   return {
+      type: "CHANGE_REGISTER_EMAIL_FIELD",
+      payload: text
+   }
 }
 
 export const submitRegister = (
-  registerEmail,
-  registerPassword,
-  registerName
+   registerEmail,
+   registerPassword,
+   registerName
 ) => dispatch => {
-  axios
-    .post(`${api}/register`, {
-      username: registerName,
-      email: registerEmail,
-      password: registerPassword
-    })
-
-    .then(data => {
-      dispatch({
-        type: "SUBMIT_REGISTER",
-        payload: data.data
+   axios
+      .post(`${api}/register`, {
+         username: registerName,
+         email: registerEmail,
+         password: registerPassword
       })
-    })
-    .catch(error =>
-      dispatch({ type: "SUBMIT_REGISTER_FAILED", payload: error })
-    )
+
+      .then(data => {
+         dispatch({
+            type: "SUBMIT_REGISTER",
+            payload: data.data
+         })
+      })
+      .catch(error =>
+         dispatch({ type: "SUBMIT_REGISTER_FAILED", payload: error })
+      )
 }

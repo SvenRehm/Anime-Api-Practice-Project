@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const api = "http://localhost:5000"
+const api = "https://powerful-cove-90393.herokuapp.com"
 //ACTION THAT USES THE LINKS
 export const requestList = animelistids => dispatch => {
    dispatch({

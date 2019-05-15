@@ -38,22 +38,6 @@ const mapDispatchToProps = dispatch => {
       onLogout: () => dispatch(Logout())
    }
 }
-// const themeblack = {
-//   primary: "#171717",
-//   secondary: "#f9f9f9",
-//   accent: "#e50914",
-//   darkgrey: "#221f1f",
-//   lightgrey: "#272727",
-//   fontFamily: "Roboto"
-// }
-// const themewhite = {
-//   primary: "#F5F5F5", //darkest
-//   secondary: "#221f1f",
-//   accent: "#FF0000", //red
-//   background: "#FAFAFA",
-//   border: "#BABABA",
-//   fontFamily: "Roboto"
-// }
 
 // eslint-disable-next-line
 const blacktheme = {

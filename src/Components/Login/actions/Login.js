@@ -14,7 +14,7 @@ export const changeEmailField = text => {
    }
 }
 
-const api = "http://localhost:5000"
+const api = "https://powerful-cove-90393.herokuapp.com"
 
 export const submitLogin = (loginEmail, loginPassword) => dispatch => {
    axios
