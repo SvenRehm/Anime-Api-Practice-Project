@@ -88,7 +88,7 @@ padding:1px;
 
  
 .react-select__control--is-focused{
-  border-color:${props => props.theme.primary_medium};
+  border-color:${props => props.theme.primary_light2};
   box-shadow:none;
   /* border-color:${props => props.theme.border}; */
   color:${props => props.theme.primary_text};
