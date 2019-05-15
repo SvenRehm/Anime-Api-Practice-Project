@@ -28,7 +28,7 @@ export default function(ComposedComponent) {
             this.props.history.push("/Login")
          } else {
             this.props.onAuthenticate(jwt)
-            this.props.onGetAnimelist(this.props.id)
+            // this.props.onGetAnimelist(this.props.id)
          }
       }
 

@@ -14,7 +14,7 @@ export const changeEmailField = text => {
    }
 }
 
-const api = "http://localhost:5000"
+const api = "https://powerful-cove-90393.herokuapp.com"
 
 export const submitLogin = (loginEmail, loginPassword) => dispatch => {
    axios
@@ -55,27 +55,6 @@ export const Authenticate = jwt => dispatch => {
          history.push("/Login")
       })
 }
-
-// export const getAnimelist = jwt => dispatch => {
-//    axios
-//       .get(`${api}/animelist`, {
-//          headers: { Authorization: `Bearer ${jwt}` }
-//       })
-//       .then(res => {
-//          const animelistIDS = res.data.map((animeid, i) => {
-//             return animeid.anime_id
-//          })
-//          dispatch({
-//             type: "GET_ANIMELIST",
-//             payload: res.data,
-//             anime_id: animelistIDS
-//          })
-//       })
-//       .catch(err => {
-//          localStorage.removeItem("cool-jwt")
-//          // history.push("/Login")
-//       })
-// }
 
 export const getAnimelist = id => dispatch => {
    axios

@@ -18,32 +18,8 @@ import ScrollToTop from "./Components/ScrollToTop/ScrollToTop"
 import { ThemeProvider, createGlobalStyle } from "styled-components"
 import Auth from "./Components/Auth/Auth"
 import { createBrowserHistory } from "history"
-import { library } from "@fortawesome/fontawesome-svg-core"
-import {
-   faHeart,
-   faStar,
-   faPlusSquare,
-   faPlusCircle,
-   faMinusCircle,
-   faSpinner
-} from "@fortawesome/free-solid-svg-icons"
-import {
-   faPlusSquare as farPlusSquare,
-   faMinusSquare as farMinusSquare
-} from "@fortawesome/free-regular-svg-icons"
 
 export const history = createBrowserHistory()
-
-//fontawesome
-library.add(
-   faHeart,
-   faStar,
-   faPlusSquare,
-   faPlusCircle,
-   faMinusCircle,
-   faSpinner
-)
-library.add(farPlusSquare, farMinusSquare)
 
 const mapStateToProps = state => {
    return {
@@ -62,28 +38,12 @@ const mapDispatchToProps = dispatch => {
       onLogout: () => dispatch(Logout())
    }
 }
-// const themeblack = {
-//   primary: "#171717",
-//   secondary: "#f9f9f9",
-//   accent: "#e50914",
-//   darkgrey: "#221f1f",
-//   lightgrey: "#272727",
-//   fontFamily: "Roboto"
-// }
-// const themewhite = {
-//   primary: "#F5F5F5", //darkest
-//   secondary: "#221f1f",
-//   accent: "#FF0000", //red
-//   background: "#FAFAFA",
-//   border: "#BABABA",
-//   fontFamily: "Roboto"
-// }
 
 // eslint-disable-next-line
 const blacktheme = {
    primary: "#272727", //darkest
    secondary: "#d3d3d3", //white
-   accent: "#FF0000", //red
+   accent: "#0088f1", //red
    background: "#121212",
    border: "#121212",
    hover: "#3d3d3d",
@@ -91,6 +51,25 @@ const blacktheme = {
    hovertext: "#FBFAF5",
    fontFamily: "'Merriweather Sans', sans-serif;"
 }
+
+// eslint-disable-next-line
+const blacktheme2 = {
+   primary: "#212121",
+   primary_dark: "#121212",
+   primary_light: "#424242",
+   primary_light2: "#616161",
+
+   secondary: "#1976d2",
+   secondary_dark: "#004ba0",
+
+   secondary_light: "#63a4ff",
+
+   primary_text: "#ffffff",
+   secondary_text: "#ffffff",
+
+   fontFamily: "'Roboto', sans-serif;"
+}
+
 // eslint-disable-next-line
 const whitetheme = {
    primary: "#FBFAF5", //hell weis
@@ -106,15 +85,34 @@ const whitetheme = {
 const GlobalStyle = createGlobalStyle`
   body {
     font-family: ${props => props.theme.fontFamily};
-    background:${props => props.theme.background};
+    background:${props => props.theme.primary_dark};
+    
+   
   }
+  body::-webkit-scrollbar-track
+{
+	box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: #212121;
+}
+body::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: #212121;
+}
+body::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
 `
 
 class App extends Component {
    constructor() {
       super()
       this.state = {
-         theme: blacktheme
+         theme: blacktheme2
       }
    }
    render() {
