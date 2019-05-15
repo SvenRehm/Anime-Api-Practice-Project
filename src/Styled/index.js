@@ -175,7 +175,8 @@ export const LayoutGrid = styled.div`
   }
   ul {
     grid-column: 6 / span 5;
-    grid-row: 6;
+    grid-row: 7;
+    align-self: center;
   }
 
   iframe {
@@ -226,9 +227,9 @@ export const CategoriesList = styled.ul`
 //singlemoreinfo  ranks
 export const Rankings = styled.div`
    grid-column: 6 / span 5;
-   grid-row: 5;
-   align-self: start;
-   margin-top: 1em;
+   grid-row: 5 / span 2;
+   align-self: center;
+   /* margin-top: 1em; */
    z-index: 2;
    display: grid;
    grid-template-columns: repeat(6, minmax(0, 1fr));
