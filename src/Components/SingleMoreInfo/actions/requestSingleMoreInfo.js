@@ -3,11 +3,11 @@ import {
    REQUEST_SINGLE_MORE_INFO_SUCCESS,
    REQUEST_SINGLE_MORE_INFO_FAILED
 } from "../../../constants/action-types"
-import { reloadUser } from "../../Login/actions/Login"
-import { getJwt } from "../../helpers/jwt"
+// import { reloadUser } from "../../Login/actions/Login"
+// import { getJwt } from "../../helpers/jwt"
 
 export const requestSingleMoreInfo = animeid => dispatch => {
-   const jwt = getJwt()
+   // const jwt = getJwt()
    dispatch({
       type: REQUEST_SINGLE_MORE_INFO_PENDING,
       animeid
@@ -21,7 +21,7 @@ export const requestSingleMoreInfo = animeid => dispatch => {
             type: REQUEST_SINGLE_MORE_INFO_SUCCESS,
             payload: info
          })
-         dispatch(reloadUser(jwt))
+         // dispatch(reloadUser(jwt))
       })
       .catch(error =>
          dispatch({ type: REQUEST_SINGLE_MORE_INFO_FAILED, payload: error })

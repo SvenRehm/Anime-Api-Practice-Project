@@ -300,6 +300,7 @@ class MyAnimeList extends Component {
    }
 
    componentDidMount() {
+      console.log(this.props)
       if (this.props.animeListData) {
          this.props.onRequestList(this.props.animeids)
       }
@@ -312,12 +313,6 @@ class MyAnimeList extends Component {
    // }
    componentDidUpdate(prevProps, prevState) {
       if (prevState.animeids !== this.state.animeids) {
-         console.log(
-            "prevstate",
-            prevState.animeids,
-            "current ",
-            this.state.animeids
-         )
          this.props.onRequestList(this.state.animeids)
       }
    }
@@ -348,168 +343,6 @@ class MyAnimeList extends Component {
       const { animeList, animeListData } = this.props
       const { userId } = this.props
 
-      // const AnimeList = animeList.map((category, i) => {
-      //    const { userId } = this.props
-
-      //    return (
-      //       <Spring
-      //          key={i}
-      //          delay={250 * i}
-      //          from={{
-      //             opacity: 0
-      //          }}
-      //          to={{
-      //             opacity: 1
-      //          }}
-      //       >
-      //          {props => (
-      //             <li
-      //                style={props}
-      //                key={i}
-      //                className={`${animeList[i].isExpanded ? "expanded" : ""}`}
-      //             >
-      //                {/* <p>{i + 1}</p> */}
-      //                <div className="noexpand">
-      //                   <img
-      //                      src={animeList[i].posterimage}
-      //                      alt="animesmallimage"
-      //                   />
-      //                   <h1>
-      //                      {animeList[i].title} <br />
-      //                      <span>
-      //                         {animeList[i].subtype},
-      //                         {parseInt(animeList[i].startDate)}
-      //                      </span>
-      //                   </h1>
-      //                   <InlineList>
-      //                      <li>
-      //                         <span>
-      //                            {animeListData[i].status === "Completed"
-      //                               ? animeList[i].episodeCount
-      //                                  ? animeList[i].episodeCount
-      //                                  : 0
-      //                               : animeListData[i].episodes_watched}
-      //                            /
-      //                            {animeList[i].episodeCount
-      //                               ? animeList[i].episodeCount
-      //                               : 0}
-      //                            <button
-      //                               className="plusbutton"
-      //                               disabled={
-      //                                  animeListData[i].episodes_watched >=
-      //                                  animeList[i].episodeCount
-      //                               }
-      //                               onClick={() =>
-      //                                  this.addEpisodeToAnime(
-      //                                     userId,
-      //                                     animeList[i].id,
-      //                                     animeListData[i].episodes_watched + 1
-      //                                  )
-      //                               }
-      //                            >
-      //                               <IconContext.Provider
-      //                                  value={{
-      //                                     className: "plusicon"
-      //                                  }}
-      //                               >
-      //                                  <IoMdAdd />
-      //                               </IconContext.Provider>
-      //                            </button>
-      //                         </span>
-      //                      </li>
-      //                      <li>
-      //                         {/* <span>{animeListData[i].status}</span> */}
-      //                         <span>
-      //                            <MyStatus
-      //                               defaultValue={animeListData[i].status}
-      //                               userId={userId}
-      //                               animeid={animeList[i].id}
-      //                               onChangeStatus={this.onChangeStatus}
-      //                            />
-      //                         </span>
-      //                      </li>
-      //                      <li>
-      //                         <span>
-      //                            <button
-      //                               className="editbutton"
-      //                               onClick={() =>
-      //                                  this.expandListItem(
-      //                                     animeList[i].id,
-      //                                     !animeList[i].isExpanded
-      //                                  )
-      //                               }
-      //                            >
-      //                               Info
-      //                               <IconContext.Provider
-      //                                  value={{
-      //                                     className: "dropdownarrow"
-      //                                  }}
-      //                               >
-      //                                  <IoMdArrowDropdown />
-      //                               </IconContext.Provider>
-      //                            </button>
-      //                         </span>
-      //                      </li>
-      //                   </InlineList>
-      //                </div>
-      //                <table className="table">
-      //                   <tbody>
-      //                      <tr>
-      //                         <td> Status </td>
-      //                         <td className="right-align">
-      //                            {animeList[i].status}
-      //                         </td>
-      //                      </tr>
-      //                      <tr>
-      //                         <td> Start Date </td>
-      //                         <td className="right-align">
-      //                            {animeList[i].startDate}
-      //                         </td>
-      //                      </tr>
-      //                      <tr>
-      //                         <td> End Date </td>
-      //                         <td className="right-align">
-      //                            {animeList[i].endDate}
-      //                         </td>
-      //                      </tr>
-      //                      <tr>
-      //                         <td> Average Rating </td>
-      //                         <td className="right-align">
-      //                            {animeList[i].averageRating}
-      //                         </td>
-      //                      </tr>
-      //                      <tr>
-      //                         <td> Popularity Rank </td>
-      //                         <td className="right-align">
-      //                            {animeList[i].popularityRank}
-      //                         </td>
-      //                      </tr>
-      //                      <tr>
-      //                         <td> ageRatingGuide </td>
-      //                         <td className="right-align">
-      //                            {animeList[i].ageRatingGuide}
-      //                         </td>
-      //                      </tr>
-      //                      <tr>
-      //                         <td> nsfw </td>
-      //                         <td className="right-align">
-      //                            {animeList[i].nsfw ? "yes" : "no"}
-      //                         </td>
-      //                      </tr>
-      //                      <tr>
-      //                         <td> MY Notes </td>
-      //                         <td className="right-align">
-      //                            {animeListData[i].notes}
-      //                         </td>
-      //                      </tr>
-      //                   </tbody>
-      //                </table>
-      //             </li>
-      //          )}
-      //       </Spring>
-      //    )
-      // })
-
       const AnimeList = animeList.map((category, i) => {
          return (
             <li
@@ -530,11 +363,9 @@ class MyAnimeList extends Component {
                   <InlineList>
                      <li>
                         <span>
-                           {animeListData[i].status === "Completed"
-                              ? animeList[i].episodeCount
-                                 ? animeList[i].episodeCount
-                                 : 0
-                              : animeListData[i].episodes_watched}
+                           {animeListData[i].episodes_watched
+                              ? animeListData[i].episodes_watched
+                              : 0}
                            /
                            {animeList[i].episodeCount
                               ? animeList[i].episodeCount
@@ -567,7 +398,11 @@ class MyAnimeList extends Component {
                         {/* <span>{animeListData[i].status}</span> */}
                         <span>
                            <MyStatus
-                              defaultValue={animeListData[i].status}
+                              defaultValue={
+                                 animeListData[i].status
+                                    ? animeListData[i].status
+                                    : null
+                              }
                               userId={userId}
                               animeid={animeList[i].id}
                               onChangeStatus={this.onChangeStatus}
@@ -661,42 +496,13 @@ class MyAnimeList extends Component {
                <AnimeCardsList> {AnimeList} </AnimeCardsList>
             )}
          </MyAnimeListStyles>
-         //       <ul>
-         //          <Transition
-         //             items={animeList}
-         //             keys={item => item.id}
-         //             from={{ opacity: 0 }}
-         //             enter={{ opacity: 1 }}
-         //             leave={{ opacity: 0 }}
-         //             trail={150}
-         //          >
-         //             {item => props => (
-         //                <li style={props} key={item.id}>
-         //                   <p>{+1}</p>
-         //                   <img src={item.posterimage} alt="animesmallimage" />
-         //                   <h1>{item.title}</h1>
-
-         //                   <h3>
-         //                      {item.subtype}, {parseInt(item.startDate)}
-         //                   </h3>
-         //                   <button
-         //                      onClick={() =>
-         //                         this.removeFromPlaylist(userId, item.id)
-         //                      }
-         //                   >
-         //                      <FontAwesomeIcon
-         //                         className="minusicon"
-         //                         icon={["fas", "minus-circle"]}
-         //                      />
-         //                   </button>
-         //                </li>
-         //             )}
-         //          </Transition>
-         //       </ul>
-         //    )}
-         // </MyAnimeListStyles>
       )
    }
+}
+
+MyAnimeList.defaultProps = {
+   status: "secondary",
+   label: "Button Text"
 }
 
 export default connect(

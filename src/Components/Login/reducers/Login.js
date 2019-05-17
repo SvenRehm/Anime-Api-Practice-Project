@@ -6,7 +6,13 @@ const initialState = {
    user: {
       id: "0",
       animelist: [
-         { id: "", anime_id: "", episodes_watched: "", status: "", notes: "" }
+         {
+            id: "0",
+            anime_id: "0",
+            episodes_watched: "0",
+            status: "none",
+            notes: "none"
+         }
       ],
       animeids: []
    }
@@ -102,9 +108,22 @@ export const Login = (state = initialState, action = {}) => {
                animelist: [...animelist]
             }
          }
+      // case "DELETE_FROM_PLAYLIST":
+      //    return {
+      //       ...state
+      //    }
+
       case "DELETE_FROM_PLAYLIST":
+         const deleteList = state.user.animeids.filter(
+            items => items !== action.payload
+         )
          return {
-            ...state
+            ...state,
+
+            user: {
+               ...state.user,
+               animeids: deleteList
+            }
          }
 
       case "LOGOUT":
