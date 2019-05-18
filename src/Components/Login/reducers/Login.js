@@ -86,7 +86,17 @@ export const Login = (state = initialState, action = {}) => {
             ...state,
             user: {
                ...state.user,
-               animeids: [...state.user.animeids, action.payload]
+               animeids: [...state.user.animeids, action.payload],
+               animelist: [
+                  ...state.user.animelist,
+                  {
+                     id: action.id,
+                     anime_id: action.animeid,
+                     status: "On Hold",
+                     episodes_watched: 0,
+                     notes: ""
+                  }
+               ]
             }
          }
 
@@ -125,7 +135,28 @@ export const Login = (state = initialState, action = {}) => {
                animeids: deleteList
             }
          }
+      case "CHANGE_STATUS_ANIMELIST":
+         // return {
+         //    ...state
+         // }
+         const statuschange = state.user.animelist.map(items => {
+            // eslint-disable-next-line
+            if (items.anime_id == action.animeid) {
+               items = { ...items, status: action.payload }
+               return items
+            } else {
+               return items
+            }
+         })
+         console.log(statuschange)
 
+         return {
+            ...state,
+            user: {
+               ...state.user,
+               animelist: [...statuschange]
+            }
+         }
       case "LOGOUT":
          return {
             ...state,

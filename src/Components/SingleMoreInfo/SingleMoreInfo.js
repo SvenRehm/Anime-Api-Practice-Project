@@ -268,17 +268,20 @@ class SingleMoreInfo extends Component {
                         <IoMdAdd />
                      </IconContext.Provider>
                   </button>
-               ) : (
-                  <button onClick={this.removeFromPlaylist}>
-                     <IconContext.Provider
-                        value={{
-                           className: "minusicon"
-                        }}
-                     >
-                        <IoMdRemove />
-                     </IconContext.Provider>
-                  </button>
-               )}
+               ) : null
+
+               // (
+               //    <button onClick={this.removeFromPlaylist}>
+               //       <IconContext.Provider
+               //          value={{
+               //             className: "minusicon"
+               //          }}
+               //       >
+               //          <IoMdRemove />
+               //       </IconContext.Provider>
+               //    </button>
+               // )
+               }
             </div>
 
             <div className="text">

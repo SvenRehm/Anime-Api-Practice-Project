@@ -25,10 +25,25 @@ export const requestList = (state = initialState, action = {}) => {
             animeList: animelist,
             isLoading: false
          }
-      case "CHANGE_STATUS_ANIMELIST":
-         return {
-            ...state
-         }
+      // case "CHANGE_STATUS_ANIMELIST":
+      // return {
+      //    ...state
+      // }
+      // const statuschange = state.animeList.map(items => {
+      //    // eslint-disable-next-line
+      //    if (items.id == action.animeid) {
+      //       items = { ...items, isExpanded: action.payload }
+      //       return items
+      //    } else {
+      //       return items
+      //    }
+      // })
+
+      // return {
+      //    ...state,
+
+      //    animeList: [...statuschange]
+      // }
 
       case "EXPAND_LIST_ITEM":
          const expandedlist = state.animeList.map(items => {

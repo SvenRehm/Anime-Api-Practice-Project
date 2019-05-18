@@ -104,7 +104,8 @@ export const loginAddToPlaylist2 = (id, animeid) => dispatch => {
       .then(res => {
          dispatch({
             type: "LOGIN_ADD_TO_PLAYLIST2",
-            payload: animeid
+            payload: animeid,
+            id: id
          })
       })
 }

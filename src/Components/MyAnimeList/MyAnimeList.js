@@ -294,33 +294,36 @@ class MyAnimeList extends Component {
    constructor(props) {
       super()
       this.state = {
-         animeids: props.animeids,
-         animeList: props.animeList
+         animeids: props.animeids
       }
    }
 
    componentDidMount() {
-      console.log(this.props)
       if (this.props.animeListData) {
          this.props.onRequestList(this.props.animeids)
       }
    }
-   // componentWillReceiveProps(newProps) {
-   //    console.log(newProps.animeListData)
-   //    if (newProps.animeListData !== this.props.animeListData) {
-   //       this.props.onRequestList(newProps.animeids)
+   // // componentWillReceiveProps(newProps) {
+   // //    console.log(newProps.animeListData)
+   // //    if (newProps.animeListData !== this.props.animeListData) {
+   // //       this.props.onRequestList(newProps.animeids)
+   // //    }
+   // // }
+   // componentDidUpdate(prevProps, prevState) {
+   //    if (prevState.animeids !== this.state.animeids) {
+   //       this.props.onRequestList(this.state.animeids)
    //    }
    // }
-   componentDidUpdate(prevProps, prevState) {
-      if (prevState.animeids !== this.state.animeids) {
-         this.props.onRequestList(this.state.animeids)
-      }
-   }
 
-   static getDerivedStateFromProps(nextProps, prevState) {
-      if (nextProps.animeids !== prevState.animeids) {
-         return { animeids: nextProps.animeids }
-      } else return null
+   // static getDerivedStateFromProps(nextProps, prevState) {
+   //    if (nextProps.animeids !== prevState.animeids) {
+   //       return { animeids: nextProps.animeids }
+   //    } else return null
+   // }
+   componentWillReceiveProps(nextProps) {
+      if (nextProps.animeids !== this.props.animeids) {
+         this.props.onRequestList(this.props.animeids)
+      }
    }
 
    removeFromPlaylist = (userid, animeid) => {
@@ -365,7 +368,7 @@ class MyAnimeList extends Component {
                         <span>
                            {animeListData[i].episodes_watched
                               ? animeListData[i].episodes_watched
-                              : 0}
+                              : "0"}
                            /
                            {animeList[i].episodeCount
                               ? animeList[i].episodeCount
@@ -493,7 +496,7 @@ class MyAnimeList extends Component {
                   <GooSpinner size={100} />
                </ListLoad>
             ) : (
-               <AnimeCardsList> {AnimeList} </AnimeCardsList>
+               <AnimeCardsList>{AnimeList}</AnimeCardsList>
             )}
          </MyAnimeListStyles>
       )
