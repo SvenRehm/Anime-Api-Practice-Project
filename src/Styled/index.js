@@ -101,8 +101,9 @@ export const LayoutGrid = styled.div`
       color: ${props => props.theme.secondary};
       /* background: ${props => props.theme.primary}; */
       /* background:rgba(39,39,39,.7); */
-      background:rgba(25,118,210, .3);
-   
+      /* background:rgba(25,118,210, .3); */
+     
+      background: rgba(33,33,33,  .6);
       box-shadow: 5px 5px 10px #030303;
       text-align: center;
       transition:all 350ms ease-in;

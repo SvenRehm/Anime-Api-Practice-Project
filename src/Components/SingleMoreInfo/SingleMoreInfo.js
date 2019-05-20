@@ -12,13 +12,7 @@ import { LayoutGrid, CategoriesList, Rankings } from "../../Styled"
 import { Link } from "react-router-dom"
 import { getJwt } from "../helpers/jwt"
 import { IconContext } from "react-icons"
-import {
-   IoMdHeart,
-   IoMdStar,
-   IoMdAdd,
-   IoMdRemove,
-   IoMdLogIn
-} from "react-icons/io"
+import { IoMdHeart, IoMdStar, IoMdAdd, IoMdLogIn } from "react-icons/io"
 import { GooSpinner } from "react-spinners-kit"
 
 const mapStateToProps = state => {
