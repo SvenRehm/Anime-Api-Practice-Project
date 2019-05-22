@@ -1,5 +1,6 @@
 // import { history } from "../../../App"
 import axios from "axios"
+import { toast } from "react-toastify"
 
 const api = "https://powerful-cove-90393.herokuapp.com"
 
@@ -38,6 +39,14 @@ export const submitRegister = (
          dispatch({
             type: "SUBMIT_REGISTER",
             payload: data.data
+         })
+         toast.success("Successfullly Registered", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: false
          })
       })
       .catch(error =>

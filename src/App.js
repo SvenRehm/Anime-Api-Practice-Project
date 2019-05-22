@@ -18,6 +18,9 @@ import ScrollToTop from "./Components/ScrollToTop/ScrollToTop"
 import { ThemeProvider, createGlobalStyle } from "styled-components"
 import Auth from "./Components/Auth/Auth"
 import { createBrowserHistory } from "history"
+import { ToastContainer } from "react-toastify"
+import { Zoom } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 export const history = createBrowserHistory()
 
@@ -129,6 +132,7 @@ class App extends Component {
          <Router history={history}>
             <ThemeProvider theme={this.state.theme}>
                <ScrollToTop>
+                  <ToastContainer transition={Zoom} />
                   <div>
                      <GlobalStyle />
                      <Navigation

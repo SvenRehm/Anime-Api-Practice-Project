@@ -13,6 +13,7 @@ import SortStatus from "./SortStatus"
 import SortTypeBox from "./SortTypeBox"
 import InfiniteScroll from "react-infinite-scroller"
 
+import "react-toastify/dist/ReactToastify.css"
 import { Grid } from "../../Styled"
 import { GooSpinner } from "react-spinners-kit"
 import { Loader } from "../../Styled/animation"
@@ -37,6 +38,7 @@ const mapStateToProps = state => {
       id: id,
       url: pagination,
       recommendedAnime: recommendedAnime,
+      message: state.Login.message,
       subtype: subtype,
       sort: sort,
       status: status,
@@ -162,31 +164,35 @@ class RecommendedAnime extends Component {
          </Trail>
       )
       return (
-         <InfiniteScroll
-            pageStart={0}
-            loadMore={() =>
-               this.props.onRequestPageTwo(
-                  this.props.url.next,
-                  this.props.subtype,
-                  this.props.sort
-               )
-            }
-            initialLoad={false}
-            useWindow={true}
-            threshold={700}
-            loader={
-               <Loader className="loader" key={0}>
-                  <GooSpinner size={100} />
-               </Loader>
-            }
-            hasMore={this.props.recommendedAnime.length <= 100}
-         >
-            <SortStatus onChangeStatus={this.props.onChangeStatus} />
-            <SortTypeBox onChangeSelectType={this.props.onChangeSelectType} />
-            <SortFilterBox onChangeSelect={this.props.onChangeSelect} />
-            <Grid>{RecommendedAnime}</Grid>
-            {/* <Grid>{RecommendedAnime}</Grid> */}
-         </InfiniteScroll>
+         <div>
+            <InfiniteScroll
+               pageStart={0}
+               loadMore={() =>
+                  this.props.onRequestPageTwo(
+                     this.props.url.next,
+                     this.props.subtype,
+                     this.props.sort
+                  )
+               }
+               initialLoad={false}
+               useWindow={true}
+               threshold={700}
+               loader={
+                  <Loader className="loader" key={0}>
+                     <GooSpinner size={100} />
+                  </Loader>
+               }
+               hasMore={this.props.recommendedAnime.length <= 100}
+            >
+               <SortStatus onChangeStatus={this.props.onChangeStatus} />
+               <SortTypeBox
+                  onChangeSelectType={this.props.onChangeSelectType}
+               />
+               <SortFilterBox onChangeSelect={this.props.onChangeSelect} />
+               <Grid>{RecommendedAnime}</Grid>
+               {/* <Grid>{RecommendedAnime}</Grid> */}
+            </InfiniteScroll>
+         </div>
       )
    }
 }

@@ -2,6 +2,9 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import { withRouter } from "react-router-dom"
 import styled from "styled-components"
+import { Link } from "react-router-dom"
+import ReactTooltip from "react-tooltip"
+
 import {
    changePasswordField,
    changeEmailField,
@@ -36,9 +39,9 @@ const LoginForm = styled.form`
       align-self: start;
       background: ${props => props.theme.primary};
 
-      grid-row: 2 / span 7;
+      grid-row: 2 / span 8;
       grid-column: 5 / span 4;
-      border: 1px solid ${props => props.theme.border};
+      border: 1px solid ${props => props.theme.primary_light};
    }
    label {
       grid-row: 3;
@@ -51,8 +54,8 @@ const LoginForm = styled.form`
       justify-self: center;
       align-self: end;
 
-      color: ${props => props.theme.secondary};
-      width: 80%;
+      color: ${props => props.theme.primary_text};
+      width: 70%;
       & #email {
          line-height: 1.2;
          letter-spacing: 0.2px;
@@ -71,10 +74,10 @@ const LoginForm = styled.form`
       justify-self: center;
       height: 2em;
       font-size: 17px;
-      width: 80%;
+      width: 70%;
       border: none;
-      color: ${props => props.theme.secondary};
-      background: ${props => props.theme.background};
+      color: ${props => props.theme.primary};
+      background: ${props => props.theme.primary_dark};
    }
 
    input[name="email"] {
@@ -88,25 +91,46 @@ const LoginForm = styled.form`
 
    h1 {
       justify-self: center;
-      align-self: center;
+      align-self: end;
       grid-column: 5 / span 4;
       grid-row: 2;
-      color: ${props => props.theme.secondary};
+      color: ${props => props.theme.primary_text};
       line-height: 1.2;
       letter-spacing: 0.2px;
       text-align: left;
       font-size: 2.5em;
+      margin-bottom: 15px;
    }
    button {
-      grid-row: 6;
+      grid-row: 6 / span 2;
       grid-column: 5 / span 4;
       width: 160px;
       height: 50px;
-      color: ${props => props.theme.secondary};
+      color: ${props => props.theme.primary_text};
       text-transform: uppercase;
-      background-color: ${props => props.theme.primary};
-      border: 1px solid ${props => props.theme.secondary};
+      background-color: ${props => props.theme.secondary};
+      border: 1px solid ${props => props.theme.primary_light};
       justify-self: center;
+      align-self: center;
+      cursor: pointer;
+   }
+
+   p {
+      color: ${props => props.theme.primary_text};
+      grid-row: 5;
+      grid-column: 5 / span 4;
+      align-self: end;
+      justify-self: center;
+      width: 70%;
+      line-height: 1.88;
+      letter-spacing: 0.4px;
+      a {
+         /* margin-left: 10px; */
+         padding: 10px;
+         color: ${props => props.theme.secondary};
+         text-decoration: none;
+         font-weight: bold;
+      }
    }
 `
 
@@ -139,18 +163,20 @@ class Login extends Component {
                value={this.props.signInPassword}
             />
 
-            <button
-               type="submit"
-               value="Login"
-               // onClick={() =>
-               //   this.props.onSubmitLogin(
-               //     this.props.signInEmail,
-               //     this.props.signInPassword
-               //   )
-               // }
-            >
+            <button type="submit" value="Login">
                Login
             </button>
+            <p>
+               Register an{" "}
+               <Link data-tip="React-tooltip" to={`/Register`}>
+                  {" "}
+                  Account
+               </Link>
+            </p>
+
+            <ReactTooltip place="top" type="success" effect="float">
+               <span>Register an Account</span>
+            </ReactTooltip>
          </LoginForm>
       )
    }

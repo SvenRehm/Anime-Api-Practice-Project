@@ -1,6 +1,9 @@
 import { history } from "../../../App"
 import axios from "axios"
 // import { getJwt } from "../../helpers/jwt"
+
+import { toast } from "react-toastify"
+
 export const changePasswordField = text => {
    return {
       type: "CHANGE_PASSWORD_FIELD",
@@ -22,17 +25,26 @@ export const submitLogin = (loginEmail, loginPassword) => dispatch => {
          email: loginEmail,
          password: loginPassword
       })
+
       .then(res => {
          dispatch({
             type: "SUBMIT_LOGIN",
-            payload: res.data,
-            message: res.data.message
+            payload: res.data
          })
 
          dispatch(Authenticate(res.data))
          // dispatch(getAnimelist(res.data))
          localStorage.setItem("cool-jwt", res.data)
          // history.push("/")
+
+         toast.success("Successfullly logged In", {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false
+         })
          history.goBack()
       })
       .catch(error => dispatch({ type: "SUBMIT_LOGIN_FAILED", payload: error }))
@@ -146,6 +158,14 @@ export const loginRemoveFromePlaylist = (id, animeid) => dispatch => {
 export const Logout = () => dispatch => {
    dispatch({
       type: "LOGOUT"
+   })
+   toast.success("Successfullly logged Out", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false
    })
    localStorage.removeItem("cool-jwt")
    history.push("/")

@@ -28,7 +28,8 @@ export const Login = (state = initialState, action = {}) => {
          return Object.assign({}, state, {
             LoggedIn: true,
             signInEmail: "",
-            signInPassword: ""
+            signInPassword: "",
+            message: action.message
          })
       case "SUBMIT_LOGIN_FAILED":
          return Object.assign({}, state, {
