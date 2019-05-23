@@ -139,15 +139,9 @@ class Register extends Component {
       )
    }
    render() {
-      const {
-         registerPassword,
-         registerEmail,
-         registerName,
-         message
-      } = this.props
+      const { registerPassword, registerEmail, registerName } = this.props
       return (
          <RegisterForm onSubmit={this.handleSubmit}>
-            <p>{message}</p>
             <h1>Register</h1>
             <label id="username">Username</label>
             <input

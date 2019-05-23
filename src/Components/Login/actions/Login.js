@@ -39,15 +39,25 @@ export const submitLogin = (loginEmail, loginPassword) => dispatch => {
 
          toast.success("Successfullly logged In", {
             position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
+            autoClose: 5000,
+            hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: false,
             draggable: false
          })
          history.goBack()
       })
-      .catch(error => dispatch({ type: "SUBMIT_LOGIN_FAILED", payload: error }))
+      .catch(error => {
+         dispatch({ type: "SUBMIT_LOGIN_FAILED", payload: error })
+         toast.error(`${error.response.data.message}`, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false
+         })
+      })
 }
 export const Authenticate = jwt => dispatch => {
    axios

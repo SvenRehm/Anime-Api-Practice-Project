@@ -49,7 +49,17 @@ export const submitRegister = (
             draggable: false
          })
       })
-      .catch(error =>
+
+      .catch(error => {
          dispatch({ type: "SUBMIT_REGISTER_FAILED", payload: error })
-      )
+         console.log(error)
+         toast.error(`${error.response.data.message}`, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: false
+         })
+      })
 }
