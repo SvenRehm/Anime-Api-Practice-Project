@@ -129,6 +129,15 @@ export const loginAddToPlaylist2 = (id, animeid) => dispatch => {
             payload: animeid,
             id: id
          })
+
+         toast.success("Successfullly added Anime to Playlist", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false
+         })
       })
 }
 
