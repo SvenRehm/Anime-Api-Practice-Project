@@ -51,7 +51,7 @@ export const submitLogin = (loginEmail, loginPassword) => dispatch => {
          dispatch({ type: "SUBMIT_LOGIN_FAILED", payload: error })
          toast.error(`${error.response.data.message}`, {
             position: "top-center",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: false,
@@ -132,7 +132,7 @@ export const loginAddToPlaylist2 = (id, animeid) => dispatch => {
 
          toast.success("Successfullly added Anime to Playlist", {
             position: "top-center",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: false,
@@ -180,8 +180,8 @@ export const Logout = () => dispatch => {
    })
    toast.success("Successfullly logged Out", {
       position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
+      autoClose: 3000,
+      hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: false,
       draggable: false

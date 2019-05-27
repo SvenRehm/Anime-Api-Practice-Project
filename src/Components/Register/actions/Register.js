@@ -42,8 +42,8 @@ export const submitRegister = (
          })
          toast.success("Successfullly Registered", {
             position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
+            autoClose: 3000,
+            hideProgressBar: true,
             closeOnClick: false,
             pauseOnHover: false,
             draggable: false
@@ -55,7 +55,7 @@ export const submitRegister = (
          console.log(error)
          toast.error(`${error.response.data.message}`, {
             position: "top-center",
-            autoClose: 5000,
+            autoClose: 3000,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,

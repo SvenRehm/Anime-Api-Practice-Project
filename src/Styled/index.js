@@ -19,6 +19,9 @@ export const LayoutGrid = styled.div`
   overflow: hidden;
   background: ${props => props.theme.primary_dark};
 
+  .Toastify__toast--success {
+   background: red;
+}
   a#loginToAdd {
     position: absolute;
     top: 2%;
