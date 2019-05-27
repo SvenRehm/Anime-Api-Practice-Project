@@ -76,7 +76,7 @@ const LoginForm = styled.form`
       font-size: 17px;
       width: 70%;
       border: none;
-      color: ${props => props.theme.primary};
+      color: ${props => props.theme.primary_text};
       background: ${props => props.theme.primary_dark};
    }
 
