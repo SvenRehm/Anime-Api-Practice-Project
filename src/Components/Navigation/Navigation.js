@@ -16,23 +16,28 @@ const StyledNav = styled.ul`
   top: 0;
   font-weight: 500;
   font-size: 17px;
-  overflow: hidden;
+  /* overflow: hidden; */
   box-shadow: 0px 13px 50px -25px rgba(0, 0, 0, 1);
+ 
   li > a {
     text-decoration: none;
     color: ${props => props.theme.primary_text};
     background: ${props => props.theme.primary};
-    padding: 1.1em;
+    /* padding: 1.1em; */
+
+    padding: .9em 1.1em .9em 1.1em;
     font-size: 17px;
-   
+ 
     transition:color 150ms ease-in;
+    
     &:hover {
+   
       transition:color 150ms ease-in;
       /* background: ${props => props.theme.hover}; */
       /* color: ${props => props.theme.accent}; */
-      color: ${props => props.theme.secondary_light};
+      /* color: ${props => props.theme.secondary_light}; */
       /* background: ${props => props.theme.primary_light}; */
-
+      border-bottom:3px solid ${props => props.theme.secondary_light};
     }
   }
 

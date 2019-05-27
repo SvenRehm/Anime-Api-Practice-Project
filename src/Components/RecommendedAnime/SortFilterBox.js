@@ -1,11 +1,33 @@
 import React from "react"
-
+import { IconContext } from "react-icons"
+import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io"
 import Select from "react-select"
 import styled from "styled-components"
+
+const arrowdown = (
+   <IconContext.Provider
+      value={{
+         className: "arrowdown"
+      }}
+   >
+      <IoIosArrowDown /> {"AverageRating"}
+   </IconContext.Provider>
+)
+
+const arrowup = (
+   <IconContext.Provider
+      value={{
+         className: "arrowup"
+      }}
+   >
+      <IoIosArrowUp /> {"AverageRating"}
+   </IconContext.Provider>
+)
+
 const options = [
    { value: "popularityRank", label: "PopularityRank" },
-   { value: "averageRating", label: "AverageRating" },
-   { value: "-averageRating", label: "AverageRating" }
+   { value: "averageRating", label: arrowup },
+   { value: "-averageRating", label: arrowdown }
 ]
 
 const MultiSelect = styled(Select)`

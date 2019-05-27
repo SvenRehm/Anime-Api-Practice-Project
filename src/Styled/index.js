@@ -19,9 +19,7 @@ export const LayoutGrid = styled.div`
   overflow: hidden;
   background: ${props => props.theme.primary_dark};
 
-  .Toastify__toast--success {
-   background: red;
-}
+
   a#loginToAdd {
     position: absolute;
     top: 2%;
@@ -137,10 +135,11 @@ export const LayoutGrid = styled.div`
   }
 
   h1 {
+    margin-top:1em;
     grid-column: 6 / span 5;
-    grid-row: 3 / span 2;
+    grid-row: 4/ span 2;
     color: #f9f9f9;
-    align-self: center;
+    align-self: start;
     justify-self: start;
     z-index: 2;
     line-height: 1.2;

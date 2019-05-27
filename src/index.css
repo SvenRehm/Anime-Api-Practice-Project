@@ -33,3 +33,6 @@ body {
    background: #424242;
    border-bottom: 5px solid #e74c3c;
 }
+.Toastify__toast-container.Toastify__toast-container--top-center {
+   top: 4em;
+}

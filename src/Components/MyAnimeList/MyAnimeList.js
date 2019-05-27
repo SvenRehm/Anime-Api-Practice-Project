@@ -303,23 +303,11 @@ class MyAnimeList extends Component {
          this.props.onRequestList(this.props.animeids)
       }
    }
-   // // componentWillReceiveProps(newProps) {
-   // //    console.log(newProps.animeListData)
-   // //    if (newProps.animeListData !== this.props.animeListData) {
-   // //       this.props.onRequestList(newProps.animeids)
-   // //    }
-   // // }
-   // componentDidUpdate(prevProps, prevState) {
-   //    if (prevState.animeids !== this.state.animeids) {
-   //       this.props.onRequestList(this.state.animeids)
-   //    }
+
+   // shouldComponentUpdate(nextProps, nextState) {
+   //    return this.props.animeids !== nextProps.animeids
    // }
 
-   // static getDerivedStateFromProps(nextProps, prevState) {
-   //    if (nextProps.animeids !== prevState.animeids) {
-   //       return { animeids: nextProps.animeids }
-   //    } else return null
-   // }
    componentWillReceiveProps(nextProps) {
       if (nextProps.animeids !== this.props.animeids) {
          this.props.onRequestList(this.props.animeids)
