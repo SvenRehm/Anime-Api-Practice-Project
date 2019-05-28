@@ -18,6 +18,12 @@ const StyledNav = styled.ul`
   font-size: 17px;
   /* overflow: hidden; */
   box-shadow: 0px 13px 50px -25px rgba(0, 0, 0, 1);
+  /* li:last-child{
+     margin-right:1em;
+  }
+  li:first-child{
+     margin-left:1em;
+  } */
  
   li > a {
     text-decoration: none;
@@ -59,17 +65,14 @@ const StyledNav = styled.ul`
     padding: 0;
 
     a {
-     
       display: inline-block;
-    
       font-size: 14px;
       padding: 6px;
-
       background: ${props => props.theme.primary_light};
-
       &:hover {
         /* color: ${props => props.theme.secondary_light}; */
         background: ${props => props.theme.primary_light};
+        border:none;
       }
     }
   }
@@ -115,9 +118,9 @@ class Navigation extends Component {
                </Link>
             </li>
 
-            <li>
+            {/* <li>
                <Link to={`/Register`}> Register</Link>
-            </li>
+            </li> */}
 
             <li>
                {!jwt ? (

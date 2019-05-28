@@ -15,8 +15,8 @@ import InfiniteScroll from "react-infinite-scroller"
 
 import "react-toastify/dist/ReactToastify.css"
 import { Grid } from "../../Styled"
-import { GooSpinner } from "react-spinners-kit"
-import { Loader } from "../../Styled/animation"
+import { CircleSpinner } from "react-spinners-kit"
+import { Loader, FilterLoader } from "../../Styled/animation"
 
 import { Trail, config } from "react-spring/renderprops"
 
@@ -179,7 +179,7 @@ class RecommendedAnime extends Component {
                threshold={700}
                loader={
                   <Loader className="loader" key={0}>
-                     <GooSpinner size={100} />
+                     <CircleSpinner size={100} />
                   </Loader>
                }
                hasMore={this.props.recommendedAnime.length <= 100}
@@ -189,6 +189,12 @@ class RecommendedAnime extends Component {
                   onChangeSelectType={this.props.onChangeSelectType}
                />
                <SortFilterBox onChangeSelect={this.props.onChangeSelect} />
+               {this.props.isLoading ? (
+                  <FilterLoader className="loader" key={0}>
+                     <CircleSpinner size={20} />
+                  </FilterLoader>
+               ) : null}
+
                <Grid>{RecommendedAnime}</Grid>
                {/* <Grid>{RecommendedAnime}</Grid> */}
             </InfiniteScroll>

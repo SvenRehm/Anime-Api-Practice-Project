@@ -15,37 +15,53 @@ export const LayoutGrid = styled.div`
   display: grid;
   grid-gap: 1em;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-rows: repeat(10, 100px);
+  grid-template-rows: repeat(14, 100px);
   overflow: hidden;
   background: ${props => props.theme.primary_dark};
 
 
   a#loginToAdd {
-    position: absolute;
-    top: 2%;
-    left: 65%;
-    border: 1px solid ${props => props.theme.border};
-    color: ${props => props.theme.secondary};
-    background: ${props => props.theme.primary};
-    text-decoration: none;
-    width: 55px;
-    height: 30px;
-    text-align: center;
-    cursor: pointer;
-    &:focus {
-      outline: none;
-    }
-    &:hover {
-      color: ${props => props.theme.hovertext};
-      background-color: ${props => props.theme.hover};
-    }
+  
+     margin: 40% 20% 20% 25%;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+      cursor: pointer;
+      border-radius:50%;
+      border: 1px solid ${props => props.theme.primary_dark};
+
+      width:  150px;
+      height: 150px;
+      color: ${props => props.theme.secondary};
+      /* background: ${props => props.theme.primary}; */
+      /* background:rgba(39,39,39,.7); */
+      /* background:rgba(25,118,210, .3); */
+     
+      background: rgba(33,33,33,  .6);
+      box-shadow: 5px 5px 10px #030303;
+      text-align: center;
+      transition:all 350ms ease-in;
+      text-align:center;
+      &:hover {
+        background:rgba(25,118,210, .5);
+        
+      }
+      
+      &:focus {
+        outline: none;
+      }
 
     /* icon inside the button*/
     .logintoadd {
-      width: 20px;
-      height: 20px;
-      vertical-align: middle;
-      transform: translate(0, 10%);
+      margin: 30% 17% 23% 30%;
+    position:absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+      width: 60px;
+        height: 60px;
+
+       
+        /* transform: translateY(60%); */
+        transition:all 350ms ease-in;
+
     }
   }
   div.darkimg {
@@ -107,26 +123,24 @@ export const LayoutGrid = styled.div`
       background: rgba(33,33,33,  .6);
       box-shadow: 5px 5px 10px #030303;
       text-align: center;
-      transition:all 350ms ease-in;
+      transition:all 150ms ease-in;
 
-      .minusicon {
-        width: 70px;
-        height: 70px;
-        vertical-align: middle;
-        transition:all 350ms ease-in;
-      
-      }
+     
       .plusicon {
         width: 70px;
         height: 70px;
 
         vertical-align: middle;
-        transition:all 350ms ease-in;
+        transition:all 250ms ease-in;
       }
       &:hover {
-        background:rgba(25,118,210, .5);
-        
+        /* background:rgba(25,118,210, .5);
+  */
       }
+      &:hover .plusicon{
+       
+        transform: scale(1.1) ;}
+       
       
       &:focus {
         outline: none;
@@ -135,11 +149,11 @@ export const LayoutGrid = styled.div`
   }
 
   h1 {
-    margin-top:1em;
+
     grid-column: 6 / span 5;
-    grid-row: 4/ span 2;
+    grid-row: 5/ span 2;
     color: #f9f9f9;
-    align-self: start;
+    align-self: center;
     justify-self: start;
     z-index: 2;
     line-height: 1.2;
@@ -152,7 +166,7 @@ export const LayoutGrid = styled.div`
     align-self: start;
 
     grid-column: 6 / span 5;
-    grid-row: 12 / span 4;
+    grid-row: 14 / span 4;
 
     line-height: 1.5em;
     font-size: 0.9em;
@@ -178,15 +192,16 @@ export const LayoutGrid = styled.div`
   }
   ul {
     grid-column: 6 / span 5;
-    grid-row: 7;
+    grid-row: 8;
     align-self: center;
   }
 
   iframe {
+   margin-top:3em;
     width: 100%;
     height: 100%;
     grid-column: 6 / span 5;
-    grid-row: 8 / span 4;
+    grid-row: 9 / span 4;
     z-index: 2;
   }
 `
@@ -230,7 +245,7 @@ export const CategoriesList = styled.ul`
 //singlemoreinfo  ranks
 export const Rankings = styled.div`
    grid-column: 6 / span 5;
-   grid-row: 5 / span 2;
+   grid-row: 6 / span 2;
    align-self: center;
    /* margin-top: 1em; */
    z-index: 2;

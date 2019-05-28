@@ -14,10 +14,11 @@ import {
 } from "./actions/requestList"
 // import { Spring, config, Trail } from "react-spring/renderprops"
 import { Loader } from "../../Styled/animation"
-import { GooSpinner } from "react-spinners-kit"
+import { CircleSpinner } from "react-spinners-kit"
 import { IconContext } from "react-icons"
 import { IoMdAdd, IoMdArrowDropdown } from "react-icons/io"
 import MyStatus from "../MyAnimeList/MyStatus"
+// import { FadeIn } from "../../Styled/animation"
 
 const mapStateToProps = state => {
    return {
@@ -68,6 +69,8 @@ const AnimeCardsList = styled.ul`
    grid-auto-rows: repeat(auto-fill, minmax(130px, 130px));  */
    grid-gap: 0.7em;
 
+
+ 
    li {
       background-color: ${props => props.theme.primary_light};
       margin-bottom: 2.5em;
@@ -76,7 +79,7 @@ const AnimeCardsList = styled.ul`
       transition: height 0.4s linear;
       /* overflow-y: (${props => (props.expand ? "hidden " : "visible")}); */
       /* overflow-y: hidden ; */
-      
+
       table{
          border-top:1px solid ${props => props.theme.primary_dark};
         padding-top:4em;
@@ -479,9 +482,9 @@ class MyAnimeList extends Component {
       return (
          <MyAnimeListStyles>
             <h2> My Anime List </h2>
-            {!animeListData && !this.props.animeList ? (
+            {!animeListData ? (
                <ListLoad className="loader" key={0}>
-                  <GooSpinner size={100} />
+                  <CircleSpinner size={100} />
                </ListLoad>
             ) : (
                <AnimeCardsList>{AnimeList}</AnimeCardsList>

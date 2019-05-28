@@ -1,24 +1,29 @@
 import styled, { keyframes } from "styled-components"
 import BaseAnimation from "./BaseAnimation"
 
-const FadeInAnimation = keyframes`  
+export const FadeInAnimation = keyframes`  
   from { opacity: 0; }
   to { opacity: 1; }
 `
 
 export const FadeIn = styled(BaseAnimation)`
-  animation-name: ${FadeInAnimation};
-
+   animation-name: ${FadeInAnimation};
 `
 
 export const Loader = styled.div`
-  z-index: 3;
-  margin: 0 auto;
+   z-index: 3;
+   margin: 0 auto;
+   width: 100px;
+   height: 100px;
+`
 
-  width: 100px;
-  height: 100px;
-  
-  div > div > div {
-    background-color: ${props => props.theme.secondary};
-  }
+export const FilterLoader = styled.div`
+   display: inline-block;
+   position: absolute;
+   top: 95px;
+   left: 50%;
+   z-index: 3;
+   margin: 0 auto;
+   width: 20px;
+   height: 20px;
 `

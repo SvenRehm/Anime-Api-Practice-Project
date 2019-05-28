@@ -13,7 +13,8 @@ import { Link } from "react-router-dom"
 import { getJwt } from "../helpers/jwt"
 import { IconContext } from "react-icons"
 import { IoMdHeart, IoMdStar, IoMdAdd, IoMdLogIn } from "react-icons/io"
-import { GooSpinner } from "react-spinners-kit"
+import { CircleSpinner } from "react-spinners-kit"
+import ReactTooltip from "react-tooltip"
 
 const mapStateToProps = state => {
    const {
@@ -243,7 +244,7 @@ class SingleMoreInfo extends Component {
                   </tbody>
                </table>
                {!jwt ? (
-                  <Link id="loginToAdd" to="/Login">
+                  <Link data-tip="React-tooltip" id="loginToAdd" to="/Login">
                      <IconContext.Provider
                         value={{
                            className: "logintoadd"
@@ -252,7 +253,7 @@ class SingleMoreInfo extends Component {
                         <IoMdLogIn />
                      </IconContext.Provider>
                   </Link>
-               ) : !isAnimeOnList ? (
+               ) : isAnimeOnList ? null : (
                   <button onClick={this.addToPlaylist2}>
                      <IconContext.Provider
                         value={{
@@ -262,7 +263,7 @@ class SingleMoreInfo extends Component {
                         <IoMdAdd />
                      </IconContext.Provider>
                   </button>
-               ) : null
+               )
 
                // (
                //    <button onClick={this.removeFromPlaylist}>
@@ -298,6 +299,9 @@ class SingleMoreInfo extends Component {
                   allowFullScreen
                />
             )}
+            <ReactTooltip place="top" type="success" effect="float">
+               <span>Login to Add to loginAddToPlaylist2</span>
+            </ReactTooltip>
          </LayoutGrid>
       ) : (
          <GreyBackground>
@@ -305,11 +309,7 @@ class SingleMoreInfo extends Component {
             <div className="image" />
 
             <div className="spinner">
-               <GooSpinner
-                  size={100}
-                  Color="red"
-                  loading={this.props.isPending}
-               />
+               <CircleSpinner size={90} loading={this.props.isPending} />
             </div>
          </GreyBackground>
       )

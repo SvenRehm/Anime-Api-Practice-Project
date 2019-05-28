@@ -129,7 +129,7 @@ const LoginForm = styled.form`
          padding: 10px;
          color: ${props => props.theme.secondary};
          text-decoration: none;
-         font-weight: bold;
+         font-weight: lighter;
       }
    }
 `
