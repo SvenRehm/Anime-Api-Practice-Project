@@ -42,7 +42,7 @@ export const LayoutGrid = styled.div`
       transition:all 350ms ease-in;
       text-align:center;
       &:hover {
-        background:rgba(25,118,210, .5);
+        background:rgba(25,118,210, .3);
         
       }
       

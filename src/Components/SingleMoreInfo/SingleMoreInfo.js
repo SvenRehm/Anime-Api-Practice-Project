@@ -300,7 +300,7 @@ class SingleMoreInfo extends Component {
                />
             )}
             <ReactTooltip place="top" type="success" effect="float">
-               <span>Login to Add to loginAddToPlaylist2</span>
+               <span>Login to Add to Playlist</span>
             </ReactTooltip>
          </LayoutGrid>
       ) : (
