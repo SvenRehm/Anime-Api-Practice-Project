@@ -11,7 +11,6 @@ const RecommendedAnimeCard = ({
    id,
    ratingRank,
    isLoading,
-
    style
 }) => {
    return (

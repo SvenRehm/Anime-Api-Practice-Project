@@ -21,6 +21,11 @@ import { createBrowserHistory } from "history"
 import { ToastContainer } from "react-toastify"
 import { Zoom } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+var http = require("http")
+
+setInterval(function() {
+   http.get("http://myanimelist.herokuapp.com")
+}, 300000) // every 5 minutes (300000)
 
 export const history = createBrowserHistory()
 

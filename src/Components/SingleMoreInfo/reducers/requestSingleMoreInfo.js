@@ -6,6 +6,7 @@ import {
 
 const initialSingleMoreInfo = {
    isPending: false,
+   isOnPlaylist: false,
    singleMoreInfo: {
       attributes: {
          synopsis: "",
@@ -75,6 +76,8 @@ export const requestSingleMoreInfo = (
             error: action.payload,
             isPending: false
          })
+
+     
 
       case "REQUEST_SINGLE_CATEGORIES_SUCCESS":
          return {
