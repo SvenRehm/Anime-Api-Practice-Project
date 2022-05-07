@@ -4,13 +4,13 @@ import styled from "styled-components"
 
 import {
    loginRemoveFromePlaylist,
-   addEpisodeToAnime
+   addEpisodeToAnime,
 } from "../Login/actions/Login"
 import {
    requestList,
    RemoveFromePlaylist,
    ExpandListItem,
-   changeStatus
+   changeStatus,
 } from "./actions/requestList"
 // import { Spring, config, Trail } from "react-spring/renderprops"
 import { Loader } from "../../Styled/animation"
@@ -20,7 +20,7 @@ import { IoMdAdd, IoMdArrowDropdown } from "react-icons/io"
 import MyStatus from "../MyAnimeList/MyStatus"
 // import { FadeIn } from "../../Styled/animation"
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
       animeList: state.requestList.animeList,
       animeids: state.Login.user.animeids,
@@ -32,12 +32,12 @@ const mapStateToProps = state => {
       // totalLength: id.data.attributes.totalLength
       //load animeids from database
       animeListData: state.Login.user.animelist,
-      isLoading: state.requestList.isLoading
+      isLoading: state.requestList.isLoading,
    }
 }
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      onRequestList: animeid => dispatch(requestList(animeid)),
+      onRequestList: (animeid) => dispatch(requestList(animeid)),
       onLoginRemoveFromePlaylist: (userId, animeid) =>
          dispatch(loginRemoveFromePlaylist(userId, animeid)),
       onRemoveFromePlaylist: (userId, animeid) =>
@@ -47,7 +47,7 @@ const mapDispatchToProps = dispatch => {
       onExpandListItem: (animeid, expand) =>
          dispatch(ExpandListItem(animeid, expand)),
       onChangeStatus: (userId, animeid, e) =>
-         dispatch(changeStatus(userId, animeid, e))
+         dispatch(changeStatus(userId, animeid, e)),
    }
 }
 
@@ -63,7 +63,7 @@ const ListLoad = styled(Loader)`
 const AnimeCardsList = styled.ul`
    grid-column: 4 / span 6;
    grid-row: 4/-1;
-   color: ${props => props.theme.primary_text};
+   color: ${(props) => props.theme.primary_text};
    list-style: none;
    /* display: grid;
    grid-auto-rows: repeat(auto-fill, minmax(130px, 130px));  */
@@ -72,24 +72,23 @@ const AnimeCardsList = styled.ul`
 
  
    li {
-      background-color: ${props => props.theme.primary_light};
-      margin-bottom: 2.5em;
+      background-color: ${(props) => props.theme.primary_light};
+      margin-bottom: 4em;
       /* grid-template-columns: repeat(7, minmax(0, 1fr)); */
-      height: 120px;
+      height: 150px;
       transition: height 0.4s linear;
-      /* overflow-y: (${props => (props.expand ? "hidden " : "visible")}); */
+      /* overflow-y: (${(props) => (props.expand ? "hidden " : "visible")}); */
       /* overflow-y: hidden ; */
 
       table{
-         border-top:1px solid ${props => props.theme.primary_dark};
+         /* border-top:1px solid ${(props) => props.theme.primary_dark}; */
         padding-top:4em;
         padding-right:250px;
-       
-         margin: 0em 0em 3em 140px;
+      
         visibility: visible;
          opacity: 1;
        transition: opacity 1s linear;
-       color: ${props => props.theme.primary_text};
+       color: ${(props) => props.theme.primary_text};
       
  
      
@@ -97,7 +96,7 @@ const AnimeCardsList = styled.ul`
         padding-top:4em;
         padding-right:250px;
        
-   margin: 0em 0em 3em 140px;
+   margin: 0em 0em 3em 170px;
      
   
       /* width: 50%; */
@@ -115,7 +114,7 @@ const AnimeCardsList = styled.ul`
         word-wrap:break-word
       }
       tr:nth-child(even) {
-  background: ${props => props.theme.primary_light};
+  background: ${(props) => props.theme.primary_light};
 }
    
    visibility: hidden;
@@ -128,9 +127,9 @@ const AnimeCardsList = styled.ul`
          display: grid;
          width: 100%;
          grid-template-columns: repeat(7, minmax(0, 1fr));
-         background-color: ${props => props.theme.primary_light};
+         background-color: ${(props) => props.theme.primary_light};
          position:relative;
-         /* border: 1px solid ${props => props.theme.border}; */
+         /* border: 1px solid ${(props) => props.theme.border}; */
       
    
       }
@@ -145,13 +144,13 @@ const AnimeCardsList = styled.ul`
          visibility: visible;
   opacity: 1;
   transition: opacity 1s linear;
-        border-top:1px solid ${props => props.theme.primary_dark};
+        /* border-top:1px solid ${(props) => props.theme.primary_dark}; */
         padding-top:4em;
         padding-right:250px;
        
-margin: 0em 0em 3em 140px;
+margin: 0em 0em 3em 170px;
      
-  color: ${props => props.theme.primary_text};
+  color: ${(props) => props.theme.primary_text};
       /* width: 50%; */
 width:700px;
 height: 200px;
@@ -167,7 +166,7 @@ height: 200px;
         word-wrap:break-word
       }
       tr:nth-child(even) {
-  background: ${props => props.theme.primary_light2};
+  background: ${(props) => props.theme.primary_light2};
 }
 
   
@@ -191,6 +190,7 @@ height: 200px;
       h1 {
          grid-column: 2 / span 3;
          grid-row: 1;
+         margin-left: 30px;
          align-self: center;
          font-size: 19px;
          line-height: 1.2;
@@ -223,7 +223,7 @@ const InlineList = styled.ul`
       height: 30px;
       line-height: 30px;
       color: White;
-      background-color: ${props => props.theme.secondary};
+      background-color: ${(props) => props.theme.secondary};
       border: none;
       cursor: pointer;
 
@@ -239,8 +239,8 @@ const InlineList = styled.ul`
       width: 22px;
       height: 22px;
       transform: translateY(+25%);
-      color: ${props => props.theme.secondary};
-      background-color: ${props => props.theme.primary_light};
+      color: ${(props) => props.theme.secondary};
+      background-color: ${(props) => props.theme.primary_light};
       border: none;
       line-height: 22px;
       cursor: pointer;
@@ -248,10 +248,10 @@ const InlineList = styled.ul`
       .plusicon {
          width: 22px;
          height: 22px;
-         /* color: ${props => props.theme.secondary}; */
+         /* color: ${(props) => props.theme.secondary}; */
       }
       &:hover {
-         color: ${props => props.theme.secondary_light};
+         color: ${(props) => props.theme.secondary_light};
        
       }
       &:focus {
@@ -289,7 +289,7 @@ const MyAnimeListStyles = styled.div`
       grid-row: 2;
       font-size: 2em;
       justify-self: center;
-      color: ${props => props.theme.primary_text};
+      color: ${(props) => props.theme.primary_text};
    }
 `
 
@@ -297,7 +297,7 @@ class MyAnimeList extends Component {
    constructor(props) {
       super()
       this.state = {
-         animeids: props.animeids
+         animeids: props.animeids,
       }
    }
 
@@ -380,7 +380,7 @@ class MyAnimeList extends Component {
                            >
                               <IconContext.Provider
                                  value={{
-                                    className: "plusicon"
+                                    className: "plusicon",
                                  }}
                               >
                                  <IoMdAdd />
@@ -417,7 +417,7 @@ class MyAnimeList extends Component {
                               Info
                               <IconContext.Provider
                                  value={{
-                                    className: "dropdownarrow"
+                                    className: "dropdownarrow",
                                  }}
                               >
                                  <IoMdArrowDropdown />
@@ -496,7 +496,7 @@ class MyAnimeList extends Component {
 
 MyAnimeList.defaultProps = {
    status: "secondary",
-   label: "Button Text"
+   label: "Button Text",
 }
 
 export default connect(
