@@ -12,13 +12,12 @@ import {
    ExpandListItem,
    changeStatus,
 } from "./actions/requestList"
-// import { Spring, config, Trail } from "react-spring/renderprops"
+
 import { Loader } from "../../Styled/animation"
 import { CircleSpinner } from "react-spinners-kit"
 import { IconContext } from "react-icons"
 import { IoMdAdd, IoMdArrowDropdown } from "react-icons/io"
 import MyStatus from "../MyAnimeList/MyStatus"
-// import { FadeIn } from "../../Styled/animation"
 
 const mapStateToProps = (state) => {
    return {
@@ -26,11 +25,7 @@ const mapStateToProps = (state) => {
       animeids: state.Login.user.animeids,
 
       userId: state.Login.user.id,
-      // subtype: id.data.attributes.subtype,
-      // posterimage: id.data.attributes.posterImage.tiny,
-      // episodeCount: id.data.attributes.episodeCount,
-      // totalLength: id.data.attributes.totalLength
-      //load animeids from database
+
       animeListData: state.Login.user.animelist,
       isLoading: state.requestList.isLoading,
    }
@@ -65,8 +60,7 @@ const AnimeCardsList = styled.ul`
    grid-row: 4/-1;
    color: ${(props) => props.theme.primary_text};
    list-style: none;
-   /* display: grid;
-   grid-auto-rows: repeat(auto-fill, minmax(130px, 130px));  */
+
    grid-gap: 0.7em;
 
 
@@ -74,14 +68,13 @@ const AnimeCardsList = styled.ul`
    li {
       background-color: ${(props) => props.theme.primary_light};
       margin-bottom: 4em;
-      /* grid-template-columns: repeat(7, minmax(0, 1fr)); */
+ 
       height: 150px;
       transition: height 0.4s linear;
-      /* overflow-y: (${(props) => (props.expand ? "hidden " : "visible")}); */
-      /* overflow-y: hidden ; */
+   
 
       table{
-         /* border-top:1px solid ${(props) => props.theme.primary_dark}; */
+         
         padding-top:4em;
         padding-right:250px;
       
