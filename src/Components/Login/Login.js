@@ -8,24 +8,24 @@ import ReactTooltip from "react-tooltip"
 import {
    changePasswordField,
    changeEmailField,
-   submitLogin
+   submitLogin,
 } from "./actions/Login"
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
    return {
       signInPassword: state.Login.signInPassword,
-      signInEmail: state.Login.signInEmail
+      signInEmail: state.Login.signInEmail,
    }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
    return {
-      onChangePasswordField: event =>
+      onChangePasswordField: (event) =>
          dispatch(changePasswordField(event.target.value)),
-      onChangeEmailField: event =>
+      onChangeEmailField: (event) =>
          dispatch(changeEmailField(event.target.value)),
       onSubmitLogin: (signInEmail, signInPassword) =>
-         dispatch(submitLogin(signInEmail, signInPassword))
+         dispatch(submitLogin(signInEmail, signInPassword)),
    }
 }
 
@@ -37,11 +37,11 @@ const LoginForm = styled.form`
       content: "";
       height: 80%;
       align-self: start;
-      background: ${props => props.theme.primary};
+      background: ${(props) => props.theme.primary};
 
       grid-row: 2 / span 8;
       grid-column: 5 / span 4;
-      border: 1px solid ${props => props.theme.primary_light};
+      border: 1px solid ${(props) => props.theme.primary_light};
    }
    label {
       grid-row: 3;
@@ -54,7 +54,7 @@ const LoginForm = styled.form`
       justify-self: center;
       align-self: end;
 
-      color: ${props => props.theme.primary_text};
+      color: ${(props) => props.theme.primary_text};
       width: 70%;
       & #email {
          line-height: 1.2;
@@ -76,8 +76,8 @@ const LoginForm = styled.form`
       font-size: 17px;
       width: 70%;
       border: none;
-      color: ${props => props.theme.primary_text};
-      background: ${props => props.theme.primary_dark};
+      color: ${(props) => props.theme.primary_text};
+      background: ${(props) => props.theme.primary_dark};
    }
 
    input[name="email"] {
@@ -94,29 +94,37 @@ const LoginForm = styled.form`
       align-self: end;
       grid-column: 5 / span 4;
       grid-row: 2;
-      color: ${props => props.theme.primary_text};
+      color: ${(props) => props.theme.primary_text};
       line-height: 1.2;
       letter-spacing: 0.2px;
       text-align: left;
       font-size: 2.5em;
       margin-bottom: 15px;
    }
+   h2 {
+      font-size: 1.2em;
+      color: ${(props) => props.theme.primary_text};
+      grid-row: 3;
+      grid-column: 5 / span 4;
+
+      justify-self: center;
+   }
    button {
       grid-row: 6 / span 2;
       grid-column: 5 / span 4;
       width: 160px;
       height: 50px;
-      color: ${props => props.theme.primary_text};
+      color: ${(props) => props.theme.primary_text};
       text-transform: uppercase;
-      background-color: ${props => props.theme.secondary};
-      border: 1px solid ${props => props.theme.primary_light};
+      background-color: ${(props) => props.theme.secondary};
+      border: 1px solid ${(props) => props.theme.primary_light};
       justify-self: center;
       align-self: center;
       cursor: pointer;
    }
 
    p {
-      color: ${props => props.theme.primary_text};
+      color: ${(props) => props.theme.primary_text};
       grid-row: 5;
       grid-column: 5 / span 4;
       align-self: end;
@@ -127,7 +135,7 @@ const LoginForm = styled.form`
       a {
          /* margin-left: 10px; */
          padding: 10px;
-         color: ${props => props.theme.secondary};
+         color: ${(props) => props.theme.secondary};
          text-decoration: none;
          font-weight: lighter;
       }
@@ -135,7 +143,7 @@ const LoginForm = styled.form`
 `
 
 class Login extends Component {
-   handleSubmit = event => {
+   handleSubmit = (event) => {
       event.preventDefault()
       this.props.onSubmitLogin(
          this.props.signInEmail,
@@ -145,6 +153,8 @@ class Login extends Component {
    render() {
       return (
          <LoginForm onSubmit={this.handleSubmit}>
+            <h2>For testing: test@gmail.com pw:test</h2>
+
             <h1>Login</h1>
             <label id="email">Email</label>
             <input
