@@ -5,7 +5,7 @@
    "dependencies": {
       "@kunukn/react-collapse": "^1.0.5",
       "animate-css-styled-components": "^1.0.2",
-      "axios": "^0.18.0",
+      "axios": "^0.21.2",
       "history": "^4.9.0",
       "react": "^16.8.6",
       "react-css-stagger": "0.0.8",
